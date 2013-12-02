@@ -1,0 +1,736 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"cl",
+				"clear"
+			],
+			[
+				"ma",
+				"margin-bottom"
+			],
+			[
+				"r",
+				"relative"
+			],
+			[
+				"pad",
+				"padding-left"
+			],
+			[
+				"pa",
+				"padding-bottom"
+			],
+			[
+				"back",
+				"background-repeat"
+			],
+			[
+				"bor",
+				"border-bottom"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"_",
+				"_GET"
+			],
+			[
+				"a",
+				"a	<a>"
+			],
+			[
+				"col",
+				"color"
+			],
+			[
+				"op",
+				"opacity"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"le",
+				"left"
+			],
+			[
+				"padding",
+				"padding"
+			],
+			[
+				"in",
+				"input	Tag"
+			],
+			[
+				"rse",
+				"response"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"sta",
+				"static"
+			],
+			[
+				"n",
+				"none"
+			],
+			[
+				"bac",
+				"background"
+			],
+			[
+				"se",
+				"section	Tag"
+			],
+			[
+				"ba",
+				"background"
+			],
+			[
+				"colo",
+				"background-color"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"marg",
+				"margin"
+			],
+			[
+				"l",
+				"left"
+			],
+			[
+				"input",
+				"input	input - search"
+			],
+			[
+				"link",
+				"link	link - stylesheet"
+			],
+			[
+				"fa",
+				"false"
+			],
+			[
+				"blo",
+				"block"
+			],
+			[
+				"avail",
+				"availability"
+			],
+			[
+				"ca",
+				"capitalize"
+			],
+			[
+				"avil",
+				"available"
+			],
+			[
+				"crea",
+				"created_on"
+			],
+			[
+				"strto",
+				"strtolower"
+			],
+			[
+				"music",
+				"musicArtist"
+			],
+			[
+				"str_r",
+				"str_replace"
+			],
+			[
+				"tex",
+				"text-align"
+			],
+			[
+				"lorem",
+				"lorem	Lorem Ipsum"
+			],
+			[
+				"border",
+				"border-bottom"
+			],
+			[
+				"menu-item",
+				"menu-item"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"b",
+				"background	background-color: name"
+			],
+			[
+				"statu",
+				"status_msg"
+			],
+			[
+				"data",
+				"Data"
+			],
+			[
+				"title",
+				"get_html_translation_table"
+			],
+			[
+				"real",
+				"real_name"
+			],
+			[
+				"profile",
+				"profile_data"
+			],
+			[
+				"js",
+				"js	js-tags"
+			],
+			[
+				"if",
+				"if?	$… = ( … ) ? … : …"
+			],
+			[
+				"elseif",
+				"elseif	php-if-else"
+			],
+			[
+				"ifelse",
+				"ifelse	js-if-else"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/Nodejs/Nodejs.sublime-build",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"snippet: p",
+				"Snippet: Package FIle"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"packs",
+				"Package Control: Install Package"
+			],
+			[
+				"Snippet: html",
+				"Snippet: HTML Template"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"unint",
+				"Nodejs::NPM::Uninstall"
+			],
+			[
+				"Snippet: ",
+				"Snippet: html"
+			],
+			[
+				"snipet: moo",
+				"Snippet: Mootools Add Event"
+			],
+			[
+				"andrew",
+				"Andrew: DDMS"
+			],
+			[
+				"gist",
+				"Gist: Open Gist"
+			],
+			[
+				"gis",
+				"Gist: Insert Gist"
+			],
+			[
+				"Snippet: moo",
+				"Snippet: Mootools Add Event"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"node",
+				"Nodejs::Build Completions"
+			],
+			[
+				"github",
+				"GitHub: Copy Gist to Clipboard"
+			],
+			[
+				"githu",
+				"GitHub: Copy Gist to Clipboard"
+			],
+			[
+				"project",
+				"Project: Save As"
+			],
+			[
+				"if",
+				"Snippet: <?php if (…) ?> … <?php endif ?>"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 139.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/view/home/hello.php",
+		"/Users/jesseweed/Sites/personal/banj.in/views/index/view.html",
+		"/Users/jesseweed/Sites/personal/banj.in/app/view/Main.js",
+		"/Users/jesseweed/Sites/personal/banj.in/app.js",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/model/mongo.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/banjin/classes/generator.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/v1/generator.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/config/routes.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/errors.php",
+		"/Users/jesseweed/Sites/personal/banj.in/api.banj.in/fuel/app/config/routes.php",
+		"/Users/jesseweed/Sites/personal/banj.in/api.banj.in/fuel/app/config/config.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/home.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/banjin/bootstrap.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/banjin/classes/banjin.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/banjin/classes/rovi.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/v1/search.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/v1/user.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/config/db.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/v1/namer.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/v1/auth.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/sencha.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/template.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/banjin/classes/namer.php",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/js/banjin.js",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/banjin/classes/itunes.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/config/config.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/generator.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/banjin/classes/domain.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/api/v1/namer.php",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/css/main.css",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/search-placeholder.php",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/js/main.js",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/auth.php",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/js/loader.js",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/api/v1/user.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/dashboard.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/template/header.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/home.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/dashboard.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/search.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/generator.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/model/user.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/auth/login.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/auth/register.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/banjin/classes/auth.php",
+		"/Users/jesseweed/Sites/personal/banj.in/Boxfile",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/config/crypt.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/core/config/config.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/api/v1/search.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/api/v1/auth.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/welcome.php",
+		"/Users/jesseweed/Sites/personal/banj.in/.htaccess",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/dashboard",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/bootstrap.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/social/config/facebook.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/social/bootstrap.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/search.php",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/css/styles.css",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/template/template.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/search/index.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/home/index.php",
+		"/Users/jesseweed/Desktop/sub_band.sql",
+		"/Users/jesseweed/Dropbox/Documents/Notes/name types.txt",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/admin/index.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/model/namer.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/namer.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/admin.php",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/js/controllers/main.js",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/config/development/db.php",
+		"/Users/jesseweed/Sites/personal/banj.in/public/index.php",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/js/controllers/search.js",
+		"/Users/jesseweed/Sites/personal/banj.in/component.json",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/home/ember.php",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/css/colors.css",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/css/mixins.css",
+		"/Users/jesseweed/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/css/pose.php",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/css/pose.config.php",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/css/.htaccess",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/css/styles.less",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/js/_lib/less.js",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/css/styles.less.css",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/css/normalize.css",
+		"/Users/jesseweed/Sites/personal/banj.in/.gitignore",
+		"/Users/jesseweed/Sites/personal/banj.in/public/assets/js/_lib/spin.min.js",
+		"/Users/jesseweed/Sites/personal/banj.in/public/.htaccess",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/Boxfile",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/config/banjin.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/views/home/hello.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/banjin/classes/dynadot.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/banjin/classes/services.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/banjin/classes/bootstrap.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/rovi/config/packageconfig.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/packages/rovi/classes/rovi.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/modules/rovi.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/controller/api/v1/search/index.php",
+		"/Users/jesseweed/Sites/personal/banj.in/fuel/app/classes/view/search/index.php",
+		"/Users/jesseweed/Sites/personal/banj.in/banjin.sublime-project",
+		"/Users/jesseweed/Sites/personal/banj.in/paths.php",
+		"/Users/jesseweed/Sites/personal/banj.in/application/config/auth.php",
+		"/Users/jesseweed/Sites/personal/banj.in/config/routes.js",
+		"/Users/jesseweed/Sites/personal/banj.in/functions/banjin copy.js",
+		"/Users/jesseweed/Sites/personal/banj.in/routes/index.js",
+		"/Users/jesseweed/Sites/personal/banj.in/functions/rovi.js",
+		"/Users/jesseweed/Sites/personal/banj.in/functions/banjin.js",
+		"/Users/jesseweed/Sites/personal/banj.in/package.json",
+		"/Users/jesseweed/Sites/personal/banj.in/routes/search.js",
+		"/Users/jesseweed/Sites/personal/banj.in/config/settings.js",
+		"/Users/jesseweed/Sites/personal/banj.in/banjio.sublime-project",
+		"/Users/jesseweed/Sites/personal/jesseweed.com/views/index.html",
+		"/Users/jesseweed/Desktop/multi-exporter.js",
+		"/Users/jesseweed/Sites/personal/jesseweed.com/routes/index.js",
+		"/Users/jesseweed/Sites/personal/jesseweed.com/jesseweed.com.sublime-project",
+		"/Users/jesseweed/Sites/personal/jesseweed.com/public/css/settings.styl",
+		"/Users/jesseweed/Sites/personal/jesseweed.com/public/css/settings/fonts.styl",
+		"/Users/jesseweed/Sites/personal/jesseweed.com/public/css/styles.styl",
+		"/Users/jesseweed/Sites/personal/jesseweed.com/public/css/errors.styl",
+		"/Users/jesseweed/Sites/personal/jesseweed.com/public/css/errors.css",
+		"/Users/jesseweed/Sites/personal/jesseweed.com/public/css/styles.css",
+		"/Users/jesseweed/Sites/personal/jesseweed.com/node_modules/stylus/Readme.md",
+		"/Users/jesseweed/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/jesseweed/Sites/personal/jesseweed.com/.gitignore",
+		"/Users/jesseweed/Sites/personal/lab/jesseweed.com/package.json",
+		"/Users/jesseweed/Sites/personal/lab/jesseweed.com/app.js",
+		"/Users/jesseweed/Sites/personal/lab/jesseweed.com/public/css/errors.styl",
+		"/Users/jesseweed/Sites/personal/lab/jesseweed.com/views/404.html",
+		"/Users/jesseweed/Sites/personal/lab/jesseweed.com/views/5xx.html",
+		"/Users/jesseweed/Sites/personal/lab/jesseweed.com/routes/index.js"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"Generator",
+			"_GET",
+			"$namer",
+			"login\nNameComApi",
+			"$names",
+			"names[",
+			" // name type",
+			"[]",
+			"say",
+			"//$names",
+			"get_array",
+			"$plural",
+			"rovi",
+			"search-name-value",
+			"->",
+			",",
+			"u",
+			"search-action-buttons",
+			"logo",
+			"top-nav",
+			"itunes",
+			"removeClass('hide')",
+			"removeClass('hide)",
+			"icon",
+			"earch-status",
+			"status-uncertain-",
+			"data",
+			"artist",
+			"base",
+			"main",
+			"Uri",
+			"save-name",
+			"saves",
+			"li",
+			"result-name",
+			"result-set",
+			"echo '",
+			"name",
+			"register",
+			"id",
+			"$_POST['user']",
+			"security",
+			"auto",
+			"facebook",
+			"data",
+			"../",
+			"BindUIActions",
+			"gender",
+			"$fb->",
+			"']",
+			"['",
+			"code",
+			"username",
+			"text",
+			"uu",
+			"rovi",
+			"availability",
+			"itunes",
+			"search",
+			"searchInput",
+			"'#search-field'",
+			"search-field",
+			"search-action-buttons",
+			"button",
+			"save-name",
+			"search-action-buttons",
+			"exact",
+			"$namer->",
+			"$names[]",
+			"first",
+			"speak",
+			"say",
+			"plurals",
+			"Mongo",
+			"get",
+			"random_word",
+			"zz",
+			"')",
+			"('",
+			"$('#admin-status')",
+			"Namer",
+			"admin-status",
+			"search-status",
+			"collection",
+			"response",
+			"mysql",
+			"ng-",
+			"ng",
+			"itunes",
+			"rovi",
+			"amg",
+			"good",
+			"header",
+			"td",
+			"margin",
+			"box",
+			"probable",
+			"rovi",
+			"result_domain",
+			"success",
+			"complete",
+			"php_value",
+			"span",
+			"h3",
+			"amg",
+			"result_amg_status",
+			"amg",
+			"itunes",
+			"amg",
+			"rovi",
+			"setClass",
+			"addClass",
+			"possible",
+			"h3",
+			"rovi",
+			"js",
+			"unknown",
+			"taken",
+			"zz",
+			"domain",
+			"rovi",
+			".",
+			"th",
+			"t",
+			"this",
+			"var ",
+			"Mypackage",
+			"user"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"home/in",
+				"fuel/app/views/home/index.php"
+			],
+			[
+				"index",
+				"public/index.php"
+			],
+			[
+				"install",
+				"_old/oauth_bak/oauth-src/example/server/INSTALL"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 379.0,
+	"status_bar_visible": false
+}
