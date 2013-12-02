@@ -1,6 +1,6 @@
 # Cage.js
 
-Cage.js is a node boilerplate which includes [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), [MongoDB](http://www.mongodb.org/) & [AngularJS](http://angularjs.org/).
+Cage.js is a boilerplate [Node.js](http://www.nodejs.org/) stack, which includes [Express](http://expressjs.com/), [MongoDB](http://www.mongodb.org/) & [AngularJS](http://angularjs.org/).
 
 ## Prerequisites
 * Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm
@@ -18,7 +18,7 @@ $ npm install -g bower
 * Grunt - Download and Install [Grunt](http://gruntjs.com).
 
 ## Additional Packages
-### Defined as npm modules in the [package.json](package.json) file.
+#### Defined as npm modules in the [package.json](package.json) file.
 * [Express](http://expressjs.com/) - Sinatra inspired web development framework
 * [Mongoose](http://mongoosejs.com/) - elegant mongodb object modeling for node.js
 * [Passport](http://passportjs.org/) - Simple, unobtrusive authentication for Node.js.
@@ -27,7 +27,7 @@ $ npm install -g bower
 * [Superagent](https://github.com/visionmedia/superagent) - Elegant & feature rich browser / node HTTP with a fluent API
 * [MD5](https://github.com/pvorb/node-md5) - native js function for hashing messages with MD5
 
-### Defined as bower modules in the [bower.json](bower.json) file.
+#### Defined as bower modules in the [bower.json](bower.json) file.
 * [AngularJS](http://angularjs.org) - HTML enhanced for web apps!
 * [Zepto.js](http://zeptojs.com/) - Minimalist JavaScript library for modern browsers, with a jQuery-compatible API
 * [jQuery](http://jquery.com/) - jQuery JavaScript Library
@@ -124,7 +124,7 @@ git push heroku master
 ```
 
 ## Credits
-Created on top of the [MEAN Stack](https://github.com/linnovate/mean) by [Amos Haviv](https://twitter.com/amoshaviv)
+Built on top of the [MEAN Stack](https://github.com/linnovate/mean) by [Amos Haviv](https://twitter.com/amoshaviv)
 
 ## License
 (The MIT License)
