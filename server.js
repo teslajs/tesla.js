@@ -10,8 +10,8 @@ var express = require('express'),
     mongoose = require('mongoose'),
     app = module.exports = express();
 
-    require('./config/env/all')(app);
     require('./config/config')(app);
+    require('./config/env-config')(app);
 
 // //Bootstrap db connection
 var db = mongoose.connect(app.config.db.url);
