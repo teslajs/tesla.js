@@ -1,27 +1,17 @@
-module.exports = {
-    db: "mongodb://localhost/mean-test",
-    port: 3001,
-    app: {
-        name: "Test"
-    },
-    facebook: {
-        clientID: "APP_ID",
-        clientSecret: "APP_SECRET",
-        callbackURL: "http://localhost:3000/auth/facebook/callback"
-    },
-    twitter: {
-        clientID: "CONSUMER_KEY",
-        clientSecret: "CONSUMER_SECRET",
-        callbackURL: "http://localhost:3000/auth/twitter/callback"
-    },
-    github: {
-        clientID: "APP_ID",
-        clientSecret: "APP_SECRET",
-        callbackURL: "http://localhost:3000/auth/github/callback"
-    },
-    google: {
-        clientID: "APP_ID",
-        clientSecret: "APP_SECRET",
-        callbackURL: "http://localhost:3000/auth/google/callback"
-    }
+module.exports = function (app) {
+
+    // global settings
+    app.site.domain = "localhost";
+    app.site.environment = "Test";
+    app.site.url = app.site.protocol + app.site.domain + '/'; // base url
+
+    // directories
+    app.site.dir = {
+        js : app.site.url + "js/",
+        img : app.site.url + "img/",
+        css : app.site.url + "css/"
+    };
+
+    console.log( app.site.environment + ' config loaded' );
+
 }

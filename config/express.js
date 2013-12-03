@@ -6,14 +6,14 @@ var express = require('express'),
     flash = require('connect-flash'),
     helpers = require('view-helpers'),
     stylus = require('stylus'),
-    fs = require('fs'),
-    config = require('./config');
+    fs = require('fs');
 
-module.exports = function(app, passport, db) {
+module.exports = function(app, db) {
+
     app.set('showStackError', true);
 
     //Prettify HTML
-    app.locals.pretty = true;
+    app.locals.pretty = app.config.prettify.html;
 
     //Should be placed before express.static
     app.use(express.compress({
@@ -23,11 +23,12 @@ module.exports = function(app, passport, db) {
         level: 9
     }));
 
-    app.use(require('stylus').middleware('./public')); // Use stylus for css
+    console.log('using ' + app.config.engines.css + ' as css preprocessor');
+    app.use(require(app.config.engines.css).middleware('./public')); // Set CSS Processor
 
     //Setting the fav icon and static folder
     app.use(express.favicon());
-    app.use(express.static(config.root + '/public'));
+    app.use(express.static(app.config.root + '/public'));
 
     //Don't use logger for test env
     if (process.env.NODE_ENV !== 'test') {
@@ -35,15 +36,20 @@ module.exports = function(app, passport, db) {
     }
 
     //Set views path, template engine and default layout
-    app.set('views', config.root + '/app/views');
-    app.set('view engine', 'jade');
+    app.set('views', app.config.root + '/app/views');
 
     //Enable jsonp
-    app.enable("jsonp callback");
+    if ( app.config.jsonp === true ) {
+        app.enable("jsonp callback");
+    }
 
     app.configure(function() {
+
         //cookieParser should be above session
         app.use(express.cookieParser());
+
+        app.set('view engine', app.config.engines.html); // set html view engine
+        console.log('using ' + app.config.engines.html + ' as view engine');
 
         // request body parsing middleware should be above methodOverride
         app.use(express.urlencoded());
@@ -52,7 +58,7 @@ module.exports = function(app, passport, db) {
 
         //express/mongo session storage
         app.use(express.session({
-            secret: 'MYAPPSECRET',
+            secret: app.config.secret,
             store: new mongoStore({
                 db: db.connection.db,
                 collection: 'sessions'
@@ -63,11 +69,7 @@ module.exports = function(app, passport, db) {
         app.use(flash());
 
         //dynamic helpers
-        app.use(helpers(config.app.name));
-
-        //use passport session
-        app.use(passport.initialize());
-        app.use(passport.session());
+        app.use(helpers(app.name));
 
         //routes should be at the last
         app.use(app.router);
