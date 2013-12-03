@@ -14,7 +14,6 @@ module.exports = function (app) {
             html: "jade",
             css: "stylus",
         },
-        styles : "stylus",
         prettify : {
             html : true,
         },
