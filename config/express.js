@@ -5,10 +5,12 @@ var express = require('express'),
     mongoStore = require('connect-mongo')(express),
     flash = require('connect-flash'),
     helpers = require('view-helpers'),
-    stylus = require('stylus'),
+    sass = require('sass'),
     fs = require('fs');
 
 module.exports = function(app, db) {
+
+    var htmlEngine = require(app.config.engines.html);
 
     app.set('showStackError', true);
 

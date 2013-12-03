@@ -11,8 +11,8 @@ module.exports = function (app) {
             url : "mongodb://localhost/site-name-dev"
         },
         engines : {
-            html: "jade",
-            css: "stylus",
+            html: "jade", // jade, ejs, haml, hjs (hogan)
+            css: "stylus", // styles, sass, less
         },
         prettify : {
             html : true,

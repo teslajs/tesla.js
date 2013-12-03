@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "express": "latest",
-    "jade": "latest",
     "mongoose": "latest",
     "connect-mongo": "latest",
     "connect-flash": "latest",
@@ -38,9 +37,15 @@
     "grunt": "latest",
     "grunt-cli": "latest",
     "grunt-env": "latest",
-    "superagent": "~0.15.7",
-    "MD5": "~1.2.0",
-    "stylus": "latest"
+    "superagent": "latest",
+    "MD5": "latest",
+    "jade": "latest",
+    "express-hogan": "latest",
+    "ejs": "latest",
+    "haml": "latest",
+    "stylus": "latest",
+    "sass": "latest",
+    "less": "latest"
   },
   "devDependencies": {
     "supertest": "latest",
