@@ -1,12 +1,8 @@
-/**
- * Module dependencies.
- */
-var mongoose = require('mongoose');
-
-exports.render = function(req, res) {
+exports.render = function(req, res, app) {
 
 	res.render('index', {
-		title : 'Cage.js'
+		pageTitle : 'Cage.js',
+		site: app.site
     });
 
 };
