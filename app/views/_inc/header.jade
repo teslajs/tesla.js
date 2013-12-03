@@ -4,14 +4,14 @@ head
 	meta(name='viewport', content='width=device-width,initial-scale=1')
 
 
-	if locals.title
-		title= 'Cage.js'
+	if locals.pageTitle
+		title= pageTitle
 	else
-		title= title
+		title= site.name
 
 
 	meta(http-equiv='Content-type', content='text/html;charset=UTF-8')
 
-	link(href='/img/icons/favicon.ico', rel='shortcut icon', type='image/x-icon')
+	link(href='#{site.dir.img}icons/favicon.ico', rel='shortcut icon', type='image/x-icon')
 
-	link(rel='stylesheet', href='/css/styles.css')
+	link(rel='stylesheet', href='#{site.dir.css}styles.css')
