@@ -4,22 +4,17 @@
 var express = require('express'),
     fs = require('fs'),
     passport = require('passport'),
-    logger = require('mean-logger');
-
-/**
- * Main application entry file.
- * Please note that the order of loading is important.
- */
-
-//Load configurations
-//if test env, load example file
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
-    config = require('./config/config'),
+    logger = require('mean-logger'),
+    env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
     auth = require('./config/middlewares/authorization'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    app = module.exports = express();
 
-//Bootstrap db connection
-var db = mongoose.connect(config.db);
+    require('./config/env/all')(app);
+    require('./config/config')(app);
+
+// //Bootstrap db connection
+var db = mongoose.connect(app.config.db.url);
 
 //Bootstrap models
 var models_path = __dirname + '/app/models';
@@ -38,18 +33,15 @@ var walk = function(path) {
 };
 walk(models_path);
 
-var app = express();
+// // require additional config files
+// // require('./config/config')(app); //express settings
+require('./config/express')(app, db); //express settings
+require('./config/routes')(app); // routes
 
-//express settings
-require('./config/express')(app, passport, db);
-
-//Bootstrap routes
-require('./config/routes')(app, passport, auth);
-
-//Start the app by listening on <port>
+// //Start the app by listening on <port>
 var port = process.env.PORT || config.port;
 app.listen(port);
 console.log('Express app started on port ' + port);
 
-//expose app
+// //expose app
 exports = module.exports = app;
