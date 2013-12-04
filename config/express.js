@@ -86,15 +86,19 @@ module.exports = function(app, db) {
 
             //Error page
             res.status(500).render('500', {
-                error: err.stack
+                error: err.stack,
+                pageTitle : app.site.name + ' - Error!',
+                site: app.site
             });
         });
 
         //Assume 404 since no middleware responded
         app.use(function(req, res, next) {
             res.status(404).render('404', {
+                pageTitle : app.site.name + ' - Not Found',
                 url: req.originalUrl,
-                error: 'Not found'
+                error: 'Not found',
+                site: app.site
             });
         });
 
