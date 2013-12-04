@@ -15,3 +15,8 @@ head
 	link(href='#{site.dir.img}icons/favicon.ico', rel='shortcut icon', type='image/x-icon')
 
 	link(rel='stylesheet', href='#{site.dir.css}styles.css')
+
+	//- Allows you to pass an array of page specific stylesheets to load
+	if locals.css
+		each stylesheet in css
+			link(rel='stylesheet', href='#{site.dir.css}#{stylesheet}')
