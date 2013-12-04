@@ -1,8 +1,8 @@
 module.exports = function (app) {
 
     // global settings
-    app.site.domain = "test.site-name.com";
-    app.site.environment = "Test";
+    app.site.domain = "staging.site-name.com";
+    app.site.environment = "Staging";
     app.site.url = app.site.protocol + app.site.domain + '/'; // base url
 
     // directories

@@ -24,7 +24,7 @@ module.exports = function (app) {
 
     // global settings
     app.site = {
-        name : "site-name",
+        name : "Cage.js",
     }
 
     // global settings

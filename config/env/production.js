@@ -1,7 +1,7 @@
 module.exports = function (app) {
 
     // global settings
-    app.site.domain = "localhost";
+    app.site.domain = "site-name.com";
     app.site.environment = "Production";
     app.site.url = app.site.protocol + app.site.domain + '/'; // base url
 
