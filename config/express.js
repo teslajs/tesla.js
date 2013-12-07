@@ -8,7 +8,7 @@ var express = require('express'),
     sass = require('sass'),
     fs = require('fs');
 
-module.exports = function(app, db) {
+module.exports = function(app) {
 
     var htmlEngine = require(app.config.engines.html);
 
@@ -59,16 +59,16 @@ module.exports = function(app, db) {
         app.use(express.methodOverride());
 
         //express/mongo session storage
-        app.use(express.session({
-            secret: app.config.secret,
-            store: new mongoStore({
-                db: db.connection.db,
-                collection: 'sessions'
-            })
-        }));
+        // app.use(express.session({
+        //     secret: app.config.secret,
+        //     store: new mongoStore({
+        //         db: db.connection.db,
+        //         collection: 'sessions'
+        //     })
+        // }));
 
         //connect flash for flash messages
-        app.use(flash());
+        // app.use(flash());
 
         //dynamic helpers
         app.use(helpers(app.name));
