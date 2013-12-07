@@ -19,7 +19,8 @@ module.exports = function (app) {
         },
         jsonp : true,
         secret : 'MYAPPSECRET',
-        protocol : 'http://'
+        protocol : 'http://',
+        autoLoad : false, // whether to autoload controllers & models
     }
 
     // global settings

@@ -2,6 +2,15 @@ var fs = require('fs');
 
 module.exports = function(app) {
 
+	// APPLY TITLE CASING TO A STRING
+	function titleCase (str) {
+
+	    return str.replace(/\w\S*/g, function (txt) {
+	        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+	    });
+
+	};
+
 	app.get("/*", function(req, res) {
 
 	    var ctrl, controller, action,
@@ -10,6 +19,7 @@ module.exports = function(app) {
 
 	    uri = uri[0].split('/');
 	    ctrl = uri[1],
+	    model = ctrl,
 	    action = uri[2];
 
 	 	console.log('current dir: ' + __dirname );
@@ -25,6 +35,10 @@ module.exports = function(app) {
 
 				if ( fs.existsSync( './app/controllers/' + ctrl + '/' + action + '.js' ) )  {
 					controller = require( '../app/controllers/' + ctrl + '/' + action );
+				} else if ( fs.existsSync( './app/controllers/' + ctrl + '.js' ) ) {
+					console.log( 'attempting to load: ' + 'app/controllers/' + ctrl );
+					console.log( 'controller exists: ' + fs.existsSync( './app/controllers/' + ctrl + '.js' ) );
+					controller = require( '../app/controllers/' + ctrl );
 				} else {
 					notFound = true;
 				}
@@ -32,7 +46,10 @@ module.exports = function(app) {
 		    // IF NO ACTION IS REQUESTED
 			} else {
 
+				action = 'index';
+
 				console.log( 'attempting to load: ' + 'app/controllers/' + ctrl );
+				console.log( 'controller exists: ' + fs.existsSync( './app/controllers/' + ctrl + '.js' ) );
 
 				if ( fs.existsSync( './app/controllers/' + ctrl + '.js' ) ) {
 					controller = require( '../app/controllers/' + ctrl );
@@ -44,16 +61,37 @@ module.exports = function(app) {
 		// USE DEFAULT CONTROLLER IF NONE SPECIFIED
 		} else {
 
+			console.log( 'attempting to load: ' + 'app/controllers/default' );
+			console.log( 'controller exists: ' + fs.existsSync( './app/controllers/default' + '.js' ) );
+
 			if ( fs.existsSync( './app/controllers/default.js' ) ) {
 				var controller = require('../app/controllers/default');
+				ctrl = 'default';
+				model = 'page';
+				action = 'index';
 			} else {
 				notFound = true;
 			}
 		}
 
+		// SETUP APP VARIABLE TO SEND TO THE CONTROLLER
+		app.req = req;
+		app.res = res;
+		app.model = titleCase(model);
+		app.controller = ctrl;
+		app.action = action;
+		app.uri = uri;
+
 		// LOAD CONTROLLER IF IT EXISTS
 		if ( notFound === false ) {
-			controller.render(req, res, app);
+
+			// Use auto controller
+			if ( app.config.autoLoad === true ) {
+				require('../app/controllers/auto').render(app);
+			} else {
+				controller.render(app);
+			}
+
 
 		// THROW A 404 IF WE CAN'T FIND THE CONTROLLER
 		} else {

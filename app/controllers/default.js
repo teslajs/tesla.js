@@ -1,6 +1,6 @@
-exports.render = function(req, res, app) {
+exports.render = function(app) {
 
-	res.render('index', {
+	app.res.render('default', {
 		pageTitle : app.site.name,
 		site: app.site
     });
