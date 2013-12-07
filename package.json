@@ -1,12 +1,12 @@
 {
   "name": "Cage.js",
   "description": "Node.js Boilerplate - Node, Express, Mongo, Angular",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "author": "Jesse Weed",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jesseweed/cage.js"
+    "url": "https://github.com/cagejs/cage.js"
   },
   "engines": {
     "node": "0.10.x",
