@@ -20,7 +20,7 @@ This is the most light-weight option and gives you the most control over how you
 
 
 ### Option 2: Install the Command Line Tools
-Tesla also include a command line tool to make creating and update apps as as simple as possible. You can install it easily with NPM:
+Tesla.js includes a simple command line tool ([tesla-cli](https://github.com/teslajs/tesla-cli.js)) to make creating and updating apps as simple as possible. You can install it easily with NPM:
 
 ```
 $ npm install -g tesla-cli
