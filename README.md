@@ -37,19 +37,19 @@ With either option 1 or option 2, you will need to make sure you have all the co
 
 ### Start the Server
 
-#### We recommend using [Grunt](https://github.com/gruntjs/grunt-cli) to start the server:
+##### We recommend using [Grunt](https://github.com/gruntjs/grunt-cli) to start the server:
 
   $ grunt
 
 This will watch for changes to any of your files and automatically restart then server when necesary.
 
-#### When not using Grunt, you can use:
+##### When not using Grunt, you can use:
 
   $ node server
 
 With this method you have to manually stop and start the server any time you make changes.
 
-#### Once the server has started, simply point your browser to:
+##### Once the server has started, simply point your browser to:
 
   http://localhost:3000
 
@@ -57,7 +57,7 @@ With this method you have to manually stop and start the server any time you mak
 ## Configuration
 All configuration is specified in the [config](config/) folder, particularly the [config.js](config/config.js) file and the [env](config/env/) files. Here you will need to specify your application name, database name, and any other settings you would like to customize.
 
-### [config.js](config/config.js)
+##### [config.js](config/config.js)
 Most default settings can be set & updated here:
 
 ```
@@ -100,7 +100,7 @@ app.site.meta = {
 ```
 
 
-### [config.js](config/config.js)
+##### [config.js](config/config.js)
 
 There are a few environment specific setting you can adjust here:
 
@@ -143,7 +143,7 @@ If you are using node instead of grunt, it is very similar:
 
 
 ## Included Packages
-#### Defined as npm modules in the [package.json](package.json) file.
+#### NPM modules in the [package.json](package.json) file.
 * [Express](http://expressjs.com/) - Sinatra inspired web development framework
 * [Mongoose](http://mongoosejs.com/) - elegant mongodb object modeling for node.js
 * [Passport](http://passportjs.org/) - Simple, unobtrusive authentication for Node.js.
@@ -152,7 +152,7 @@ If you are using node instead of grunt, it is very similar:
 * [Superagent](https://github.com/visionmedia/superagent) - Elegant & feature rich browser / node HTTP with a fluent API
 * [MD5](https://github.com/pvorb/node-md5) - native js function for hashing messages with MD5
 
-#### Defined as bower modules in the [bower.json](bower.json) file.
+#### Bower modules in the [bower.json](bower.json) file.
 * [AngularJS](http://angularjs.org) - HTML enhanced for web apps!
 * [Zepto.js](http://zeptojs.com/) - Minimalist JavaScript library for modern browsers, with a jQuery-compatible API
 * [jQuery](http://jquery.com/) - jQuery JavaScript Library
