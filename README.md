@@ -1,6 +1,6 @@
-# Cage.js
+# Tesla.js
 
-Cage.js is a boilerplate [Node.js](http://www.nodejs.org/) stack, which includes [Express](http://expressjs.com/), [MongoDB](http://www.mongodb.org/) & [AngularJS](http://angularjs.org/).
+Tesls.js is a boilerplate [Node.js](http://www.nodejs.org/) stack, which includes [Express](http://expressjs.com/), [MongoDB](http://www.mongodb.org/) & [AngularJS](http://angularjs.org/).
 
 ## Prerequisites
 * Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm
@@ -33,7 +33,7 @@ $ npm install -g bower
 * [jQuery](http://jquery.com/) - jQuery JavaScript Library
 
 ## Quick Install
-  The quickest way to get started with Cage.js is to clone the project and utilize it like this:
+  The quickest way to get started with Tesls.js is to clone the project and utilize it like this:
 
   Install dependencies:
 

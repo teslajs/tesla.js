@@ -8,7 +8,7 @@ module.exports = function (app) {
         root : rootPath,
         port : 3000,
         db : {
-            url : "mongodb://localhost/site-name-dev"
+            url : "mongodb://localhost/db-name"
         },
         engines : {
             html: "jade", // jade, ejs, haml, hjs (hogan)
@@ -25,7 +25,7 @@ module.exports = function (app) {
 
     // global settings
     app.site = {
-        name : "Cage.js",
+        name : "Tesla.js",
     }
 
     // global settings

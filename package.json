@@ -1,12 +1,12 @@
 {
-  "name": "Cage.js",
+  "name": "Tesla.js",
   "description": "Node.js Boilerplate - Node, Express, Mongo, Angular",
   "version": "0.1.1",
   "private": false,
   "author": "Jesse Weed",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cagejs/cage.js"
+    "url": "https://github.com/teslajs/tesla.js"
   },
   "engines": {
     "node": "0.10.x",
