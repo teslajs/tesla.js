@@ -29,7 +29,7 @@
       </header>
       <section>
         <h1>
-<a name="teslajs" class="anchor" href="#teslajs"><span class="octicon octicon-link"></span></a>Tesla.js</h1>
+<a name="teslajs-beta" class="anchor" href="#teslajs-beta"><span class="octicon octicon-link"></span></a>Tesla.js (beta)</h1>
 
 <p>Tesla.js is a boilerplate <a href="http://www.nodejs.org/">node.js</a> framework, with some basic MVC features.</p>
 
@@ -39,6 +39,37 @@
 <ul>
 <li>Node.js - Download and Install <a href="http://www.nodejs.org/download/">Node.js</a>. You can also follow <a href="https://gist.github.com/isaacs/579814">this gist</a> for a quick and easy way to install Node.js and npm</li>
 <li>MongoDB - Download and Install <a href="http://www.mongodb.org/downloads">MongoDB</a> - Make sure it's running on the default port (27017).</li>
+</ul><h2>
+<a name="included-packages" class="anchor" href="#included-packages"><span class="octicon octicon-link"></span></a>Included Packages</h2>
+
+<h4>
+<a name="npm-modules-in-the-packagejson-file" class="anchor" href="#npm-modules-in-the-packagejson-file"><span class="octicon octicon-link"></span></a>NPM modules in the <a href="package.json">package.json</a> file.</h4>
+
+<ul>
+<li>
+<a href="http://expressjs.com/">Express</a> - Sinatra inspired web development framework</li>
+<li>
+<a href="http://mongoosejs.com/">Mongoose</a> - elegant mongodb object modeling for node.js</li>
+<li>
+<a href="http://passportjs.org/">Passport</a> - Simple, unobtrusive authentication for Node.js.</li>
+<li>
+<a href="http://jade-lang.com/">Jade</a> - robust, elegant, feature rich template engine for nodejs</li>
+<li>
+<a href="http://learnboost.github.io/stylus/">Stylus</a> - Robust, expressive, and feature-rich CSS superset</li>
+<li>
+<a href="https://github.com/visionmedia/superagent">Superagent</a> - Elegant &amp; feature rich browser / node HTTP with a fluent API</li>
+<li>
+<a href="https://github.com/pvorb/node-md5">MD5</a> - native js function for hashing messages with MD5</li>
+</ul><h4>
+<a name="bower-modules-in-the-bowerjson-file" class="anchor" href="#bower-modules-in-the-bowerjson-file"><span class="octicon octicon-link"></span></a>Bower modules in the <a href="bower.json">bower.json</a> file.</h4>
+
+<ul>
+<li>
+<a href="http://angularjs.org">AngularJS</a> - HTML enhanced for web apps!</li>
+<li>
+<a href="http://zeptojs.com/">Zepto.js</a> - Minimalist JavaScript library for modern browsers, with a jQuery-compatible API</li>
+<li>
+<a href="http://jquery.com/">jQuery</a> - jQuery JavaScript Library</li>
 </ul><h2>
 <a name="quick-start" class="anchor" href="#quick-start"><span class="octicon octicon-link"></span></a>Quick Start</h2>
 
@@ -125,8 +156,8 @@ app.config = {
     },
 
     engines : {
-        html: "jade", // jade, ejs, haml, hjs (hogan)
-        css: "stylus", // styles, sass, less
+        html: "jade", // specify view engine - options: jade, ejs, haml, hjs (hogan)
+        css: "stylus", // specify css processor - options: stylus, sass, less
     },
     root : rootPath,
 
@@ -187,37 +218,113 @@ app.site.dir = {
 </blockquote>
 
 <h2>
-<a name="included-packages" class="anchor" href="#included-packages"><span class="octicon octicon-link"></span></a>Included Packages</h2>
+<a name="models-controllers--views-oh-my" class="anchor" href="#models-controllers--views-oh-my"><span class="octicon octicon-link"></span></a>Models, Controllers &amp; Views, Oh My!</h2>
 
-<h4>
-<a name="npm-modules-in-the-packagejson-file" class="anchor" href="#npm-modules-in-the-packagejson-file"><span class="octicon octicon-link"></span></a>NPM modules in the <a href="package.json">package.json</a> file.</h4>
+<h3>
+<a name="routing" class="anchor" href="#routing"><span class="octicon octicon-link"></span></a>Routing</h3>
 
-<ul>
-<li>
-<a href="http://expressjs.com/">Express</a> - Sinatra inspired web development framework</li>
-<li>
-<a href="http://mongoosejs.com/">Mongoose</a> - elegant mongodb object modeling for node.js</li>
-<li>
-<a href="http://passportjs.org/">Passport</a> - Simple, unobtrusive authentication for Node.js.</li>
-<li>
-<a href="http://jade-lang.com/">Jade</a> - robust, elegant, feature rich template engine for nodejs</li>
-<li>
-<a href="http://learnboost.github.io/stylus/">Stylus</a> - Robust, expressive, and feature-rich CSS superset</li>
-<li>
-<a href="https://github.com/visionmedia/superagent">Superagent</a> - Elegant &amp; feature rich browser / node HTTP with a fluent API</li>
-<li>
-<a href="https://github.com/pvorb/node-md5">MD5</a> - native js function for hashing messages with MD5</li>
-</ul><h4>
-<a name="bower-modules-in-the-bowerjson-file" class="anchor" href="#bower-modules-in-the-bowerjson-file"><span class="octicon octicon-link"></span></a>Bower modules in the <a href="bower.json">bower.json</a> file.</h4>
+<p>Tesla comes with an automatic routing system which saves you the trouble of manually creating routes for your site. The routing is based on the following URI structure:</p>
 
-<ul>
-<li>
-<a href="http://angularjs.org">AngularJS</a> - HTML enhanced for web apps!</li>
-<li>
-<a href="http://zeptojs.com/">Zepto.js</a> - Minimalist JavaScript library for modern browsers, with a jQuery-compatible API</li>
-<li>
-<a href="http://jquery.com/">jQuery</a> - jQuery JavaScript Library</li>
-</ul><h2>
+<pre><code>http://localhost:3000/controller/action
+</code></pre>
+
+<p>As an example, http://localhost:3000/home would load the following controller: app/controllers/home.js</p>
+
+<p>Similarly, http://localhost:3000/foo/bar would load this controller: app/controllers/foo/bar.js</p>
+
+<h5>
+<a name="autoloading" class="anchor" href="#autoloading"><span class="octicon octicon-link"></span></a>Autoloading</h5>
+
+<p>The exeption to this rule is if you set "autoLoad: true" in <a href="config/config.js">config/config.js</a>. In this case you only need to create a model and a view, as Tesla will attempt to automatically load the model and the view using the <a href="app/controllers/auto.js">app/controllers/auto.js</a> controller.</p>
+
+<p>With autoload, going to <a href="http://localhost:3000/hello/world">http://localhost:3333/hello/world</a> will attempt to load the following files:</p>
+
+<p>*Controller: app/controllers/auto.js
+*Model: app/models/hello.js
+*View: app/views/hello/world.jade</p>
+
+<p>Autoload assumes a model with the name of the controller, and will try to find a record whose "name" field matches the action. Using <a href="http://localhost:3000/article/super-awesome-fun-time">http://localhost:3000/articles/super-awesome-fun-time</a> as an example, autoload load use a model called "articles" and try to find a record with the name "super-awesome-fun-time":</p>
+
+<pre><code>articles.findOne({name: "super-awesome-fun-time"})
+</code></pre>
+
+<p>With autoloading, any data returned from the model will be sent to the view via the "data" variable. If no data is returned we assume the page does not exist and will throw a 404 error. Also worth noting, autoload expects to find a model to provide data to the view. If you forget to create a model with the correct name, you will get a 404 error when loading the page. If you don't want or need a model to provide data to your controller, or want to use a different URI structure, don't use autoload.</p>
+
+<h3>
+<a name="controllers" class="anchor" href="#controllers"><span class="octicon octicon-link"></span></a>Controllers</h3>
+
+<p>If you are not using autoload, you will need to create your own controllers, which couldn't be easier! For example, if you want to create the page http://localhost:3000/help, simply create a controller with the same name: app/controllers/help.</p>
+
+<p>Then, add the following code:</p>
+
+<pre><code>exports.render = function(app) {
+
+    app.res.render('help', {
+        site: app.site
+    });
+
+};
+</code></pre>
+
+<p>The above code is pretty simple, it simply loads the view "app/views/help.jade" and passes it a "site" variable.</p>
+
+<p>For a slightly for complex example, lets say you want to create a blog with the following uri structure: http://localhost:3000/article/read?id=12345</p>
+
+<p>Let's assume also you also want use an "article" model to load an article with the id "12345". Create the file "app/controllers/article/read.js" with the following code:</p>
+
+<pre><code>var mongoose = require('mongoose'),
+    Articles = mongoose.model( 'Article' ),
+
+exports.render = function(app) {
+
+    var id = req.query('id')
+
+    Articles.findOne({_id: ud}).exec(function(err, article) {
+
+        // IF WE GET AN ERROR
+        if (err) {
+            app.res.render('error', {
+                status: 500
+            });
+
+        // IF NO DATA WAS RETURNED, THROW A 404
+        } else if ( article === null) {
+            app.res.status(404).render('404', {
+                pageTitle : app.site.name + ' - Not Found',
+                url: app.req.originalUrl,
+                error: 'Not found',
+                site: app.site
+            });
+
+        // IF NO PROBLEMS, RENDER PAGE
+        } else {
+
+            // LOAD THE ARTICLE/READ VIEW &amp; PASS DATA FROM THE MODEL
+            app.res.render('article/read', {
+                article : article,
+                site: app.site
+            });
+
+        }
+
+        }
+
+    });
+
+};
+</code></pre>
+
+<h3>
+<a name="views" class="anchor" href="#views"><span class="octicon octicon-link"></span></a>Views</h3>
+
+<p>Views can use Jade (default), Haml, Handlebars or EJS. See the appropriate documentation for you chosen templating language for more info on how to use it.</p>
+
+<h3>
+<a name="models" class="anchor" href="#models"><span class="octicon octicon-link"></span></a>Models</h3>
+
+<p>For models, Tesla uses <a href="http://mongoosejs.com/">Mongoose</a> to connect to a MongoDB server. Documentation on working with Mongoos can be found here: <a href="http://mongoosejs.com/docs/guide.html">http://mongoosejs.com/docs/guide.html</a></p>
+
+<h2>
 <a name="troubleshooting" class="anchor" href="#troubleshooting"><span class="octicon octicon-link"></span></a>Troubleshooting</h2>
 
 <p>During install some of you may encounter some issues, most of this issues can be solved by one of the following tips.
