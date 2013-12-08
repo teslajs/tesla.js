@@ -4,12 +4,26 @@
   "version": "0.1.6",
   "private": false,
   "contributors": [
-    "Jesse Weed"
+    {
+      "name" : "Jesse Weed (http://jesseweed.com)"
+    }
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/teslajs/tesla.js"
   },
+  "homepage": {
+    "url": "http://teslajs.com"
+  },
+  "bugs": {
+    "url" : "https://github.com/teslajs/tesla.js/issues"
+  },
+  "licenses" : [
+    {
+      "type": "MIT",
+      "url": "https://github.com/teslajs/tesla.js/blob/master/LICENSE"
+    }
+  ],
   "engines": {
     "node": "0.10.x",
     "npm": "1.2.x"
@@ -25,15 +39,8 @@
     "connect-mongo": "latest",
     "connect-flash": "latest",
     "crypto": "latest",
-    "passport": "latest",
-    "passport-local": "latest",
-    "passport-facebook": "latest",
-    "passport-twitter": "latest",
-    "passport-github": "latest",
-    "passport-google-oauth": "latest",
     "underscore": "latest",
     "view-helpers": "latest",
-    "mean-logger": "latest",
     "forever": "latest",
     "bower": "latest",
     "grunt": "latest",
