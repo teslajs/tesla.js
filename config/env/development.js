@@ -5,8 +5,6 @@ module.exports = function (app) {
     app.site.environment = "Development";
     app.site.url = app.config.protocol + app.site.domain + ':'  + app.config.port + '/'; // base url
 
-    console.log(app.site.url);
-
     // directories
     app.site.dir = {
         css : app.site.url + "css/",

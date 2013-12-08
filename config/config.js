@@ -3,32 +3,36 @@ rootPath = path.normalize(__dirname + '/..');
 
 module.exports = function (app) {
 
-    // config setting
+    app.site = {
+        name : "Tesla.js", // the name of you app
+    }
+
     app.config = {
-        root : rootPath,
-        port : 3000,
-        db : {
-            url : "mongodb://localhost/db-name"
+        port : 3000, // port to run the server on
+
+        prettify : {
+            html : true, // whether to pretify html
         },
+
         engines : {
             html: "jade", // jade, ejs, haml, hjs (hogan)
             css: "stylus", // styles, sass, less
         },
-        prettify : {
-            html : true,
+        root : rootPath,
+
+        db : {
+            url : "mongodb://localhost/db-name" // url to database
         },
-        jsonp : true,
+
+        jsonp : true, // allow jsonp requests
         secret : 'MYAPPSECRET',
         protocol : 'http://',
         autoLoad : false, // whether to autoload controllers & models
     }
 
-    // global settings
-    app.site = {
-        name : "Tesla.js",
-    }
 
-    // global settings
+
+    // some default meta setting for head
     app.site.meta = {
         description : '',
         keywords : '',
