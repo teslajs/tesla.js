@@ -1,9 +1,11 @@
 {
   "name": "tesla",
-  "description": "Node.js Boilerplate - Node, Express, Mongo, Angular",
-  "version": "0.1.1",
+  "description": "MVC Style Framework for Node.js",
+  "version": "0.1.2",
   "private": false,
-  "author": "Jesse Weed",
+  "contributors": [
+    "Jesse Weed"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/teslajs/tesla.js"
