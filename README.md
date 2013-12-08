@@ -1,23 +1,128 @@
 # Tesla.js
 
-Tesls.js is a boilerplate [Node.js](http://www.nodejs.org/) stack, which includes [Express](http://expressjs.com/), [MongoDB](http://www.mongodb.org/) & [AngularJS](http://angularjs.org/).
+Tesla.js is a boilerplate [node.js](http://www.nodejs.org/) framework, with some basic MVC features.
 
 ## Prerequisites
 * Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm
 * MongoDB - Download and Install [MongoDB](http://www.mongodb.org/downloads) - Make sure it's running on the default port (27017).
 
-### Tools Prerequisites
-* NPM - Node.js package manager, should be installed when you install node.js.
-* Bower - Web package manager, installing [Bower](http://bower.io/) is simple when you have npm:
+## Quick Start
+The quickest way to get started with Tesla.js is to clone the project and utilize it like this:
+
+####Install Tesla:
+
+  $ npm install -g tesla
+
+####Install Dependencies:
+
+  $ npm install
+
+####We recommend using [Grunt](https://github.com/gruntjs/grunt-cli) to start the server:
+
+  $ grunt
+
+This will watch for changes to any of your files and automatically restart then server when necesary.
+
+####When not using grunt you can use:
+
+  $ node server
+
+With this method you have to manually stop and start the server any time you make changes.
+
+####Once the server has started, simply point your browser to:
+
+  http://localhost:3000
+
+
+## Configuration
+All configuration is specified in the [config](config/) folder, particularly the [config.js](config/config.js) file and the [env](config/env/) files. Here you will need to specify your application name, database name, and any other settings you would like to customize.
+
+### [config.js](config/config.js)
+Most default settings can be set & updated here:
 
 ```
-$ npm install -g bower
+app.site = {
+    name : "Tesla.js", // the name of you app
+}
+
+app.config = {
+    port : 3000, // port to run the server on
+
+    prettify : {
+        html : true, // whether to pretify html
+    },
+
+    engines : {
+        html: "jade", // jade, ejs, haml, hjs (hogan)
+        css: "stylus", // styles, sass, less
+    },
+    root : rootPath,
+
+    db : {
+        url : "mongodb://localhost/db-name" // url to database
+    },
+
+    jsonp : true, // allow jsonp requests
+    secret : 'MYAPPSECRET',
+    protocol : 'http://',
+    autoLoad : false, // whether to autoload controllers & models
+}
+
+
+
+// some default meta setting for head
+app.site.meta = {
+    description : '',
+    keywords : '',
+    viewport : 'width=device-width, user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0',
+    encoding : "utf-8"
+}
 ```
 
-### Optional
-* Grunt - Download and Install [Grunt](http://gruntjs.com).
 
-## Additional Packages
+### [config.js](config/config.js)
+
+There are a few environment specific setting you can adjust here:
+
+```
+// global settings
+app.site.domain = "localhost"; // domain the site is running on
+app.site.environment = "Development"; // name of environment
+app.site.url = app.config.protocol + app.site.domain + ':'  + app.config.port + '/'; // base url
+
+// directories location to use for dynamic file linking
+app.site.dir = {
+    css : app.site.url + "css/",
+    img : app.site.url + "img/",
+    lib : app.site.url + "lib/",
+    js : app.site.url + "js/"
+};
+```
+
+
+### Environmental Settings
+
+There are three environments provided by default, __development__, __test__, and __production__. Each of these environments has the following configuration options:
+* __db__ - This is the name of the MongoDB database to use, and is set by default to __mean-dev__ for the development environment.
+* __app.name__ - This is the name of your app or website, and can be different for each environment. You can tell which environment you are running by looking at the TITLE attribute that your app generates.
+* __Social OAuth Keys__ - Facebook, GitHub, Google, Twitter. You can specify your own social application keys here for each platform:
+  * __clientID__
+  * __clientSecret__
+  * __callbackURL__
+
+To run with a different environment, just specify NODE_ENV as you call grunt:
+
+  $ NODE_ENV=test grunt
+
+If you are using node instead of grunt, it is very similar:
+
+  $ NODE_ENV=test node server
+
+> NOTE: Running Node.js applications in the __production__ environment enables caching, which is disabled by default in all other environments.
+
+
+
+## Included Packages
 #### Defined as npm modules in the [package.json](package.json) file.
 * [Express](http://expressjs.com/) - Sinatra inspired web development framework
 * [Mongoose](http://mongoosejs.com/) - elegant mongodb object modeling for node.js
@@ -32,24 +137,6 @@ $ npm install -g bower
 * [Zepto.js](http://zeptojs.com/) - Minimalist JavaScript library for modern browsers, with a jQuery-compatible API
 * [jQuery](http://jquery.com/) - jQuery JavaScript Library
 
-## Quick Install
-  The quickest way to get started with Tesls.js is to clone the project and utilize it like this:
-
-  Install dependencies:
-
-    $ npm install
-
-  We recommend using [Grunt](https://github.com/gruntjs/grunt-cli) to start the server:
-
-    $ grunt
-
-  When not using grunt you can use:
-
-    $ node server
-
-  Then open a browser and go to:
-
-    http://localhost:3000
 
 
 ## Troubleshooting
@@ -88,29 +175,6 @@ Bower Clean Cache:
 $ bower cache clean
 ```
 
-
-## Configuration
-All configuration is specified in the [config](config/) folder, particularly the [config.js](config/config.js) file and the [env](config/env/) files. Here you will need to specify your application name, database name, as well as hook up any social app keys if you want integration with Twitter, Facebook, GitHub or Google.
-
-### Environmental Settings
-
-There are three environments provided by default, __development__, __test__, and __production__. Each of these environments has the following configuration options:
-* __db__ - This is the name of the MongoDB database to use, and is set by default to __mean-dev__ for the development environment.
-* __app.name__ - This is the name of your app or website, and can be different for each environment. You can tell which environment you are running by looking at the TITLE attribute that your app generates.
-* __Social OAuth Keys__ - Facebook, GitHub, Google, Twitter. You can specify your own social application keys here for each platform:
-	* __clientID__
-	* __clientSecret__
-	* __callbackURL__
-
-To run with a different environment, just specify NODE_ENV as you call grunt:
-
-	$ NODE_ENV=test grunt
-
-If you are using node instead of grunt, it is very similar:
-
-	$ NODE_ENV=test node server
-
-> NOTE: Running Node.js applications in the __production__ environment enables caching, which is disabled by default in all other environments.
 
 ## Heroku Quick Deployment
 Before you start make sure you have <a href="https://toolbelt.heroku.com/">heroku toolbelt</a> installed and an accessible mongo db instance - you can try <a href="http://www.mongohq.com/">mongohq</a> which have an easy setup )
