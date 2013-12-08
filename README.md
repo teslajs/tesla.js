@@ -23,7 +23,7 @@ This is the most light-weight option and gives you the most control over how you
 Tesla also include a command line tool to make creating and update apps as as simple as possible. You can install it easily with NPM:
 
 ```
-$ npm install -g tesla
+$ npm install -g tesla-cli
 ```
 
 Once Tesla is installed, simply run the following command anytime you want to create a new app:
