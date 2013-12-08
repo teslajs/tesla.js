@@ -70,7 +70,7 @@ http://localhost:3000
 ## Configuration
 All configuration is specified in the [config](config/) folder, particularly the [config.js](config/config.js) file and the [env](config/env/) files. Here you will need to specify your application name, database name, and any other settings you would like to customize.
 
-##### [config.js](config/config.js)
+##### Default config file: [config.js](config/config.js)
 Most default settings can be set & updated here:
 
 ```
@@ -129,8 +129,6 @@ $ NODE_ENV=test node server
 
 
 ##### Example config file for "development" environment: [config/env/development.js](config/env/development.js)
-
-There are a few environment specific setting you can adjust here:
 
 ```
 // global settings
