@@ -1,11 +1,11 @@
 {
   "name": "tesla",
   "description": "MVC Style Framework for Node.js",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": false,
   "contributors": [
     {
-      "name" : "Jesse Weed (http://jesseweed.com)"
+      "name": "Jesse Weed (http://jesseweed.com)"
     }
   ],
   "repository": {
@@ -16,9 +16,9 @@
     "url": "http://teslajs.com"
   },
   "bugs": {
-    "url" : "https://github.com/teslajs/tesla.js/issues"
+    "url": "https://github.com/teslajs/tesla.js/issues"
   },
-  "licenses" : [
+  "licenses": [
     {
       "type": "MIT",
       "url": "https://github.com/teslajs/tesla.js/blob/master/LICENSE"
