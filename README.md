@@ -1,10 +1,26 @@
-# Tesla.js
+# Tesla.js (beta)
 
 Tesla.js is a boilerplate [node.js](http://www.nodejs.org/) framework, with some basic MVC features.
 
 ## Prerequisites
 * Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm
 * MongoDB - Download and Install [MongoDB](http://www.mongodb.org/downloads) - Make sure it's running on the default port (27017).
+
+## Included Packages
+#### NPM modules in the [package.json](package.json) file.
+* [Express](http://expressjs.com/) - Sinatra inspired web development framework
+* [Mongoose](http://mongoosejs.com/) - elegant mongodb object modeling for node.js
+* [Passport](http://passportjs.org/) - Simple, unobtrusive authentication for Node.js.
+* [Jade](http://jade-lang.com/) - robust, elegant, feature rich template engine for nodejs
+* [Stylus](http://learnboost.github.io/stylus/) - Robust, expressive, and feature-rich CSS superset
+* [Superagent](https://github.com/visionmedia/superagent) - Elegant & feature rich browser / node HTTP with a fluent API
+* [MD5](https://github.com/pvorb/node-md5) - native js function for hashing messages with MD5
+
+#### Bower modules in the [bower.json](bower.json) file.
+* [AngularJS](http://angularjs.org) - HTML enhanced for web apps!
+* [Zepto.js](http://zeptojs.com/) - Minimalist JavaScript library for modern browsers, with a jQuery-compatible API
+* [jQuery](http://jquery.com/) - jQuery JavaScript Library
+
 
 ## Quick Start
 There are 2 ways that you can install tesla:
@@ -86,8 +102,8 @@ app.config = {
     },
 
     engines : {
-        html: "jade", // jade, ejs, haml, hjs (hogan)
-        css: "stylus", // styles, sass, less
+        html: "jade", // specify view engine - options: jade, ejs, haml, hjs (hogan)
+        css: "stylus", // specify css processor - options: stylus, sass, less
     },
     root : rootPath,
 
@@ -150,21 +166,112 @@ app.site.dir = {
 
 
 
+## Models, Controllers & Views, Oh My!
 
-## Included Packages
-#### NPM modules in the [package.json](package.json) file.
-* [Express](http://expressjs.com/) - Sinatra inspired web development framework
-* [Mongoose](http://mongoosejs.com/) - elegant mongodb object modeling for node.js
-* [Passport](http://passportjs.org/) - Simple, unobtrusive authentication for Node.js.
-* [Jade](http://jade-lang.com/) - robust, elegant, feature rich template engine for nodejs
-* [Stylus](http://learnboost.github.io/stylus/) - Robust, expressive, and feature-rich CSS superset
-* [Superagent](https://github.com/visionmedia/superagent) - Elegant & feature rich browser / node HTTP with a fluent API
-* [MD5](https://github.com/pvorb/node-md5) - native js function for hashing messages with MD5
+### Routing
+Tesla comes with an automatic routing system which saves you the trouble of manually creating routes for your site. The routing is based on the following URI structure:
 
-#### Bower modules in the [bower.json](bower.json) file.
-* [AngularJS](http://angularjs.org) - HTML enhanced for web apps!
-* [Zepto.js](http://zeptojs.com/) - Minimalist JavaScript library for modern browsers, with a jQuery-compatible API
-* [jQuery](http://jquery.com/) - jQuery JavaScript Library
+```
+http://localhost:3000/controller/action
+```
+
+As an example, http://localhost:3000/home would load the following controller: app/controllers/home.js
+
+Similarly, http://localhost:3000/foo/bar would load this controller: app/controllers/foo/bar.js
+
+
+##### Autoloading
+The exeption to this rule is if you set "autoLoad: true" in [config/config.js](config/config.js). In this case you only need to create a model and a view, as Tesla will attempt to automatically load the model and the view using the [app/controllers/auto.js](app/controllers/auto.js) controller.
+
+With autoload, going to [http://localhost:3333/hello/world](http://localhost:3000/hello/world) will attempt to load the following files:
+
+*Controller: app/controllers/auto.js
+*Model: app/models/hello.js
+*View: app/views/hello/world.jade
+
+Autoload assumes a model with the name of the controller, and will try to find a record whose "name" field matches the action. Using [http://localhost:3000/articles/super-awesome-fun-time](http://localhost:3000/article/super-awesome-fun-time) as an example, autoload load use a model called "articles" and try to find a record with the name "super-awesome-fun-time":
+
+```
+articles.findOne({name: "super-awesome-fun-time"})
+```
+
+With autoloading, any data returned from the model will be sent to the view via the "data" variable. If no data is returned we assume the page does not exist and will throw a 404 error. Also worth noting, autoload expects to find a model to provide data to the view. If you forget to create a model with the correct name, you will get a 404 error when loading the page. If you don't want or need a model to provide data to your controller, or want to use a different URI structure, don't use autoload.
+
+
+
+### Controllers
+If you are not using autoload, you will need to create your own controllers, which couldn't be easier! For example, if you want to create the page http://localhost:3000/help, simply create a controller with the same name: app/controllers/help.
+
+Then, add the following code:
+
+```
+exports.render = function(app) {
+
+    app.res.render('help', {
+        site: app.site
+    });
+
+};
+```
+
+The above code is pretty simple, it simply loads the view "app/views/help.jade" and passes it a "site" variable.
+
+For a slightly for complex example, lets say you want to create a blog with the following uri structure: http://localhost:3000/article/read?id=12345
+
+Let's assume also you also want use an "article" model to load an article with the id "12345". Create the file "app/controllers/article/read.js" with the following code:
+
+```
+var mongoose = require('mongoose'),
+    Articles = mongoose.model( 'Article' ),
+
+exports.render = function(app) {
+
+    var id = req.query('id')
+
+    Articles.findOne({_id: ud}).exec(function(err, article) {
+
+        // IF WE GET AN ERROR
+        if (err) {
+            app.res.render('error', {
+                status: 500
+            });
+
+        // IF NO DATA WAS RETURNED, THROW A 404
+        } else if ( article === null) {
+            app.res.status(404).render('404', {
+                pageTitle : app.site.name + ' - Not Found',
+                url: app.req.originalUrl,
+                error: 'Not found',
+                site: app.site
+            });
+
+        // IF NO PROBLEMS, RENDER PAGE
+        } else {
+
+            // LOAD THE ARTICLE/READ VIEW & PASS DATA FROM THE MODEL
+            app.res.render('article/read', {
+                article : article,
+                site: app.site
+            });
+
+        }
+
+        }
+
+    });
+
+};
+```
+
+### Views
+
+Views can use Jade (default), Haml, Handlebars or EJS. See the appropriate documentation for you chosen templating language for more info on how to use it.
+
+
+### Models
+
+For models, Tesla uses [Mongoose](http://mongoosejs.com/) to connect to a MongoDB server. Documentation on working with Mongoos can be found here: [http://mongoosejs.com/docs/guide.html](http://mongoosejs.com/docs/guide.html)
+
 
 
 
