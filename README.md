@@ -7,29 +7,49 @@ Tesla.js is a boilerplate [node.js](http://www.nodejs.org/) framework, with some
 * MongoDB - Download and Install [MongoDB](http://www.mongodb.org/downloads) - Make sure it's running on the default port (27017).
 
 ## Quick Start
-The quickest way to get started with Tesla.js is to clone the project and utilize it like this:
+There are 2 ways that you can install tesla:
 
-####Install Tesla:
+### Option 1: Clone The Repo
+The first option to simply clone the repo and use it a barebones boilerplate to start your next project.
+
+  $ git clone git@github.com:teslajs/tesla.js.git
+
+This is the most light-weight option and gives you the most control over how you set your project up.
+
+
+### Option 2: Install the Command Line Tools
+Tesla also include a command line tool to make creating and update apps as as simple as possible. You can install it easily with NPM:
 
   $ npm install -g tesla
 
-####Install Dependencies:
+Once Tesla is installed, simply run the following command anytime you want to create a new app:
+
+  $ tesla app-name
+
+The example above will create a new app with the name "app-name"
+
+
+### Install Dependencies
+
+With either option 1 or option 2, you will need to make sure you have all the correct dependencies installed before you can start the server:
 
   $ npm install
 
-####We recommend using [Grunt](https://github.com/gruntjs/grunt-cli) to start the server:
+### Start the Server
+
+#### We recommend using [Grunt](https://github.com/gruntjs/grunt-cli) to start the server:
 
   $ grunt
 
 This will watch for changes to any of your files and automatically restart then server when necesary.
 
-####When not using grunt you can use:
+#### When not using Grunt, you can use:
 
   $ node server
 
 With this method you have to manually stop and start the server any time you make changes.
 
-####Once the server has started, simply point your browser to:
+#### Once the server has started, simply point your browser to:
 
   http://localhost:3000
 
