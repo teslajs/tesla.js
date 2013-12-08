@@ -1,5 +1,5 @@
 {
-  "name": "Tesla.js",
+  "name": "tesla",
   "description": "Node.js Boilerplate - Node, Express, Mongo, Angular",
   "version": "0.1.1",
   "private": false,
