@@ -113,7 +113,22 @@ app.site.meta = {
 ```
 
 
-##### [config.js](config/config.js)
+### Environmental Settings
+
+To run with a different environment, just specify NODE_ENV as you call grunt:
+
+```
+$ NODE_ENV=test grunt
+```
+
+If you are using node instead of grunt, it is very similar:
+
+```
+$ NODE_ENV=test node server
+```
+
+
+##### Example config file for "development" environment: [config/env/development.js](config/env/development.js)
 
 There are a few environment specific setting you can adjust here:
 
@@ -133,25 +148,8 @@ app.site.dir = {
 ```
 
 
-### Environmental Settings
-
-There are three environments provided by default, __development__, __test__, and __production__. Each of these environments has the following configuration options:
-* __db__ - This is the name of the MongoDB database to use, and is set by default to __mean-dev__ for the development environment.
-* __app.name__ - This is the name of your app or website, and can be different for each environment. You can tell which environment you are running by looking at the TITLE attribute that your app generates.
-* __Social OAuth Keys__ - Facebook, GitHub, Google, Twitter. You can specify your own social application keys here for each platform:
-  * __clientID__
-  * __clientSecret__
-  * __callbackURL__
-
-To run with a different environment, just specify NODE_ENV as you call grunt:
-
-  $ NODE_ENV=test grunt
-
-If you are using node instead of grunt, it is very similar:
-
-  $ NODE_ENV=test node server
-
 > NOTE: Running Node.js applications in the __production__ environment enables caching, which is disabled by default in all other environments.
+
 
 
 
