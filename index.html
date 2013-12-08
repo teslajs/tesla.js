@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Tesla.js by teslajs</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Tesla.js</h1>
+        <p>MVC Style Framework for Node.js</p>
+
+        <p class="view"><a href="https://github.com/teslajs/tesla.js">View the Project on GitHub <small>teslajs/tesla.js</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/teslajs/tesla.js/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/teslajs/tesla.js/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/teslajs/tesla.js">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="teslajs" class="anchor" href="#teslajs"><span class="octicon octicon-link"></span></a>Tesla.js</h1>
+
+<p>Tesla.js is a boilerplate <a href="http://www.nodejs.org/">node.js</a> framework, with some basic MVC features.</p>
+
+<h2>
+<a name="prerequisites" class="anchor" href="#prerequisites"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
+
+<ul>
+<li>Node.js - Download and Install <a href="http://www.nodejs.org/download/">Node.js</a>. You can also follow <a href="https://gist.github.com/isaacs/579814">this gist</a> for a quick and easy way to install Node.js and npm</li>
+<li>MongoDB - Download and Install <a href="http://www.mongodb.org/downloads">MongoDB</a> - Make sure it's running on the default port (27017).</li>
+</ul><h2>
+<a name="quick-start" class="anchor" href="#quick-start"><span class="octicon octicon-link"></span></a>Quick Start</h2>
+
+<p>There are 2 ways that you can install tesla:</p>
+
+<h3>
+<a name="option-1-clone-the-repo" class="anchor" href="#option-1-clone-the-repo"><span class="octicon octicon-link"></span></a>Option 1: Clone The Repo</h3>
+
+<p>The first option to simply clone the repo and use it a barebones boilerplate to start your next project.</p>
+
+<pre><code>$ git clone git@github.com:teslajs/tesla.js.git
+</code></pre>
+
+<p>This is the most light-weight option and gives you the most control over how you set your project up.</p>
+
+<h3>
+<a name="option-2-install-the-command-line-tools" class="anchor" href="#option-2-install-the-command-line-tools"><span class="octicon octicon-link"></span></a>Option 2: Install the Command Line Tools</h3>
+
+<p>Tesla.js includes a simple command line tool (<a href="https://github.com/teslajs/tesla-cli">tesla-cli</a>) to make creating and updating apps as simple as possible. You can install it easily with NPM:</p>
+
+<pre><code>$ npm install -g tesla-cli
+</code></pre>
+
+<p>Once Tesla is installed, simply run the following command anytime you want to create a new app:</p>
+
+<pre><code>$ tesla app-name
+</code></pre>
+
+<p>The example above will create a new app with the name "app-name"</p>
+
+<h3>
+<a name="install-dependencies" class="anchor" href="#install-dependencies"><span class="octicon octicon-link"></span></a>Install Dependencies</h3>
+
+<p>With either option 1 or option 2, you will need to make sure you have all the correct dependencies installed before you can start the server:</p>
+
+<pre><code>$ npm install
+</code></pre>
+
+<h3>
+<a name="start-the-server" class="anchor" href="#start-the-server"><span class="octicon octicon-link"></span></a>Start the Server</h3>
+
+<h5>
+<a name="we-recommend-using-grunt-to-start-the-server" class="anchor" href="#we-recommend-using-grunt-to-start-the-server"><span class="octicon octicon-link"></span></a>We recommend using <a href="https://github.com/gruntjs/grunt-cli">Grunt</a> to start the server:</h5>
+
+<pre><code>$ grunt
+</code></pre>
+
+<p>This will watch for changes to any of your files and automatically restart then server when necesary.</p>
+
+<h5>
+<a name="when-not-using-grunt-you-can-use" class="anchor" href="#when-not-using-grunt-you-can-use"><span class="octicon octicon-link"></span></a>When not using Grunt, you can use:</h5>
+
+<pre><code>$ node server
+</code></pre>
+
+<p>With this method you have to manually stop and start the server any time you make changes.</p>
+
+<h5>
+<a name="once-the-server-has-started-simply-point-your-browser-to" class="anchor" href="#once-the-server-has-started-simply-point-your-browser-to"><span class="octicon octicon-link"></span></a>Once the server has started, simply point your browser to:</h5>
+
+<pre><code>http://localhost:3000
+</code></pre>
+
+<h2>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>All configuration is specified in the <a href="config/">config</a> folder, particularly the <a href="config/config.js">config.js</a> file and the <a href="config/env/">env</a> files. Here you will need to specify your application name, database name, and any other settings you would like to customize.</p>
+
+<h5>
+<a name="default-config-file-configjs" class="anchor" href="#default-config-file-configjs"><span class="octicon octicon-link"></span></a>Default config file: <a href="config/config.js">config.js</a>
+</h5>
+
+<p>Most default settings can be set &amp; updated here:</p>
+
+<pre><code>app.site = {
+    name : "Tesla.js", // the name of you app
+}
+
+app.config = {
+    port : 3000, // port to run the server on
+
+    prettify : {
+        html : true, // whether to pretify html
+    },
+
+    engines : {
+        html: "jade", // jade, ejs, haml, hjs (hogan)
+        css: "stylus", // styles, sass, less
+    },
+    root : rootPath,
+
+    db : {
+        url : "mongodb://localhost/db-name" // url to database
+    },
+
+    jsonp : true, // allow jsonp requests
+    secret : 'MYAPPSECRET',
+    protocol : 'http://',
+    autoLoad : false, // whether to autoload controllers &amp; models
+}
+
+
+
+// some default meta setting for head
+app.site.meta = {
+    description : '',
+    keywords : '',
+    viewport : 'width=device-width, user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0',
+    encoding : "utf-8"
+}
+</code></pre>
+
+<h3>
+<a name="environmental-settings" class="anchor" href="#environmental-settings"><span class="octicon octicon-link"></span></a>Environmental Settings</h3>
+
+<p>To run with a different environment, just specify NODE_ENV as you call grunt:</p>
+
+<pre><code>$ NODE_ENV=test grunt
+</code></pre>
+
+<p>If you are using node instead of grunt, it is very similar:</p>
+
+<pre><code>$ NODE_ENV=test node server
+</code></pre>
+
+<h5>
+<a name="example-config-file-for-development-environment-configenvdevelopmentjs" class="anchor" href="#example-config-file-for-development-environment-configenvdevelopmentjs"><span class="octicon octicon-link"></span></a>Example config file for "development" environment: <a href="config/env/development.js">config/env/development.js</a>
+</h5>
+
+<pre><code>// global settings
+app.site.domain = "localhost"; // domain the site is running on
+app.site.environment = "Development"; // name of environment
+app.site.url = app.config.protocol + app.site.domain + ':'  + app.config.port + '/'; // base url
+
+// directories location to use for dynamic file linking
+app.site.dir = {
+    css : app.site.url + "css/",
+    img : app.site.url + "img/",
+    lib : app.site.url + "lib/",
+    js : app.site.url + "js/"
+};
+</code></pre>
+
+<blockquote>
+<p>NOTE: Running Node.js applications in the <strong>production</strong> environment enables caching, which is disabled by default in all other environments.</p>
+</blockquote>
+
+<h2>
+<a name="included-packages" class="anchor" href="#included-packages"><span class="octicon octicon-link"></span></a>Included Packages</h2>
+
+<h4>
+<a name="npm-modules-in-the-packagejson-file" class="anchor" href="#npm-modules-in-the-packagejson-file"><span class="octicon octicon-link"></span></a>NPM modules in the <a href="package.json">package.json</a> file.</h4>
+
+<ul>
+<li>
+<a href="http://expressjs.com/">Express</a> - Sinatra inspired web development framework</li>
+<li>
+<a href="http://mongoosejs.com/">Mongoose</a> - elegant mongodb object modeling for node.js</li>
+<li>
+<a href="http://passportjs.org/">Passport</a> - Simple, unobtrusive authentication for Node.js.</li>
+<li>
+<a href="http://jade-lang.com/">Jade</a> - robust, elegant, feature rich template engine for nodejs</li>
+<li>
+<a href="http://learnboost.github.io/stylus/">Stylus</a> - Robust, expressive, and feature-rich CSS superset</li>
+<li>
+<a href="https://github.com/visionmedia/superagent">Superagent</a> - Elegant &amp; feature rich browser / node HTTP with a fluent API</li>
+<li>
+<a href="https://github.com/pvorb/node-md5">MD5</a> - native js function for hashing messages with MD5</li>
+</ul><h4>
+<a name="bower-modules-in-the-bowerjson-file" class="anchor" href="#bower-modules-in-the-bowerjson-file"><span class="octicon octicon-link"></span></a>Bower modules in the <a href="bower.json">bower.json</a> file.</h4>
+
+<ul>
+<li>
+<a href="http://angularjs.org">AngularJS</a> - HTML enhanced for web apps!</li>
+<li>
+<a href="http://zeptojs.com/">Zepto.js</a> - Minimalist JavaScript library for modern browsers, with a jQuery-compatible API</li>
+<li>
+<a href="http://jquery.com/">jQuery</a> - jQuery JavaScript Library</li>
+</ul><h2>
+<a name="troubleshooting" class="anchor" href="#troubleshooting"><span class="octicon octicon-link"></span></a>Troubleshooting</h2>
+
+<p>During install some of you may encounter some issues, most of this issues can be solved by one of the following tips.
+If you went through all this and still can't solve the issue, feel free to contact me(Amos), via the repository issue tracker or the links provided below.</p>
+
+<h4>
+<a name="update-npm-bower-or-grunt" class="anchor" href="#update-npm-bower-or-grunt"><span class="octicon octicon-link"></span></a>Update NPM, Bower or Grunt</h4>
+
+<p>Sometimes you may find there is a weird error during install like npm's <em>Error: ENOENT</em>, usually updating those tools to the latest version solves the issue.</p>
+
+<p>Updating NPM:</p>
+
+<pre><code>$ npm update -g npm
+</code></pre>
+
+<p>Updating Grunt:</p>
+
+<pre><code>$ npm update -g grunt-cli
+</code></pre>
+
+<p>Updating Bower:</p>
+
+<pre><code>$ npm update -g bower
+</code></pre>
+
+<h4>
+<a name="cleaning-npm-and-bower-cache" class="anchor" href="#cleaning-npm-and-bower-cache"><span class="octicon octicon-link"></span></a>Cleaning NPM and Bower cache</h4>
+
+<p>NPM and Bower has a caching system for holding packages that you already installed.
+We found that often cleaning the cache solves some troubles this system creates.</p>
+
+<p>NPM Clean Cache:</p>
+
+<pre><code>$ npm cache clean
+</code></pre>
+
+<p>Bower Clean Cache:</p>
+
+<pre><code>$ bower cache clean
+</code></pre>
+
+<h2>
+<a name="heroku-quick-deployment" class="anchor" href="#heroku-quick-deployment"><span class="octicon octicon-link"></span></a>Heroku Quick Deployment</h2>
+
+<p>Before you start make sure you have <a href="https://toolbelt.heroku.com/">heroku toolbelt</a> installed and an accessible mongo db instance - you can try <a href="http://www.mongohq.com/">mongohq</a> which have an easy setup )</p>
+
+<div class="highlight highlight-bash"><pre>git init
+git add .
+git commit -m <span class="s2">"initial version"</span>
+heroku apps:create
+git push heroku master
+</pre></div>
+
+<h2>
+<a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h2>
+
+<p>Inspired by the <a href="https://github.com/linnovate/mean">MEAN Stack</a> by <a href="https://twitter.com/amoshaviv">Amos Haviv</a> and <a href="https://github.com/visionmedia/express">Express</a> by <a href="https://github.com/visionmedia">TJ Holowaychuk</a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/teslajs">teslajs</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-46283194-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
