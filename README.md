@@ -1,6 +1,6 @@
 # Tesla.js (beta)
 
-Tesla.js is a boilerplate [node.js](http://www.nodejs.org/) framework, with some basic MVC features.
+Tesla.js is a boilerplate [node.js](http://www.nodejs.org/) framework, with some basic MVC features. It's still a work in progress and will be at least few more weeks before it's feature complete.
 
 ## Prerequisites
 * Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm
