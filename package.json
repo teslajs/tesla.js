@@ -1,5 +1,5 @@
 {
-  "name": "tesla",
+  "name": "{{name}}",
   "description": "MVC Style Framework for Node.js",
   "version": "0.1.10",
   "private": false,
@@ -47,14 +47,7 @@
     "grunt-cli": "latest",
     "grunt-env": "latest",
     "superagent": "latest",
-    "MD5": "latest",
-    "jade": "latest",
-    "express-hogan": "latest",
-    "ejs": "latest",
-    "haml": "latest",
-    "stylus": "latest",
-    "sass": "latest",
-    "less": "latest"
+    "MD5": "latest"
   },
   "devDependencies": {
     "supertest": "latest",
