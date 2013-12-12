@@ -15,8 +15,8 @@ module.exports = function (app) {
         },
 
         engines : {
-            html: "{{html}}", // jade, ejs, haml, hjs (hogan)
-            css: "{{css}}", // styles, sass, less
+            html: "{{html}}", // options: [jade|ejs|haml|hjs|jshtml]
+            css: "{{css}}", // options: [stylus|sass|less]
         },
         root : rootPath,
 
