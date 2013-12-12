@@ -39,7 +39,7 @@ This will create a new app with the name "app-name". Next, switch into your new 
 
 ```
 $ cd app-name
-``
+```
 
 Than install dependencies:
 ```
