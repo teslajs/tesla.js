@@ -4,7 +4,7 @@ rootPath = path.normalize(__dirname + '/..');
 module.exports = function (app) {
 
     app.site = {
-        name : "Tesla.js", // the name of you app
+        name : "{{name}}", // the name of you app
     }
 
     app.config = {
@@ -15,8 +15,8 @@ module.exports = function (app) {
         },
 
         engines : {
-            html: "jade", // jade, ejs, haml, hjs (hogan)
-            css: "stylus", // styles, sass, less
+            html: "{{html}}", // jade, ejs, haml, hjs (hogan)
+            css: "{{css}}", // styles, sass, less
         },
         root : rootPath,
 
