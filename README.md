@@ -2,6 +2,30 @@
 
 Tesla.js is a boilerplate [node.js](http://www.nodejs.org/) framework, with some basic MVC features. It's still a work in progress and will be at least few more weeks before it's feature complete.
 
+# Contents
+#####[Prerequisites](#prerequisites)
+
+#####[Included Packages](#included-Packages)
+
+#####[Installation](#installation)
+
+#####[Quick Start](#quick-start)
+
+#####[Configuration](#configuration)
++ [App Settings](#default-config-file-configjs)
++ [Environmental Settings](#environmental-settings)
+
+#####[Models, Controllers & Views, Oh My!](#models-controllers--views-oh-my)
++ [Routing](#routing)
++ [Controllers](#controllers)
++ [Views](#views)
++ [Models](#models)
+
+#####[Troubleshooting](#troubleshooting)
+
+#####[Heroku Quick Deployment](#heroku-quick-deployment)
+
+
 ## Prerequisites
 * Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm
 * MongoDB - Download and Install [MongoDB](http://www.mongodb.org/downloads) - Make sure it's running on the default port (27017).
