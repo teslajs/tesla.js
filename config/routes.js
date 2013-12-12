@@ -96,7 +96,7 @@ module.exports = function(app) {
 		// THROW A 404 IF WE CAN'T FIND THE CONTROLLER
 		} else {
 			res.status(404).render('404', {
-	            pageTitle : app.site.name + ' - Not Found',
+	            title : app.site.name + ' - Not Found',
 	            url: req.originalUrl,
 	            error: 'Not found',
 	            site: app.site

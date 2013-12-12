@@ -86,7 +86,7 @@ module.exports = function(app) {
             //Error page
             res.status(500).render('500', {
                 error: err.stack,
-                pageTitle : app.site.name + ' - Error!',
+                title : app.site.name + ' - Error!',
                 site: app.site
             });
         });
@@ -94,7 +94,7 @@ module.exports = function(app) {
         //Assume 404 since no middleware responded
         app.use(function(req, res, next) {
             res.status(404).render('404', {
-                pageTitle : app.site.name + ' - Not Found',
+                title : app.site.name + ' - Not Found',
                 url: req.originalUrl,
                 error: 'Not found',
                 site: app.site

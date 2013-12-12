@@ -19,7 +19,7 @@ exports.render = function(app) {
         // IF NO DATA WAS RETURNED, THROW A 404
         } else if ( data === null) {
             app.res.status(404).render('404', {
-                pageTitle : app.site.name + ' - Not Found',
+                title : app.site.name + ' - Not Found',
                 url: app.req.originalUrl,
                 error: 'Not found',
                 site: app.site
