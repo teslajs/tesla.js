@@ -1,22 +1,18 @@
-/**
- * Module dependencies.
- */
+// MODULE DEPENDENCIES
 var express = require('express'),
     fs = require('fs'),
-    passport = require('passport'),
-    logger = require('mean-logger'),
     env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
-    auth = require('./config/middlewares/authorization'),
     mongoose = require('mongoose'),
     app = module.exports = express();
 
-    require('./config/config')(app);
-    require('./config/env-config')(app);
+// REQUIRE CONFIG FILES
+require('./config/config')(app);
+require('./config/env-config')(app);
 
-// //Bootstrap db connection
+// BOOTSTRAP DB CONNECTION
 var db = mongoose.connect(app.config.db.url);
 
-//Bootstrap models
+// BOOTSTRAP MODELS
 var models_path = __dirname + '/app/models';
 var walk = function(path) {
     fs.readdirSync(path).forEach(function(file) {
@@ -33,15 +29,14 @@ var walk = function(path) {
 };
 walk(models_path);
 
-// // require additional config files
-// // require('./config/config')(app); //express settings
+// REQUIRE ADDITIONAL CONFIG FILES
 require('./config/express')(app, db); //express settings
 require('./config/routes')(app); // routes
 
-// //Start the app by listening on <port>
+// STAR THE APP BY LISTEN ON <PORT>
 var port = process.env.PORT || config.port;
 app.listen(port);
 console.log('Express app started on port ' + port);
 
-// //expose app
+// EXPOSE APP
 exports = module.exports = app;
