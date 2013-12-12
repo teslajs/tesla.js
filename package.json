@@ -1,5 +1,5 @@
 {
-  "name": "{{name}}",
+  "name": "tesla",
   "description": "MVC Style Framework for Node.js",
   "version": "0.1.10",
   "private": false,
