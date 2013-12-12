@@ -22,25 +22,12 @@ Tesla.js is a boilerplate [node.js](http://www.nodejs.org/) framework, with some
 * [jQuery](http://jquery.com/) - jQuery JavaScript Library
 
 
-## Quick Start
-There are 2 ways that you can install tesla:
-
-### Option 1: Clone The Repo
-The first option to simply clone the repo and use it a barebones boilerplate to start your next project.
-
-```
-$ git clone git@github.com:teslajs/tesla.js.git
-```
-
-This is the most light-weight option and gives you the most control over how you set your project up.
-
-
-### Option 2: Install the Command Line Tools
-Tesla.js includes a simple command line tool ([tesla-cli](https://github.com/teslajs/tesla-cli)) to make creating and updating apps as simple as possible. You can install it easily with NPM:
-
+## Installation
 ```
 $ npm install -g tesla-cli
 ```
+
+## Quick Start
 
 Once Tesla is installed, simply run the following command anytime you want to create a new app:
 
@@ -48,7 +35,73 @@ Once Tesla is installed, simply run the following command anytime you want to cr
 $ tesla app-name
 ```
 
-The example above will create a new app with the name "app-name"
+This will create a new app with the name "app-name". Next, switch into your new apps directory:
+
+```
+$ cd app-name
+``
+
+Than install dependencies:
+```
+$ npm install
+```
+
+And finally start the server:
+```
+$ grunt
+```
+
+
+
+### Options
+```
+Usage: tesla [options]
+
+Options:
+
+  -V, --version       output the version number
+  -e, --ejs           add ejs engine support (defaults to jade)
+  -J, --jshtml        add jshtml engine support (defaults to jade)
+  -H, --hogan         add hogan.js engine support (defaults to jade)
+  -c, --css   add stylesheet  support (less|sass|stylus) (defaults to plain css)
+  -f, --force         force on non-empty directory
+```
+
+For example, if you want to generate an application called "foobar" with Jade & Stylus support you would simply execute:
+
+```
+$ tesla --css stylus foobar
+```
+
+
+Or to generate an application with EJS & SASS support:
+
+```
+$ tesla --css sass --ejs foobar
+```
+
+
+
+
+
+### Option 2: Clone The Repo
+The second option to simply clone the repo and use it a barebones boilerplate to start your next project.
+
+```
+$ git clone git@github.com:teslajs/tesla.js.git
+```
+
+This is the most light-weight option and gives you the most control over how you set your project up.
+
+This step requires a few additional steps to configure correctly:
+
+##### 1. Set your app name
+
+Open [app/config/config.js](app/config/config.js) and set the "app.site.name" to your app name.
+Open [package.json](package.json) and set the "name" to your app name.
+
+
+##### 2. Set you HTML templating en
 
 
 ### Install Dependencies
