@@ -1,0 +1,8 @@
+<h1>Oh noes!</h1>
+<h3>It looks like something has gone horribly wrong...</h3>
+
+<pre>
+	<span class="code">
+		@write(error)
+	</span>
+</pre>

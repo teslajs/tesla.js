@@ -1,0 +1,22 @@
+head
+	meta(charset='utf-8')
+	meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+	meta(name='viewport', content='width=device-width,initial-scale=1')
+
+
+	if locals.pageTitle
+		title= pageTitle
+	else
+		title= site.name
+
+
+	meta(http-equiv='Content-type', content='text/html;charset=UTF-8')
+
+	link(href='#{site.dir.img}icons/favicon.ico', rel='shortcut icon', type='image/x-icon')
+
+	link(rel='stylesheet', href='#{site.dir.css}styles.css')
+
+	//- Allows you to pass an array of page specific stylesheets to load
+	if locals.css
+		each stylesheet in css
+			link(rel='stylesheet', href='#{site.dir.css}#{stylesheet}')
