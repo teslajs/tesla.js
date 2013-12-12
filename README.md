@@ -51,6 +51,12 @@ And finally start the server:
 $ grunt
 ```
 
+Once the server has started, simply point your browser to:
+
+```
+http://localhost:3000
+```
+
 
 
 ### Options
@@ -82,10 +88,8 @@ $ tesla --css sass --ejs foobar
 
 
 
-
-
 ### Option 2: Clone The Repo
-The second option to simply clone the repo and use it a barebones boilerplate to start your next project.
+The second option is to simply clone the repo and use it as a barebones boilerplate to start your next project.
 
 ```
 $ git clone git@github.com:teslajs/tesla.js.git
@@ -93,7 +97,7 @@ $ git clone git@github.com:teslajs/tesla.js.git
 
 This is the most light-weight option and gives you the most control over how you set your project up.
 
-This step requires a few additional steps to configure correctly:
+However, this step requires a few additional steps to configure correctly:
 
 ##### 1. Set your app name
 
@@ -101,28 +105,59 @@ Open [app/config/config.js](app/config/config.js) and set the "app.site.name" to
 Open [package.json](package.json) and set the "name" to your app name.
 
 
-##### 2. Set you HTML templating en
+##### 2. Set your HTML templating & CSS processing engines
+
+Open [app/config/config.js](app/config/config.js) and set your engines:
+
+```
+app.config = {
+
+    engines : {
+        html: "jade", // options: [jade|ejs|haml|hjs|jshtml]
+        css: "stylus", // options: [stylus|sass|less]
+    },
+
+}
+```
+
+Install NPM modules
+
+```
+// Install your selected HTML engine
+$ npm install jade // for Jade
+$ npm install ejs // for EJS
+$ npm install jshtml // for JSHTML
+$ npm install express-hogan // for HJS (Hogan)
+
+// Install your selected CSS engine
+$ npm install less // for LESS
+$ npm install sass // for SASS
+$ npm install stylus // for STYLUS
+```
+
+Next, go into the [app](app) folder and rename the view folder you want to use to "views". For example if you're using Jade, rename "views.jade" to "views". Delete the rest.
+
+Finally, do the same for the css directory. Go into the [public](public) folder and rename the css directory you want to use. To use Stylus, rename "stylus.css" to "css" and delete the rest of the folders. If you don't want to use a css processor, keep the current "css" folder and delete the rest.
 
 
-### Install Dependencies
+##### 3. Install Dependencies
 
-With either option 1 or option 2, you will need to make sure you have all the correct dependencies installed before you can start the server:
+Now that everything is configured, cd into your app directory and run the following command:
 
 ```
 $ npm install
 ```
 
-### Start the Server
 
-##### We recommend using [Grunt](https://github.com/gruntjs/grunt-cli) to start the server:
+##### Start the Server
+
+We recommend using [Grunt](https://github.com/gruntjs/grunt-cli) to start the server:
 
 ```
 $ grunt
 ```
 
-This will watch for changes to any of your files and automatically restart then server when necesary.
-
-##### When not using Grunt, you can use:
+This will watch for changes to any of your files and automatically restart then server when necesary. If you choose not not using Grunt, you can run the app like so:
 
 ```
 $ node server
@@ -130,7 +165,7 @@ $ node server
 
 With this method you have to manually stop and start the server any time you make changes.
 
-##### Once the server has started, simply point your browser to:
+Once the server has started, simply point your browser to:
 
 ```
 http://localhost:3000
