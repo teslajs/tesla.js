@@ -26,7 +26,7 @@ module.exports = function (app) {
         root : rootPath,
 
         db : {
-            url : "mongodb://localhost/pegnote" // url to database
+            url : "mongodb://localhost/{{name}}" // url to database
         },
 
         jsonp : true, // allow jsonp requests
