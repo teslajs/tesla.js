@@ -43,7 +43,7 @@
     "forever": ">=0.10.10",
     "grunt": ">=0.4.2",
     "grunt-cli": ">=0.1.11",
-    "grunt-env": ">=0,41",
+    "grunt-env": ">=0.4.1",
     "MD5": ">=1.2.0",
     "mongoose": ">=3.8.2",
     "superagent": ">=0.15.7",
