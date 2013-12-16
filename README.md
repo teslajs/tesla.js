@@ -1,5 +1,6 @@
 # Tesla.js (beta)
 [![NPM version](https://badge.fury.io/js/tesla.png)](http://badge.fury.io/js/tesla)
+[![Dependency Status](https://gemnasium.com/teslajs/tesla.js.png)](https://gemnasium.com/teslajs/tesla.js)
 
 Tesla.js is a boilerplate [node.js](http://www.nodejs.org/) framework, with some basic MVC features. It's still a work in progress and will be at least few more weeks before it's feature complete.
 
