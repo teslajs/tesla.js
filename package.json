@@ -47,7 +47,8 @@
     "grunt-cli": "latest",
     "grunt-env": "latest",
     "superagent": "latest",
-    "MD5": "latest"
+    "MD5": "latest",
+    "express-minify": "0.0.7"
   },
   "devDependencies": {
     "supertest": "latest",
