@@ -2,6 +2,7 @@
  * Module dependencies.
  */
 var express = require('express'),
+    minify = require('express-minify'),
     mongoStore = require('connect-mongo')(express),
     flash = require('connect-flash'),
     helpers = require('view-helpers'),
@@ -25,11 +26,107 @@ module.exports = function(app) {
     }));
 
     console.log('using ' + app.config.engines.css + ' as css preprocessor');
-    app.use(require(app.config.engines.css).middleware('./public')); // Set CSS Processor
+
+    // CUSTOM SETTINGS FOR STYLUS
+    if ( app.config.engines.css === 'stylus' ) {
+
+        var stylus = require('stylus');
+
+        if ( app.config.prettify.css === true ) {
+            var compress = false;
+        } else {
+            var compress = true;
+        }
+
+        // USE NIB
+        if ( app.config.engines.cssLibrary === 'nib') {
+
+            var nib = require('nib');
+
+            function compile(str, path) {
+
+              return stylus(str)
+                .set('filename', path)
+                .set('compress', compress)
+                .use(nib());
+            }
+
+
+
+        // USE AXIS
+        } else if ( app.config.engines.cssLibrary === 'axis') {
+
+            var axis = require('axis-css');
+
+            function compile(str, path) {
+
+                console.log(path);
+
+              return stylus(str)
+                .set('filename', path)
+                .set('compress', compress)
+                .use(axis());
+            }
+
+
+        } else {
+            function compile(str, path) {
+              return stylus(str)
+                .set('filename', path)
+                .set('compress', compress);
+            }
+        }
+
+        console.log('css dir: '  + app.config.root + '/public/');
+
+        app.use(stylus.middleware({
+            src: app.config.root + '/public/',
+            compile: compile
+        }));
+
+
+    // IF NOT USING STYLUS
+    } else {
+        app.use(require(app.config.engines.css).middleware(app.config.root + '/public/')); // Set CSS Processor
+    }
+
+
+    // MINIFY
+
+
+    if ( app.config.prettify.css === false ) {
+        min_css = /css/;
+        min_less = /css/;
+        min_sass = /css/;
+        min_stylus = /css/;
+    } else {
+        min_css = /donothinghere/;
+        min_less = /donothinghere/;
+        min_sass = /donothinghere/;
+        min_stylus = /donothinghere/;
+    }
+
+    if ( app.config.prettify.css === false ) {
+        min_js = /js/;
+    } else {
+        min_js = /donothinghere/;
+    }
+
+    app.use(minify( {
+        js_match: min_js,
+        css_match: min_css,
+        sass_match: min_sass,
+        less_match: min_less,
+        stylus_match: min_stylus,
+        coffee_match: /coffeescript/,
+        cache: app.config.cache,
+        blacklist: [/\.min\.(css|js)$/],
+        whitelist: null
+    }));
 
     //Setting the fav icon and static folder
     app.use(express.favicon());
-    app.use(express.static(app.config.root + '/public'));
+    app.use(express.static('./public'));
 
     //Don't use logger for test env
     if (process.env.NODE_ENV !== 'test') {

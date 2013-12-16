@@ -12,22 +12,28 @@ module.exports = function (app) {
 
         prettify : {
             html : true, // whether to pretify html
+            css : true, // whether to pretify css
+            js : true // whether to pretify js
         },
+
+        cache : false, // whether to use caching
 
         engines : {
             html: "{{html}}", // options: [jade|ejs|haml|hjs|jshtml]
             css: "{{css}}", // options: [stylus|sass|less]
+            cssLibrary: '{{cssLibrary}}', // options: [nib|axis]
         },
         root : rootPath,
 
         db : {
-            url : "mongodb://localhost/db-name" // url to database
+            url : "mongodb://localhost/pegnote" // url to database
         },
 
         jsonp : true, // allow jsonp requests
         secret : 'MYAPPSECRET',
         protocol : 'http://',
         autoLoad : false, // whether to autoload controllers & models
+        publicDir : './public',
     }
 
 
