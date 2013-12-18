@@ -1,15 +1,6 @@
 var fs = require('fs');
 
-module.exports = function(app) {
-
-	// APPLY TITLE CASING TO A STRING
-	function titleCase (str) {
-
-	    return str.replace(/\w\S*/g, function (txt) {
-	        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-	    });
-
-	};
+module.exports = function(app, tesla) {
 
 	app.get("/*", function(req, res) {
 
@@ -77,7 +68,7 @@ module.exports = function(app) {
 		// SETUP APP VARIABLE TO SEND TO THE CONTROLLER
 		app.req = req;
 		app.res = res;
-		app.model = titleCase(model);
+		app.model = tesla.titleCase(model);
 		app.controller = ctrl;
 		app.action = action;
 		app.uri = uri;

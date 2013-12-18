@@ -8,7 +8,7 @@ var express = require('express'),
     helpers = require('view-helpers'),
     fs = require('fs');
 
-module.exports = function(app) {
+module.exports = function(app, tesla) {
 
     var htmlEngine = require(app.config.engines.html);
 

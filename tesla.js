@@ -3,7 +3,9 @@ var express = require('express'),
     fs = require('fs'),
     env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
     mongoose = require('mongoose'),
-    app = module.exports = express();
+    tesla = require('./tesla_modules/tesla'),
+    app = module.exports = express(),
+    io = require('socket.io').listen(app);
 
 // REQUIRE CONFIG FILES
 require('./config/config')(app);
@@ -11,6 +13,8 @@ require('./config/env-config')(app);
 
 // BOOTSTRAP DB CONNECTION
 var db = mongoose.connect(app.config.db.url);
+
+tesla.log('logged with tesla');
 
 // BOOTSTRAP MODELS
 var models_path = __dirname + '/app/models';
@@ -30,8 +34,8 @@ var walk = function(path) {
 walk(models_path);
 
 // REQUIRE ADDITIONAL CONFIG FILES
-require('./config/express')(app, db); //express settings
-require('./config/routes')(app); // routes
+require('./config/express')(app, tesla); //express settings
+require('./config/routes')(app, tesla); // routes
 
 // STAR THE APP BY LISTEN ON <PORT>
 var port = process.env.PORT || config.port;

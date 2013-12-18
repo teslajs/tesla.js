@@ -4,7 +4,7 @@ rootPath = path.normalize(__dirname + '/..');
 module.exports = function (app) {
 
     app.site = {
-        name : "{{name}}", // the name of you app
+        name : "tesla.js", // the name of you app
     }
 
     app.config = {
@@ -19,14 +19,14 @@ module.exports = function (app) {
         cache : false, // whether to use caching
 
         engines : {
-            html: "{{html}}", // options: [jade|ejs|haml|hjs|jshtml]
-            css: "{{css}}", // options: [stylus|sass|less]
-            cssLibrary: '{{cssLibrary}}', // options: [nib|axis]
+            html: "jade", // options: [jade|ejs|haml|hjs|jshtml]
+            css: "stylus", // options: [stylus|sass|less]
+            cssLibrary: false, // options: [nib|axis]
         },
         root : rootPath,
 
         db : {
-            url : "mongodb://localhost/{{name}}" // url to database
+            url : "mongodb://localhost/dbname" // url to database
         },
 
         jsonp : true, // allow jsonp requests

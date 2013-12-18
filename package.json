@@ -45,11 +45,12 @@
     "grunt-cli": ">=0.1.11",
     "grunt-env": ">=0.4.1",
     "MD5": ">=1.2.0",
-    "mongoose": ">=3.8.2",
+    "mongoose": "3.8.2",
     "superagent": ">=0.15.7",
     "underscore": ">=1.5.2",
     "view-helpers": ">=0.1.3",
-    "waterline": ">=0.9.10"
+    "waterline": ">=0.9.10",
+    "socket.io": ">=0.9.16"
   },
   "devDependencies": {
     "grunt-concurrent": ">=0.4.2",
