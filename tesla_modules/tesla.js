@@ -1,17 +1,11 @@
+module.exports = function (app) {
 
+	return {
 
-exports.log = function (what) {
-  console.log(what);
+		// ALLOW TESLA LOGGING TO BE TURNED OFF IN CONFIG
+		log: function(what) {
+			if ( app.config.logging.console === true ) console.log(what);
+		}
+	}
+
 };
-
-
-exports.titleCase = function (str) {
-	return str.replace(/\w\S*/g, function (txt) {
-	    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-	});
-};
-
-
-// exports.circumference = function (r) {
-//   return 2 * PI * r;
-// };

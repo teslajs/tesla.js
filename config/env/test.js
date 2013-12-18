@@ -1,4 +1,8 @@
+var colors = require('colors');
+
 module.exports = function (app) {
+
+    var tesla = require('../../tesla_modules/tesla')(app);
 
     // global settings
     app.site.domain = "test.site-name.com";
@@ -12,6 +16,6 @@ module.exports = function (app) {
         css : app.site.url + "css/"
     };
 
-    console.log( app.site.environment + ' config loaded' );
+    tesla.log( 'INFO:'.blue + ' ' + app.site.environment + ' config loaded' );
 
 }

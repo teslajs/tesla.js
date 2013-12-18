@@ -34,6 +34,11 @@ module.exports = function (app) {
         protocol : 'http://',
         autoLoad : false, // whether to autoload controllers & models
         publicDir : './public',
+
+        logging : {
+            console: true, // whether to allow tesla to log messages to the node console
+            files: false // this doesn't do anything yet
+        }
     }
 
 

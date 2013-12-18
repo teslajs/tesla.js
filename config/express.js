@@ -6,6 +6,8 @@ var express = require('express'),
     mongoStore = require('connect-mongo')(express),
     flash = require('connect-flash'),
     helpers = require('view-helpers'),
+    tesla = require('../tesla_modules/tesla'),
+    colors = require('colors'),
     fs = require('fs');
 
 module.exports = function(app, tesla) {
@@ -25,7 +27,7 @@ module.exports = function(app, tesla) {
         level: 9
     }));
 
-    console.log('using ' + app.config.engines.css + ' as css preprocessor');
+    tesla.log('INFO:'.blue.blue + ' using ' + app.config.engines.css + ' as css preprocessor');
 
     // CUSTOM SETTINGS FOR STYLUS
     if ( app.config.engines.css === 'stylus' ) {
@@ -60,8 +62,6 @@ module.exports = function(app, tesla) {
 
             function compile(str, path) {
 
-                console.log(path);
-
               return stylus(str)
                 .set('filename', path)
                 .set('compress', compress)
@@ -76,8 +76,6 @@ module.exports = function(app, tesla) {
                 .set('compress', compress);
             }
         }
-
-        console.log('css dir: '  + app.config.root + '/public/');
 
         app.use(stylus.middleware({
             src: app.config.root + '/public/',
@@ -147,7 +145,7 @@ module.exports = function(app, tesla) {
         app.use(express.cookieParser());
 
         app.set('view engine', app.config.engines.html); // set html view engine
-        console.log('using ' + app.config.engines.html + ' as view engine');
+        tesla.log('INFO:'.blue.blue + ' using ' + app.config.engines.html + ' as view engine');
 
         // request body parsing middleware should be above methodOverride
         app.use(express.urlencoded());

@@ -1,4 +1,4 @@
-exports.render = function(app) {
+exports.index = function(app) {
 
 	app.res.render('default', {
 		title : app.site.name,
