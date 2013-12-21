@@ -439,3 +439,7 @@ git push heroku master
 
 ## Credits
 Inspired by the [MEAN Stack](https://github.com/linnovate/mean) by [Amos Haviv](https://twitter.com/amoshaviv) and [Express](https://github.com/visionmedia/express) by [TJ Holowaychuk](https://github.com/visionmedia)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/teslajs/tesla.js/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
