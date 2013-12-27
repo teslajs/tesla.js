@@ -32,7 +32,8 @@ module.exports = function (app) {
         root : rootPath,
 
         db : {
-            url : "mongodb://dev:pass@linus.mongohq.com:10074/sandbox" // url to database
+            url : "mongodb://<user>:<pass>@mongohq.com:10074/dbname", // url to database
+            driver: "mongodb"
         },
 
         jsonp : true, // allow jsonp requests
