@@ -18,6 +18,12 @@ module.exports = function (app) {
 
         cache : false, // whether to use caching
 
+        api : {
+            enabled : true,
+            format : 'json',
+            access : '*'
+        },
+
         engines : {
             html: "jade", // options: [jade|ejs|haml|hjs|jshtml]
             css: "stylus", // options: [stylus|sass|less]
@@ -26,7 +32,7 @@ module.exports = function (app) {
         root : rootPath,
 
         db : {
-            url : "mongodb://localhost/dbname" // url to database
+            url : "mongodb://dev:pass@linus.mongohq.com:10074/sandbox" // url to database
         },
 
         jsonp : true, // allow jsonp requests
