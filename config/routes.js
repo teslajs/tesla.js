@@ -3,7 +3,7 @@ var fs = require('fs'),
 
 module.exports = function(app, tesla) {
 
-	var tesla = require('../tesla_modules/tesla')(app);
+	var tesla = require('../lib/tesla')(app);
 
 
 	// POST
@@ -19,7 +19,7 @@ module.exports = function(app, tesla) {
 	// GET
 	app.get("/*", function(req, res) {
 
-		var uri = require('../tesla_modules/tesla.uri')(app, req); // require uri module
+		var uri = require('../lib/uri')(app, req); // require uri module
 
 		// SET VARS
 		var notFound = false,

@@ -6,7 +6,7 @@ var express = require('express'),
     mongoStore = require('connect-mongo')(express),
     flash = require('connect-flash'),
     helpers = require('view-helpers'),
-    tesla = require('../tesla_modules/tesla'),
+    tesla = require('../lib/tesla'),
     colors = require('colors'),
     fs = require('fs');
 

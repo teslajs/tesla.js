@@ -2,7 +2,7 @@ var colors = require('colors');
 
 module.exports = function (app) {
 
-    var tesla = require('../../tesla_modules/tesla')(app);
+    var tesla = require('../../lib/tesla')(app);
 
     // global settings
     app.site.domain = "test.site-name.com";

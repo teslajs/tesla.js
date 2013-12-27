@@ -10,7 +10,7 @@ var express = require('express'),
 
 require('./config/config')(app);
 
-var tesla = require('./tesla_modules/tesla')(app);
+var tesla = require('./lib/tesla')(app);
 
 tesla.log(' ');
 tesla.log(' ');
