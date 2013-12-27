@@ -95,8 +95,12 @@ Options:
   -e, --ejs           add ejs engine support (defaults to jade)
   -J, --jshtml        add jshtml engine support (defaults to jade)
   -H, --hogan         add hogan.js engine support (defaults to jade)
-  -c, --css   add stylesheet  support (less|sass|stylus) (defaults to plain css)
+  -c, --css           add stylesheet  support (less|sass|stylus) (defaults to plain css)
+  --nib               add support for nib to stylus
+  --axis              add support for axis to stylus
   -f, --force         force on non-empty directory
+  generate <name>     generate new model + controller with basic CRUD functionality
+  start               start the web server (still a bit buggy, best just just run "grunt" for now)
 ```
 
 For example, if you want to generate an application called "foobar" with Jade & Stylus support you would simply execute:
@@ -278,115 +282,138 @@ app.site.dir = {
 
 > NOTE: Running Node.js applications in the __production__ environment enables caching, which is disabled by default in all other environments.
 
-
-
-## Models, Controllers & Views, Oh My!
-
-### Routing
+## Routing
 Tesla comes with an automatic routing system which saves you the trouble of manually creating routes for your site. The routing is based on the following URI structure:
 
 ```
-http://localhost:3000/controller/action
+http://localhost:3000/controller/action/:id
 ```
 
-As an example, http://localhost:3000/home would load the following controller: app/controllers/home.js
-
-Similarly, http://localhost:3000/foo/bar would load this controller: app/controllers/foo/bar.js
-
-
-##### Autoloading
-The exeption to this rule is if you set "autoLoad: true" in [config/config.js](config/config.js). In this case you only need to create a model and a view, as Tesla will attempt to automatically load the model and the view using the [app/controllers/auto.js](app/controllers/auto.js) controller.
-
-With autoload, going to [http://localhost:3333/hello/world](http://localhost:3000/hello/world) will attempt to load the following files:
-
-*Controller: app/controllers/auto.js
-*Model: app/models/hello.js
-*View: app/views/hello/world.jade
-
-Autoload assumes a model with the name of the controller, and will try to find a record whose "name" field matches the action. Using [http://localhost:3000/articles/super-awesome-fun-time](http://localhost:3000/article/super-awesome-fun-time) as an example, autoload load use a model called "articles" and try to find a record with the name "super-awesome-fun-time":
+Let's say you called the following url:
 
 ```
-articles.findOne({name: "super-awesome-fun-time"})
+http://localhost:3000/foo/bar
 ```
 
-With autoloading, any data returned from the model will be sent to the view via the "data" variable. If no data is returned we assume the page does not exist and will throw a 404 error. Also worth noting, autoload expects to find a model to provide data to the view. If you forget to create a model with the correct name, you will get a 404 error when loading the page. If you don't want or need a model to provide data to your controller, or want to use a different URI structure, don't use autoload.
+The router will attempt to find a matching controller in this order:
+
+1. app/controllers/fooController.js
+2. app/controllers/foo/indexController.js
+3. app/controllers/foo/barController.js
+
+If it does not find a matching controller, the router will throw a 404 error. You are of course free to create your own custom routes if the default url scheme doesn't work for your site.
 
 
+## Working with data
 
-### Controllers
-If you are not using autoload, you will need to create your own controllers, which couldn't be easier! For example, if you want to create the page http://localhost:3000/help, simply create a controller with the same name: app/controllers/help.
+Creating models & working with data in Tesla is super simple. It takes only 2 steps:
 
-Then, add the following code:
+1) To work with data, make sure you set the URL for your database (config.db.url) in the [config file](https://github.com/teslajs/tesla.js/blob/master/config/config.js).
 
-```
-exports.render = function(app) {
-
-    app.res.render('help', {
-        site: app.site
-    });
-
-};
-```
-
-The above code is pretty simple, it simply loads the view "app/views/help.jade" and passes it a "site" variable.
-
-For a slightly for complex example, lets say you want to create a blog with the following uri structure: http://localhost:3000/article/read?id=12345
-
-Let's assume also you also want use an "article" model to load an article with the id "12345". Create the file "app/controllers/article/read.js" with the following code:
+2) Generate new model: let's say you have a collection called "user" you want to use with your app, all you need to do is run the following command:
 
 ```
-var mongoose = require('mongoose'),
-    Articles = mongoose.model( 'Article' ),
-
-exports.render = function(app) {
-
-    var id = req.query('id')
-
-    Articles.findOne({_id: ud}).exec(function(err, article) {
-
-        // IF WE GET AN ERROR
-        if (err) {
-            app.res.render('error', {
-                status: 500
-            });
-
-        // IF NO DATA WAS RETURNED, THROW A 404
-        } else if ( article === null) {
-            app.res.status(404).render('404', {
-                pageTitle : app.site.name + ' - Not Found',
-                url: app.req.originalUrl,
-                error: 'Not found',
-                site: app.site
-            });
-
-        // IF NO PROBLEMS, RENDER PAGE
-        } else {
-
-            // LOAD THE ARTICLE/READ VIEW & PASS DATA FROM THE MODEL
-            app.res.render('article/read', {
-                article : article,
-                site: app.site
-            });
-
-        }
-
-        }
-
-    });
-
-};
+$ tesla generate user
 ```
 
-### Views
-
-Views can use Jade (default), Haml, Handlebars or EJS. See the appropriate documentation for you chosen templating language for more info on how to use it.
-
-
-### Models
-
-For models, Tesla uses [Mongoose](http://mongoosejs.com/) to connect to a MongoDB server. Documentation on working with Mongoos can be found here: [http://mongoosejs.com/docs/guide.html](http://mongoosejs.com/docs/guide.html)
+this will create 2 new files for you:
+- app/models/user.js
+- app/controllers/userController.js
 
 
+#### Models
+
+As long as your databse URL is set properly, this is all you need to do. However, you will almost certainly want to open up your new model and define the schema for your collection or table.
+
+In this file, you will see a block that looks something like this:
+
+```
+// DEFINE MODEL SCHEMA
+// Be sure to add some files to the schema below or you will not have success quering or adding to the database
+var Model = db.define("user", {
+    created   : { type: "date", time: true },
+    updated   : { type: "date", time: true }
+    // _id : { type: "text" },
+    // name      : { type: "text", required: true },
+    // isAdmin : { type: "boolean", defaultValue: false },
+}, {
+    validations: {
+        // EXAMPLE VALIDATIONS
+        // password: orm.enforce.security.password('luns5', 'Passowrd does not meet min security requirements.'),
+        // email: orm.enforce.patterns.email('Please enter a valid email address.')
+        // More Options : https://github.com/dresende/node-enforce
+    }
+});
+```
+
+Here you will want to define what fields you want to be able to read/update in the collection. In the example above, this model only has access to "created" and "updated" fields. But it's almost certain that you will need to add more fields than this. There are a few commented out examples included to get you started.
+
+Tesla uses [Node-ORM](https://github.com/dresende/node-orm2) to provide add basic ORM functionality. For more info on definifing models & validations,[have a look at the ORM wiki](https://github.com/dresende/node-orm2/wiki).
+
+Once you have your schema setup, that should be about all you need to with the model do in most cases. But feel free to muck about further down in the file if you need to do some more customization.
+
+#### Controllers
+
+By default, Tesla will serve up your data via a RESTful JSON api. If this is the result you want, you shouldn't need to make any changes to the generated controller. You get the following URI scheme by default:
+
+```
+http://localhost:3000/user/all
+http://localhost:3000/user/create?data&goes&here
+http://localhost:3000/user/delete/:id
+http://localhost:3000/user/find?query&terms&here
+http://localhost:3000/user/update/:id
+```
+
+It's worth noting that delete & update require to pass the databse ID, while create & find accept arguments via GET parameters. Create maps each GET parameter to a field in the databse (POST/PUT support will come in the next iteration). For example, if you want add the following data to your collection/table:
+
+```
+name: Bob
+email: bob@marley.com
+```
+
+you would simple enter this into the browser:
+
+```
+http://localhost:3000/user/create?name=Bob&email=bob@marley.com
+```
+
+Similarly, if you want to retrieve all the records of people names Bob, you would build a request like this:
+
+```
+http://localhost:3000/user/find?name=Bob
+```
+
+and you will get back something like this:
+
+```
+[
+	{
+		name: "Bob"
+		email: "bob@marley.com"
+	},
+	{
+		name: "Bob"
+		email: "bob@dylan.com"
+	}
+]
+```
+
+Now, if you would rather serve up a proper HTML view, it's a simple change, just open up your [config file]() and set "config.api.enabled" to "false". Now, it will map the request to the appropriate view. By default, you get 5 (all, create, delete, find, update) views. Continuing with our user example, you will get the following url > view mapping:
+
+```
+http://localhost:3000/user/all  >  app/views/all
+http://localhost:3000/user/create?data&goes&here  >  app/views/create
+http://localhost:3000/user/delete/:id  >  app/views/delete
+http://localhost:3000/user/find?query&terms&here  >  app/views/find
+http://localhost:3000/user/update/:id  >  app/views/update
+```
+
+These are all setup in the controller, however you will need to create the appropriate view files or you will get a 404 error. The data from each request (which was previously spit out as a JSON view) will be sent to the view as an object called "data".
+
+
+## Views
+
+Views can use Jade (default), Haml, Handlebars or EJS (though I've only tested with Jade so far). See the appropriate documentation for your chosen templating language for more info on how to use it.
 
 
 ## Troubleshooting
