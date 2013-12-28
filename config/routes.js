@@ -27,6 +27,7 @@ module.exports = function(app, tesla) {
 			ctrl = uri.controller(),
 			id = uri.id(),
 			loc = '../',
+			viewDir = './app/views/',
 			ctrlDir = './app/controllers/',
 			ctrlFile = ctrlDir + ctrl + 'Controller.js',
 			ctrlFileIndex = ctrlDir + ctrl + '/indexController.js',
@@ -94,33 +95,49 @@ module.exports = function(app, tesla) {
 		// LOAD CONTROLLER IF IT EXISTS
 		if ( notFound === false ) {
 
-			// Use auto controller
-			if ( app.config.autoLoad === true ) {
-				require('../app/controllers/autoController').render(app);
+			// LOAD ACTION
+			if ( controller[action] ) {
+				tesla.log( 'SUCCESS:'.green + ' Using ' + '"exports.' + action + '"' + ' in ' + ctrlFileLoaded.replace('./', '') );
+				controller[action](app);
+			// IF ACTION DOESN't EXIST, TRY INDEX
+			} else if ( action === '' || action === 'index' ) {
+				tesla.log( 'SUCCESS:'.green + ' Using ' + '"exports.index"' + ' in ' + ctrlFileLoaded.replace('./', '') );
+				tesla.log(' ');
+				controller.index(app);
+			// IF NO INDEX, THROW 404
 			} else {
-
-				// LOAD ACTION
-				if ( controller[action] ) {
-					tesla.log( 'SUCCESS:'.green + ' Using ' + '"exports.' + action + '"' + ' in ' + ctrlFileLoaded.replace('./', '') );
-					controller[action](app);
-				// IF ACTION DOESN't EXIST, TRY INDEX
-				} else if ( action === '' || action === 'index' ) {
-					tesla.log( 'SUCCESS:'.green + ' Using ' + '"exports.index"' + ' in ' + ctrlFileLoaded.replace('./', '') );
-					tesla.log(' ');
-					controller.index(app);
-				// IF NO INDEX, THROW 404
-				} else {
-					tesla.log(' ');
-					// tesla.log( 'ERROR:'.red + ' "exports.'.yellow + action.yellow  + '"'.yellow + ' not found in '.red + ctrlFileLoaded.yellow);
-					tesla.log( 'ERROR: Attempt to use'.red + ' "exports.index"'.yellow + ' also failed, throwing 404...'.red);
-					throw404(res, req, app);
-				}
+				tesla.log(' ');
+				// tesla.log( 'ERROR:'.red + ' "exports.'.yellow + action.yellow  + '"'.yellow + ' not found in '.red + ctrlFileLoaded.yellow);
+				tesla.log( 'ERROR: Attempt to use'.red + ' "exports.index"'.yellow + ' also failed, throwing 404...'.red);
+				throw404(res, req, app);
 			}
 
-
-		// THROW A 404 IF WE CAN'T FIND THE CONTROLLER
 		} else {
-			throw404(res, req, app);
+
+
+			if ( app.config.autoLoad === true ) {
+
+				// TRY TO LOAD APP/VIEWS/CONTROLLER
+				if ( fs.existsSync( viewDir + ctrl + '.' + app.config.engines.html ) )  {
+					require('../app/controllers/autoController').render(app, ctrl);
+				// TRY TO LOAD APP/VIEWS/CONTROLLER/INDEX
+				} else if ( fs.existsSync( viewDir + '/' + ctrl + '/index.' + app.config.engines.html ) ) {
+					require('../app/controllers/autoController').render(app, ctrl + '/index');
+				// TRY TO LOAD APP/VIEWS/CONTROLLER/ACTION
+				} else if (  fs.existsSync( viewDir + '/' + ctrl + '/' + action + '.' + app.config.engines.html ) ) {
+					require('../app/controllers/autoController').render(app, ctrl + '/' + action);
+				// TRY TO LOAD APP/VIEWS/CONTROLLER/ACTION/INDEX
+				} else if (  fs.existsSync( viewDir + '/' + ctrl + '/' + action + '/index.' + app.config.engines.html ) ) {
+					require('../app/controllers/autoController').render(app, ctrl + '/' + action + '/index');
+				// IF NO VIEW CAN BE FOUND, THROW A 404
+				} else {
+					throw404(res, req, app);
+				}
+
+			// THROW A 404 IF WE CAN'T FIND THE CONTROLLER + AUTOLOAD FAILS
+			} else {
+				throw404(res, req, app);
+			}
 		}
 
 		tesla.log(' ');
