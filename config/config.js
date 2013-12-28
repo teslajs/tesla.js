@@ -39,7 +39,7 @@ module.exports = function (app) {
         jsonp : true, // allow jsonp requests
         secret : 'MYAPPSECRET',
         protocol : 'http://',
-        autoLoad : false, // whether to autoload controllers & models
+        autoLoad : true, // whether to attempt autoload controllers
         publicDir : './public',
 
         logging : {
