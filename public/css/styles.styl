@@ -1,0 +1,399 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
+
+html, body {
+  padding: 0px;
+  margin: 0px;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color:#777;
+  font-weight:300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color:#222;
+  margin:0 0 20px;
+}
+
+p, ul, ol, table, pre, dl {
+  margin:0 0 20px;
+}
+
+h1, h2, h3 {
+  line-height:1.1;
+}
+
+h1 {
+  font-size:43px;
+}
+
+h2 {
+  color:#393939;
+}
+
+h3, h4, h5, h6 {
+  color:#494949;
+}
+
+a {
+  color:#39c;
+  font-weight:400;
+  text-decoration:none;
+}
+
+a small {
+  font-size:11px;
+  color:#777;
+  margin-top:-0.6em;
+  display:block;
+}
+
+.wrapper {
+  width:860px;
+  margin:0 auto;
+}
+
+blockquote {
+  border-left:1px solid #e5e5e5;
+  margin:0;
+  padding:0 0 0 20px;
+  font-style:italic;
+}
+
+.code {
+  font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+  background: #e6dee9;
+  color:#936da0;
+  font-size:12px;
+  padding: 0px 0px 0px 15px;
+  background-image: url('../img/code-bg.png');
+  overflow-x: auto;
+  line-height: 42px;
+}
+
+.code-inline {
+  padding: 5px;
+  background: #e6dee9;
+  margin-right: 5px;
+  color: #936da0;
+  font-size: 12px;
+  overflow-x: auto;
+  line-height: 42px;
+}
+
+
+table {
+  width:100%;
+  border-collapse:collapse;
+}
+
+th, td {
+  text-align:left;
+  padding:5px 10px;
+  border-bottom:1px solid #e5e5e5;
+}
+
+dt {
+  color:#444;
+  font-weight:700;
+}
+
+th {
+  color:#444;
+}
+
+img {
+  max-width:100%;
+}
+
+header {
+  width:270px;
+  float:left;
+  position:fixed;
+}
+
+header ul {
+  list-style:none;
+  height:40px;
+
+  padding:0;
+
+  background: #eee;
+  background: -moz-linear-gradient(top, #f8f8f8 0%, #dddddd 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#dddddd));
+  background: -webkit-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+  background: -o-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+  background: -ms-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+  background: linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+
+  border-radius:5px;
+  border:1px solid #d2d2d2;
+  box-shadow:inset #fff 0 1px 0, inset rgba(0,0,0,0.03) 0 -1px 0;
+  width:270px;
+}
+
+header li {
+  width:89px;
+  float:left;
+  border-right:1px solid #d2d2d2;
+  height:40px;
+}
+
+header ul a {
+  line-height:1;
+  font-size:11px;
+  color:#999;
+  display:block;
+  text-align:center;
+  padding-top:6px;
+  height:40px;
+}
+
+strong {
+  color:#222;
+  font-weight:700;
+}
+
+header ul li + li {
+  width:88px;
+  border-left:1px solid #fff;
+}
+
+header ul li + li + li {
+  border-right:none;
+  width:89px;
+}
+
+header ul a strong {
+  font-size:14px;
+  display:block;
+  color:#222;
+}
+
+small {
+  font-size:11px;
+}
+
+hr {
+  border:0;
+  background:#e5e5e5;
+  height:1px;
+  margin:0 0 20px;
+}
+
+footer {
+  width:270px;
+  float:left;
+  position:fixed;
+  bottom:50px;
+}
+
+div.wrapper {
+  width:auto;
+  margin:0;
+}
+
+header, section, footer {
+  float:none;
+  position:static;
+  width:auto;
+}
+
+header {
+  padding-right:320px;
+}
+
+section {
+  border:1px solid #e5e5e5;
+  border-width:1px 0;
+  padding:20px 0;
+  margin:0 0 20px;
+}
+
+header a small {
+  display:inline;
+}
+
+header ul {
+  position:absolute;
+  right:50px;
+  top:52px;
+}
+
+
+
+// CONTENT
+.content {
+  padding: 30px 50px 20px 50px;
+}
+
+
+// HERO SECTION
+.hero {
+  background-image: url('../img/hero-bg.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin-top: -1px;
+  width: 100%;
+  height: 250px;
+  margin-bottom: -1px;
+  top: 0px;
+  text-align: center;
+  position: relative;
+}
+
+.hero-img {
+  width: 250px;
+  margin-top: 80px;
+}
+
+// NAVIGATION
+.main-nav {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #8717ac;
+  background-color: rgba(135, 23, 172, 0.4);
+  width: 100%;
+  height: 41px;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.5);
+}
+
+.main-nav ul {
+  text-align: right;
+  margin-left: -45px;
+}
+
+.main-nav .logo {
+  float: left;
+  padding: 11px 5px 5px 12px;
+  width: 80px;
+}
+
+.main-nav .logo:hover {
+  cursor: pointer;
+  opacity: 0.7;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+
+.main-nav ul li {
+  text-align: left;
+  list-style: none;
+  display: inline-block;
+  color: #fff;
+  padding: 10px 20px 10px 20px;
+  // border-left: solid 1px rgba(0, 0, 0, 0.2);
+  margin-right: -5px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.main-nav ul li a {
+  color: #fff;
+}
+
+.main-nav ul li:last-child {
+  // border-left: solid 1px rgba(0, 0, 0, 0.2);
+  padding-right: 40px;
+}
+
+.main-nav ul li:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+nav.docs {
+  float: right;
+  width: 200px;
+  background-color: #8717ac;
+  color: #fff;
+  line-height: 10px;
+  margin-top: 10px;
+  margin-right: 0px;
+  margin-left: 50px;
+}
+
+nav.docs a {
+  color: #fff;
+}
+
+nav.docs h3 a {
+  color: #8717ac;
+}
+
+nav.docs h3 {
+  background-color: rgba(255, 255, 255, 1);
+  color: #8717ac;
+  font-weight: normal;
+  padding: 10px;
+  border: solid 1px #8717ac;
+  margin: 0px 0px -1px 0px;
+}
+
+nav.docs h4 {
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 10px;
+  margin: 0px 0px 1px 0px;
+  // margin-left: 18px;
+  line-height: 18px;
+  color: #fff;
+}
+
+
+nav.docs h5 {
+  padding: 15px 0px 15px 10px;
+  margin: 0px;
+  line-height: 10px;
+  border-bottom: solid 1px rgba(255, 255, 255, 0.3);
+}
+
+nav.docs a {
+  display: block;
+  height: 100%
+}
+
+nav.docs h5:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+nav.docs h4:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+nav.docs h3:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+}
+
+nav.docs h3, nav.docs h4, nav.docs h5 {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.top-link {
+  float: right;
+}

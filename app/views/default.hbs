@@ -1,79 +1,60 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Tesla.js</title>
-
-    <link rel="stylesheet" href="public/css/styles.css">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-  </head>
-  <body>
+{{> header}}
 
 <span id="home"></span>
 
 <section class="hero">
-    <img src="public/img/logo-big.png" alt="Tesla - a powerful web framework for Node.js" class="hero-img">
+	<img src="img/logo-big.png" alt="Tesla - a powerful web framework for Node.js" class="hero-img">
 </section>
 
-<nav class="main-nav">
-    <a href="#"><img src="public/img/logo-tiny.png" alt="Tesla.js" class="logo"></a>
-    <ul>
-
-        <li><a href="docs">Docs</a></li>
-        <li><a href="https://github.com/teslajs/tesla.js/" target="_blank">Github</a></li>
-    </ul>
-</nav>
+{{> navigation}}
 
 <section class="content">
 
 <nav class="docs">
 
-    <h3><a href="#installation">Installation</a></h3>
+	<h3><a href="#installation">Installation</a></h3>
 
-        <h4><a href="#prerequisites">Prerequisites</a></h4>
-        <h4><a href="#installing-tesla">Installing Tesla</a></h4>
+		<h4><a href="#prerequisites">Prerequisites</a></h4>
+		<h4><a href="#installing-tesla">Installing Tesla</a></h4>
 
-    <h3><a href="#quick-start">Quick Start</a></h3>
+	<h3><a href="#quick-start">Quick Start</a></h3>
 
-    <h3><a href="#setup-options">Setup Options</a></h3>
-        <h4><a href="#basic-settings">Basic Settings</a></h4>
-            <h5><a href="#mvc-scaffolding">MVC Scaffolding</a></h5>
-            <h5><a href="#html-templating-engines">HTML Templating Engines</a></h5>
-            <h5><a href="#css-pre-processors">CSS Pre-Processors</a></h5>
+	<h3><a href="#setup-options">Setup Options</a></h3>
+		<h4><a href="#basic-settings">Basic Settings</a></h4
+			<h5><a href="#mvc-scaffolding">MVC Scaffolding</a></h5>
+			<h5><a href="#html-templating-engines">HTML Templating Engines</a></h5>
+			<h5><a href="#css-pre-processors">CSS Pre-Processors</a></h5>
 
-        <h4><a href="#front-end-tools">Front-End Tools</a></h4>
-            <h5><a href="#javascript-application-frameworks">JavaScript Application Frameworks</a></h5>
-            <h5><a href="#javascript-libraries">JavaScript Libraries</a></h5>
-            <h5><a href="#css-frameworks">CSS Frameworks</a></h5>
+		<h4><a href="#front-end-tools">Front-End Tools</a></h4>
+			<h5><a href="#javascript-application-frameworks">JavaScript Application Frameworks</a></h5>
+			<h5><a href="#javascript-libraries">JavaScript Libraries</a></h5>
+			<h5><a href="#css-frameworks">CSS Frameworks</a></h5>
 
-        <h4><a href="#real-world-examples">Real World Examples</a></h4>
-            <h5><a href="#javascript-application-frameworks">JavaScript Application Frameworks</a></h5>
+		<h4><a href="#real-world-examples">Real World Examples</a></h4>
+			<h5><a href="#javascript-application-frameworks">JavaScript Application Frameworks</a></h5>
 
-        <h4><a href="#all-tesla-cli-options">All Tesla CLI Options</a></h4>
+		<h4><a href="#all-tesla-cli-options">All Tesla CLI Options</a></h4>
 
-    <h3><a href="#configuration">Configuration</a></h3>
-        <h4><a href="#default-config-file">Default Config File</a></h4>
-        <h4><a href="#environmental-settings">Environmental Settings</a></h4>
-        <h4><a href="#development-environment-example">"Development" Environment Example</a></h4>
+	<h3><a href="#configuration">Configuration</a></h3>
+		<h4><a href="#default-config-file">Default Config File</a></h4>
+		<h4><a href="#environmental-settings">Environmental Settings</a></h4>
+		<h4><a href="#development-environment-example">"Development" Environment Example</a></h4>
 
 
-    <h3><a href="#routing">Routing</a></h3>
+	<h3><a href="#routing">Routing</a></h3>
 
-    <h3><a href="#working-with-data">Working with Data</a></h3>
-        <h4><a href="#models">Models</a></h4>
-        <h4><a href="#controllers">Controllers</a></h4>
+	<h3><a href="#working-with-data">Working with Data</a></h3>
+		<h4><a href="#models">Models</a></h4>
+		<h4><a href="#controllers">Controllers</a></h4>
 
-    <h3><a href="#views">Views</a></h3>
+	<h3><a href="#views">Views</a></h3>
 
-    <h3><a href="#troubleshooting">Troubleshooting</a></h3>
-        <h4><a href="#updatenpm-bower-or-grunt">Update NPM, Bower or Grunt</a></h4>
-        <h4><a href="#cleaning-npm-and-bower-cache">Cleaning NPM &amp; Bower cache</a></h4>
+	<h3><a href="#troubleshooting">Troubleshooting</a></h3>
+		<h4><a href="#updatenpm-bower-or-grunt">Update NPM, Bower or Grunt</a></h4>
+		<h4><a href="#cleaning-npm-and-bower-cache">Cleaning NPM &amp; Bower cache</a></h4>
 
-    <h3><a href="#heroku-quick-deployment">Heroku Quick Deployment</a></h3>
-    <h3><a href="#credits">Credits</a></h3>
+	<h3><a href="#heroku-quick-deployment">Heroku Quick Deployment</a></h3>
+	<h3><a href="#credits">Credits</a></h3>
 
 </nav>
 
@@ -595,63 +576,4 @@ git push heroku master
 
 <section>
 
-    <script src="public/js/jquery.min.js"></script>
-    <script src="public/js/zepto.min.js"></script>
-    <script src="http://localhost:35729/livereload.js"></script>
-
-    <script>
-
-    Zepto(function($){
-
-        $(window).on('scroll', function(e){
-            // console.log( $(window).scrollTop() );
-
-            if ( $(window).scrollTop() > 205 ) {
-                // $('.hero').css({position: 'fixed', top: '-207px'});
-                $('.main-nav').css({backgroundColor: 'rgba(135, 23, 172, 1)', borderBottom: 'solid 1px #000'});
-
-                // background-color: rgba(135, 23, 172, 0.6);
-            } else {
-                $('.main-nav').css({backgroundColor: 'rgba(135, 23, 172, 0.4)', borderBottom: 'solid 1px rgba(0, 0, 0, 0.5)'});
-            }
-        })
-
-        $.each($('a'), function(){
-
-            if ( this.href.indexOf('#') > 0 ) {
-                var id = this.href.split('/#');
-
-                $(this).on('click', function(e){
-                    scrollTo(id[1]);
-                    console.log('sceoll to: ' + id[1]);
-                    return false;
-                });
-
-            }
-
-        });
-
-    });
-
-
-    function scrollTo(where) {  // SCROLL TO SPECIFIC ELEMENT
-        var offset = 60;
-
-        if ( $("#" + where).length > 0 ) {
-            $('html, body').animate({
-                    scrollTop: $("#" + where).offset().top - offset
-            }, 500 );
-            window.history.pushState(where, false, '#' + where);
-        } else {
-            $('html, body').animate({
-                scrollTop: $(where).offset().top - offset
-            }, 500 );
-            window.history.pushState(where, false, '#' + where);
-        }
-
-    }; // END: SCROLL
-
-    </script>
-
-    </body>
-</html>
+{{> footer}}

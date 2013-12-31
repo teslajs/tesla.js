@@ -1,0 +1,98 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Tesla.js</title>
+
+    <link rel="stylesheet" href="../public/css/styles.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+<span id="home"></span>
+
+<section class="hero">
+    <img src="../public/img/logo-big.png" alt="Tesla - a powerful web framework for Node.js" class="hero-img">
+</section>
+
+<nav class="main-nav">
+    <a href="../"><img src="../public/img/logo-tiny.png" alt="Tesla.js" class="logo"></a>
+    <ul>
+
+        <li><a href="/docs">Docs</a></li>
+        <li><a href="https://github.com/teslajs/tesla.js/" target="_blank">Github</a></li>
+    </ul>
+</nav>
+
+<section class="content">
+
+    <h1>Docs</h1>
+
+    <p>Proper documentation is in the works. In the meatime, please check out the Guide on the <a href="/">home page</a>, or view the project README on <a href="https://github.com/teslajs/tesla.js/blob/master/README.md">Github</a>.</p>
+
+</section>
+
+    <script src="../public/js/jquery.min.js"></script>
+    <script src="../public/js/zepto.min.js"></script>
+    <script src="http://localhost:35729/livereload.js"></script>
+
+    <script>
+
+    Zepto(function($){
+
+        $(window).on('scroll', function(e){
+            // console.log( $(window).scrollTop() );
+
+            if ( $(window).scrollTop() > 205 ) {
+                // $('.hero').css({position: 'fixed', top: '-207px'});
+                $('.main-nav').css({backgroundColor: 'rgba(135, 23, 172, 1)', borderBottom: 'solid 1px #000'});
+
+                // background-color: rgba(135, 23, 172, 0.6);
+            } else {
+                $('.main-nav').css({backgroundColor: 'rgba(135, 23, 172, 0.4)', borderBottom: 'solid 1px rgba(0, 0, 0, 0.5)'});
+            }
+        })
+
+        $.each($('a'), function(){
+
+            if ( this.href.indexOf('#') > 0 ) {
+                var id = this.href.split('/#');
+
+                $(this).on('click', function(e){
+                    scrollTo(id[1]);
+                    console.log('sceoll to: ' + id[1]);
+                    return false;
+                });
+
+            }
+
+        });
+
+    });
+
+
+    function scrollTo(where) {  // SCROLL TO SPECIFIC ELEMENT
+        var offset = 60;
+
+        if ( $("#" + where).length > 0 ) {
+            $('html, body').animate({
+                    scrollTop: $("#" + where).offset().top - offset
+            }, 500 );
+            window.history.pushState(where, false, '#' + where);
+        } else {
+            $('html, body').animate({
+                scrollTop: $(where).offset().top - offset
+            }, 500 );
+            window.history.pushState(where, false, '#' + where);
+        }
+
+    }; // END: SCROLL
+
+    </script>
+
+    </body>
+</html>
