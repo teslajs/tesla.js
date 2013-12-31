@@ -19,38 +19,39 @@ module.exports = function (app) {
         cache : false, // whether to use caching
 
         api : {
-            enabled : true,
-            format : 'json',
-            access : '*'
+            enabled : true, // set false to disable json output for scafolding
+            format : 'json', // format to output in api views
+            access : '*' // placeholder for future api security enhancement
         },
 
         engines : {
-            html: "jade", // options: [jade|ejs|haml|hjs|jshtml]
-            css: "stylus", // options: [stylus|sass|less]
-            cssLibrary: false, // options: [nib|axis]
+            html: "jade", // options: (ejs|handlebars|hogan|jade|mustache)
+            css: "stylus", // options: (stylus|sass|less) - set false to just use vanilla css
+            cssLibrary: false, // options: (axis|bourbon|nib) - set to false for none
         },
-        root : rootPath,
 
+        root : rootPath, // path to the root of your server
+
+        // see https://github.com/dresende/node-orm2/wiki/Connecting-to-Database for more info on connection to your databse
         db : {
-            url : "mongodb://<user>:<pass>@mongohq.com:10074/dbname", // url to database
-            driver: "mongodb"
+            url : "driver://username:password@hostname/database", // url to database
+            driver: "mongodb" // which db driver to use
         },
 
         jsonp : true, // allow jsonp requests
-        secret : 'MYAPPSECRET',
-        protocol : 'http://',
+        secret : 'MYAPPSECRET', // placeholder for now, will be implemented later
+        protocol : 'http://', // options: (http|https)
         autoLoad : true, // whether to attempt autoload controllers
-        publicDir : './public',
+        publicDir : './public', // public directory where images, javascript, css, etc is stored
 
         logging : {
             console: true, // whether to allow tesla to log messages to the node console
-            files: false // this doesn't do anything yet
+            files: false // this doesn't do anything yet, eventually it will write .log files
         }
     }
 
 
-
-    // some default meta setting for head
+    // some default meta setting for site <head>
     app.site.meta = {
         description : '',
         keywords : '',
