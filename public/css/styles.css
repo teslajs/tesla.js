@@ -23,6 +23,7 @@ h5,
 h6 {
   color: #222;
   margin: 0 0 20px;
+  font-weight: 100;
 }
 p,
 ul,
@@ -39,9 +40,13 @@ h3 {
 }
 h1 {
   font-size: 43px;
+  font-weight: 100;
 }
 h2 {
-  color: #393939;
+  color: #8717ac;
+  border-bottom: solid 1px #8717ac;
+  padding-bottom: 10px;
+  font-size: 30px;
 }
 h3,
 h4,
@@ -208,6 +213,16 @@ header ul {
 .content {
   padding: 30px 50px 20px 50px;
 }
+.doc-section {
+  padding: 30px;
+  margin: 0px;
+  margin-bottom: 30px;
+  margin-right: 280px;
+  border: solid 1px #8717ac;
+}
+.doc-section h2 {
+  margin: 0px 0px 20px 0px;
+}
 .hero {
   background-image: url("../img/hero-bg.jpg");
   -webkit-background-size: cover;
@@ -279,13 +294,11 @@ header ul {
 }
 nav.docs {
   float: right;
-  width: 200px;
+  width: 250px;
   background-color: #8717ac;
   color: #fff;
   line-height: 10px;
-  margin-top: 10px;
   margin-right: 0px;
-  margin-left: 50px;
 }
 nav.docs a {
   color: #fff;
@@ -299,12 +312,17 @@ nav.docs h3 {
   font-weight: normal;
   padding: 10px;
   border: solid 1px #8717ac;
-  margin: 0px 0px -1px 0px;
+  border-top: none;
+  margin: 0px 0px 0px 0px;
+}
+nav.docs h3:first-child {
+  border-top: solid 1px #8717ac;
 }
 nav.docs h4 {
   background-color: rgba(255,255,255,0.4);
   padding: 10px;
   margin: 0px 0px 1px 0px;
+  padding-left: 18px;
   line-height: 18px;
   color: #fff;
 }
@@ -341,4 +359,35 @@ nav.docs h5 {
 }
 .top-link {
   float: right;
+}
+section {
+  border: none;
+}
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.feature-box {
+  padding: 0px;
+  border-bottom: solid 1px #ccc;
+}
+.feature-box:last-child {
+  border: none;
+}
+.feature-box h4 {
+  padding: 0px;
+  margin: 0px;
+}
+.features {
+  margin-right: 260px;
+}
+.pd-r-40 {
+  padding-right: 40px;
+}
+.mr-t-40 {
+  margin-top: 40px;
 }

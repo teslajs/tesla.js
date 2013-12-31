@@ -27,10 +27,12 @@
     </ul>
 </nav>
 
+
 <section class="content">
 
 <nav class="docs">
 
+    <h3><a href="#features">Features</a></h3>
     <h3><a href="#installation">Installation</a></h3>
 
         <h4><a href="#prerequisites">Prerequisites</a></h4>
@@ -57,7 +59,7 @@
     <h3><a href="#configuration">Configuration</a></h3>
         <h4><a href="#default-config-file">Default Config File</a></h4>
         <h4><a href="#environmental-settings">Environmental Settings</a></h4>
-        <h4><a href="#development-environment-example">"Development" Environment Example</a></h4>
+        <h4><a href="#development-environment-example">Dev Environment Example</a></h4>
 
 
     <h3><a href="#routing">Routing</a></h3>
@@ -77,14 +79,62 @@
 
 </nav>
 
+<section id="about-section" class="doc-section">
 
+<!-- ABOUT -->
 <h1 id="about">Tesla.js</h1>
 
 <p>Tesla is a modern MVC style framework built on to of <a href="http://nodejs.org/">Node.js</a> and <a href="http://expressjs.com/">Express</a>. It's build to be fast, simple &amp; easy to configure, with sane defaults and flexible boilerplates to get you up and running as quickly as possible.</p>
 
-<p>Tesla is still under heavy development, so I recommend checking for updates often by running <code class="code-inline">npm update tesla-cli -g</code>. I try to only push stable working builds, but errors do creep in, and bug reports are always apreciated!</p>
+<p>Tesla is still under heavy development, so I recommend checking for updates often by running. I try to only push stable working builds, but errors do creep in, and bug reports are always apreciated!</p>
 
-<hr>
+<strong>To update Tesla: &nbsp; </strong>
+<code class="code-inline">npm update tesla-cli -g</code>
+
+</section>
+
+
+
+<section id="features-section" class="doc-section">
+
+    <h2>Features</h2>
+
+    <section class="feature-box">
+        <h4>MVC</h4>
+        <p>Simple but useful MVC structure with optional scaffolding to auto-create models, controllers & even a simple JSON API for you. Models use Node-ORM so you’re not tied to a specific database.</p>
+    </section>
+
+    <section class="feature-box">
+        <h4>Auto-routing</h4>
+        <p>If your url’s follow the domain.com/controller/action/:id format, there’s no need to create any custom routing, it will just automatically load the controller/view if it’s found, and throw a 404 if it’s not.</p>
+    </section>
+
+    <section class="feature-box">
+        <h4>Flexible Templates</h4>
+        <p>You can choose from EJS, Handlebars, Hogan, Jade or Handlebars for templates. Less, Sass & Stylus are available for css pre-processors (with additional support for Bourbon, Axis & Nib libraries).</p>
+    </section>
+
+    <section class="feature-box">
+        <h4>Boilerplates</h4>
+        <p>Tesla uses a combination of npm and Bower to help create some useful boilerplates when setting up a new app. You can choose to have Tesla add things like jQuery, AngularJS, Foundation, etc. to your view templates automatically when it creates the project.</p>
+    </section>
+
+    <section class="feature-box">
+        <h4>Auto-watch & LiveReload</h4>
+        <p>Tesla utilizes the Grunt task runner to watch for file changes, restarting the server when necessary. It also comes with LiveReload out of the box to auto refresh your browser when files change.</p>
+    </section>
+
+    <section class="feature-box">
+        <h4>Easy Configuration</h4>
+        <p>Almost all of the server settings (port number, database settings, etc.) can be easily updated in the config file.</p>
+    </section>
+
+</section>
+
+
+
+<!-- INSTALLATION -->
+<section id="installation-section" class="doc-section">
 
 <a class="top-link" href="#home">back to top</a>
 <h2 id="installation">Installation</h2>
@@ -105,6 +155,13 @@
 
 <pre class="code"><code>$ npm install tesla-cli -g
 </code></pre>
+
+</section>
+
+
+
+<!-- QUICK START -->
+<section id="quick-start-section" class="doc-section">
 
 <a class="top-link" href="#home">back to top</a>
 <h2 id="quick-start">Quick Start</h2>
@@ -129,6 +186,10 @@
 
 <p>If you choose not to use Grunt, you can start the server by running <code class="code-inline">node server.js</code>. But using Grunt gives you some extras such as livereload, and watching for changes your files &amp; restarting the server whenever necesary.</p>
 
+</section>
+
+<!-- SETUP -->
+<section id="setup-section" class="doc-section">
 <a class="top-link" href="#home">back to top</a>
 <h2 id="setup-options">Setup Options</h2>
 
@@ -306,7 +367,11 @@ Options:
 generate &lt;name&gt;      generate new model + controller with basic CRUD functionality
 start                start the web server (still a bit buggy, best just just run "grunt" for now)
 </pre>
+</section>
 
+
+<!-- CONFIG -->
+<section id="configuration-section" class="doc-section">
 <a class="top-link" href="#home">back to top</a>
 <h2 id="configuration">Configuration</h2>
 
@@ -396,6 +461,12 @@ app.site.dir = {
 };
 </code></pre>
 
+</section>
+
+
+
+<!-- ROUTING -->
+<section id="routing-section" class="doc-section">
 <a class="top-link" href="#home">back to top</a>
 <h2 id="routing">Routing</h2>
 
@@ -422,6 +493,12 @@ app.site.dir = {
 
 <p>You are of course free to create your own custom routes if the default url scheme doesn't work for your site.</p>
 
+</section>
+
+
+
+<!-- WORKING WITH DATA -->
+<section id="working-with-data-section" class="doc-section">
 <a class="top-link" href="#home">back to top</a>
 <h2 id="working-with-data">Working with data</h2>
 
@@ -521,12 +598,25 @@ http://localhost:3000/user/update/:id  &gt;  app/views/update
 
 <p>These are all setup in the controller, however you will need to create the appropriate view files or you will get a 404 error. The data from each request (which was previously spit out as a JSON view) will be sent to the view as an object called "data".</p>
 
+</section>
+
+
+
+<!-- VIEWS -->
+<section id="views-section" class="doc-section">
+
 <a class="top-link" href="#home">back to top</a>
 <h2 id="views">Views</h2>
 
 
-<p>Views can use Jade (default), Haml, Handlebars or EJS (though I've only tested with Jade so far). See the appropriate documentation for your chosen templating language for more info on how to use it.</p>
+<p>Views can use EJS, Handlebars, Hogan, Jade (default) or Mustache templates. See the appropriate documentation for your chosen templating language for more info on how to use it.</p>
 
+</section>
+
+
+
+<!-- TROUBLESHOOTING -->
+<section id="troubleshooting-section" class="doc-section">
 <a class="top-link" href="#home">back to top</a>
 <h2 id="troubleshooting">Troubleshooting</h2>
 
@@ -567,7 +657,12 @@ We found that often cleaning the cache solves some troubles this system creates.
 
 <pre class="code"><code>$ bower cache clean
 </code></pre>
+</section>
 
+
+
+<!-- HEROKU -->
+<section id="heroku-section" class="doc-section">
 <a class="top-link" href="#home">back to top</a>
 <h2 id="heroku-quick-deployment">Heroku Quick Deployment</h2>
 
@@ -580,6 +675,12 @@ git commit -m "initial version"
 heroku apps:create
 git push heroku master
 </code></pre>
+</section>
+
+
+
+<!-- CREDITS -->
+<section id="credits-section" class="doc-section">
 
 <a class="top-link" href="#home">back to top</a>
 <h2 id="credits">Credits</h2>
@@ -593,9 +694,30 @@ git push heroku master
 
 <br><br>
 
-<p><a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/teslajs/tesla.js/trend.png" alt="Bitdeli Badge" title="" /></a></p>
+<p><a href="https://bitdeli.com/teslajs" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/teslajs/tesla.js/trend.png" alt="Bitdeli Badge" title="" /></a></p>
 
-<section>
+</section>
+
+
+
+<!-- <section class="features" id="features"></section> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
 
     <script src="public/js/jquery.min.js"></script>
     <script src="public/js/zepto.min.js"></script>

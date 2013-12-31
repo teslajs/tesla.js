@@ -10,60 +10,52 @@
 
 <section class="content">
 
-<nav class="docs">
-
-	<h3><a href="#installation">Installation</a></h3>
-
-		<h4><a href="#prerequisites">Prerequisites</a></h4>
-		<h4><a href="#installing-tesla">Installing Tesla</a></h4>
-
-	<h3><a href="#quick-start">Quick Start</a></h3>
-
-	<h3><a href="#setup-options">Setup Options</a></h3>
-		<h4><a href="#basic-settings">Basic Settings</a></h4
-			<h5><a href="#mvc-scaffolding">MVC Scaffolding</a></h5>
-			<h5><a href="#html-templating-engines">HTML Templating Engines</a></h5>
-			<h5><a href="#css-pre-processors">CSS Pre-Processors</a></h5>
-
-		<h4><a href="#front-end-tools">Front-End Tools</a></h4>
-			<h5><a href="#javascript-application-frameworks">JavaScript Application Frameworks</a></h5>
-			<h5><a href="#javascript-libraries">JavaScript Libraries</a></h5>
-			<h5><a href="#css-frameworks">CSS Frameworks</a></h5>
-
-		<h4><a href="#real-world-examples">Real World Examples</a></h4>
-			<h5><a href="#javascript-application-frameworks">JavaScript Application Frameworks</a></h5>
-
-		<h4><a href="#all-tesla-cli-options">All Tesla CLI Options</a></h4>
-
-	<h3><a href="#configuration">Configuration</a></h3>
-		<h4><a href="#default-config-file">Default Config File</a></h4>
-		<h4><a href="#environmental-settings">Environmental Settings</a></h4>
-		<h4><a href="#development-environment-example">"Development" Environment Example</a></h4>
-
-
-	<h3><a href="#routing">Routing</a></h3>
-
-	<h3><a href="#working-with-data">Working with Data</a></h3>
-		<h4><a href="#models">Models</a></h4>
-		<h4><a href="#controllers">Controllers</a></h4>
-
-	<h3><a href="#views">Views</a></h3>
-
-	<h3><a href="#troubleshooting">Troubleshooting</a></h3>
-		<h4><a href="#updatenpm-bower-or-grunt">Update NPM, Bower or Grunt</a></h4>
-		<h4><a href="#cleaning-npm-and-bower-cache">Cleaning NPM &amp; Bower cache</a></h4>
-
-	<h3><a href="#heroku-quick-deployment">Heroku Quick Deployment</a></h3>
-	<h3><a href="#credits">Credits</a></h3>
-
-</nav>
-
+{{> docLinks}}
 
 <h1 id="about">Tesla.js</h1>
 
 <p>Tesla is a modern MVC style framework built on to of <a href="http://nodejs.org/">Node.js</a> and <a href="http://expressjs.com/">Express</a>. It's designed to be as flexible as possible, and includes sane default and boilerplates to get your site up an running as quickly as possible.</p>
 
 <p>It's still a work in progress, with more features being added, and while the current build seems stable, bug reports are always apreciated!</p>
+
+
+<section class="features">
+
+    <h2>Features</h2>
+
+    <section class="feature-box">
+        <h4>MVC</h4>
+        <p>Simple but useful MVC structure with optional scaffolding to auto-create models, controllers & even a simple JSON API for you. Models use Node-ORM so you’re not tied to a specific database.</p>
+    </section>
+
+    <section class="feature-box">
+        <h4>Auto-routing</h4>
+        <p>If your url’s follow the domain.com/controller/action/:id format, there’s no need to create any custom routing, it will just automatically load the controller/view if it’s found, and throw a 404 if it’s not.</p>
+    </section>
+
+    <section class="feature-box">
+        <h4>Flexible Templates</h4>
+        <p>You can choose from EJS, Handlebars, Hogan, Jade or Handlebars for templates. Less, Sass & Stylus are available for css pre-processors (with additional support for Bourbon, Axis & Nib libraries).</p>
+    </section>
+
+    <section class="feature-box">
+        <h4>Boilerplates</h4>
+        <p>Tesla uses a combination of npm and Bower to help create some useful boilerplates when setting up a new app. You can choose to have Tesla add things like jQuery, AngularJS, Foundation, etc. to your view templates automatically when it creates the project.</p>
+    </section>
+
+    <section class="feature-box">
+        <h4>Auto-watch & LiveReload</h4>
+        <p>Tesla utilizes the Grunt task runner to watch for file changes, restarting the server when necessary. It also comes with LiveReload out of the box to auto refresh your browser when files change.</p>
+    </section>
+
+    <section class="feature-box">
+        <h4>Easy Configuration</h4>
+        <p>Almost all of the server settings (port number, database settings, etc.) can be easily updated in the config file.</p>
+    </section>
+
+</section>
+
+<div>
 
 <a class="top-link" href="#home">back to top</a>
 <h2 id="installation">Installation</h2>
@@ -573,6 +565,10 @@ git push heroku master
 <br><br>
 
 <p><a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/teslajs/tesla.js/trend.png" alt="Bitdeli Badge" title="" /></a></p>
+
+
+</div>
+
 
 <section>
 
