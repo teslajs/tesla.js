@@ -3,8 +3,6 @@
  */
 var express = require('express'),
     minify = require('express-minify'),
-    mongoStore = require('connect-mongo')(express),
-    flash = require('connect-flash'),
     helpers = require('view-helpers'),
     tesla = require('../lib/tesla'),
     colors = require('colors'),
@@ -12,7 +10,13 @@ var express = require('express'),
 
 module.exports = function(app, tesla) {
 
-    var htmlEngine = require(app.config.engines.html);
+    if ( app.config.engines.html === 'hogan' ) {
+        var htmlEngine = require('hogan-middleware');
+    } else if ( app.config.engines.html === 'mustache' ) {
+        var htmlEngine = require('mustache-express');
+    } else {
+        var htmlEngine = require(app.config.engines.html);
+    }
 
     app.set('showStackError', true);
 
@@ -131,7 +135,7 @@ module.exports = function(app, tesla) {
         app.use(express.logger('dev'));
     }
 
-    //Set views path, template engine and default layout
+    //Set views directory
     app.set('views', app.config.root + '/app/views');
 
     //Enable jsonp
@@ -144,25 +148,27 @@ module.exports = function(app, tesla) {
         //cookieParser should be above session
         app.use(express.cookieParser());
 
-        app.set('view engine', app.config.engines.html); // set html view engine
+        // set html view engine
+        if ( app.config.engines.html === 'hbs' ) {
+            app.set('view engine', 'hbs');
+            app.engine('html', require('hbs').__express);
+            htmlEngine.registerPartials(app.config.root + '/app/views/partials');
+        } else if ( app.config.engines.html === 'hogan' ) {
+            app.engine('mustache', require('hogan-middleware').__express);
+            app.set('view engine', 'mustache');
+        } else if ( app.config.engines.html === 'mustache' ) {
+            app.engine('mustache', htmlEngine());
+            app.set('view engine', 'mustache');
+        } else {
+            app.set('view engine', app.config.engines.html);
+        }
+
         tesla.log('INFO:'.blue.blue + ' using ' + app.config.engines.html + ' as view engine');
 
         // request body parsing middleware should be above methodOverride
         app.use(express.urlencoded());
         app.use(express.json());
         app.use(express.methodOverride());
-
-        //express/mongo session storage
-        // app.use(express.session({
-        //     secret: app.config.secret,
-        //     store: new mongoStore({
-        //         db: db.connection.db,
-        //         collection: 'sessions'
-        //     })
-        // }));
-
-        //connect flash for flash messages
-        // app.use(flash());
 
         //dynamic helpers
         app.use(helpers(app.name));

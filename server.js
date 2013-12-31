@@ -2,7 +2,6 @@
 var express = require('express'),
     fs = require('fs'),
     env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
-    mongoose = require('mongoose'),
     app = module.exports = express(),
     colors = require('colors'),
     io = require('socket.io').listen(app),

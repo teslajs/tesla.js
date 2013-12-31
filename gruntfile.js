@@ -37,7 +37,7 @@ module.exports = function(grunt) {
                     file: 'server.js',
                     args: [],
                     ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store'],
-                    watchedExtensions: ['js'],
+                    watchedExtensions: ['js', 'hbs', 'html', 'mustache'],
                     watchedFolders: ['app', 'config', 'tesla_modules'],
                     debug: true,
                     delayTime: 1,

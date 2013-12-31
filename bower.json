@@ -2,10 +2,5 @@
     "name": "tesla.js",
     "version": "0.1.0",
     "dependencies": {
-        "angular": "1.0.6",
-        "angular-resource": "1.0.6",
-        "angular-cookies": "1.0.6",
-        "jquery": "latest",
-        "zeptojs": "latest"
     }
 }
