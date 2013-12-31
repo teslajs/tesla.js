@@ -6,6 +6,28 @@ Tesla is a modern MVC style framework built on to of [Node.js](http://nodejs.org
 
 It's still a work in progress, with more features being added, and while the current build seems stable, bug reports are always apreciated!
 
+## Features
+
+#### MVC
+Simple but useful MVC structure with optional scaffolding to auto-create models, controllers & even a simple JSON API for you. Models use Node-ORM so you’re not tied to a specific database.
+
+#### Auto-routing
+If your url’s follow the domain.com/controller/action/:id format, there’s no need to create any custom routing, it will just automatically load the controller/view if it’s found, and throw a 404 if it’s not.
+
+#### Flexible Templates
+You can choose from EJS, Handlebars, Hogan, Jade or Handlebars for templates. Less, Sass & Stylus are available for css pre-processors (with additional support for Bourbon, Axis & Nib libraries).
+
+#### Boilerplates
+Tesla uses a combination of npm and Bower to help create some useful boilerplates when setting up a new app. You can choose to have Tesla add things like jQuery, AngularJS, Foundation, etc. to your view templates automatically when it creates the project.
+
+#### Auto-watch & LiveReload
+Tesla utilizes the Grunt task runner to watch for file changes, restarting the server when necessary. It also comes with LiveReload out of the box to auto refresh your browser when files change.
+
+#### Easy Configuration
+Almost all of the server settings (port number, database settings, etc.) can be easily updated in the config file.
+
+
+
 
 ## Installation
 
