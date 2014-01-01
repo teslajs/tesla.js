@@ -490,9 +490,19 @@ app.site.dir = {
 <li>app/controllers/foo/barController.js </li>
 </ol>
 
-<p>If it does not find a matching controller, the router will throw a 404 error.</p>
+<p>If it does not find a matching controller, it will use <em>app/controllers/autoController.js</em> and attempt to load one of the following views as a last resort:</p>
 
-<p>You are of course free to create your own custom routes if the default url scheme doesn't work for your site.</p>
+<ol>
+<li>app/views/foo.js</li>
+<li>app/views/foo/index.js</li>
+<li>app/views/foo/bar.js </li>
+<li>app/views/foo/bar/index.js </li>
+</ol>
+
+
+<p>If it's unable to find a matching controller or view, the router will throw a 404 error.</p>
+
+<p>If the default url scheme doesn't work for your site, you are of course free to create your own custom routes.</p>
 
 </section>
 
@@ -504,32 +514,34 @@ app.site.dir = {
 <h2 id="working-with-data">Working with data</h2>
 
 
-<p>Creating models &amp; working with data in Tesla is super simple. It takes only 2 steps:</p>
+<p>Working with data &amp; creating models in Tesla is super easy. It takes only 2 steps:</p>
 
-<p>1) To work with data, make sure you set the URL for your database (config.db.url) in the <a href="https://github.com/teslajs/tesla.js/blob/master/config/config.js">config file</a>.</p>
+<p><strong>1. Add your database:</strong><br> To work with data make sure you set the URL for your database (config.db.url) in the <a href="https://github.com/teslajs/tesla.js/blob/master/config/config.js">config file</a>.</p>
 
-<p>2) Generate new model: let's say you have a collection called "user" you want to use with your app, all you need to do is run the following command:</p>
+<p><strong>2. Generate a new model:</strong><br> let's say you have a collection called "user" you want to use with your app, all you need to do is run the following command:</p>
 
-<pre class="code"><code>$ tesla generate user
-</code></pre>
+<pre class="code"><code>$ tesla generate user</code></pre>
 
-<p>this will create 2 new files for you:
-- app/models/user.js
-- app/controllers/userController.js</p>
+<p>This will create 2 new files for you:
+<ul>
+<li>app/models/user.js</li>
+<li>app/controllers/userController.js</li>
+</ul>
+</p>
+
+<br>
 
 <h4 id="models">Models</h4>
 
-<p>As long as your databse URL is set properly, this is all you need to do. However, you will almost certainly want to open up your new model and define the schema for your collection or table.</p>
+<p>As long as your databse URL is set properly, this is all you need to do. However, you will almost certainly want to open up your new model and define the schema for your database table/collection.</p>
 
 <p>In this file, you will see a block that looks something like this:</p>
 
-<pre class="code"><code>// DEFINE MODEL SCHEMA
-// Be sure to add some files to the schema below or you will not have success quering or adding to the database
-var Model = db.define("user", {
-    created   : { type: "date", time: true },
-    updated   : { type: "date", time: true }
-    // _id : { type: "text" },
-    // name      : { type: "text", required: true },
+<pre class="code"><code>var Model = db.define("user", {
+    created    : { type: "date", time: true },
+    updated    : { type: "date", time: true }
+    // _id     : { type: "text" },
+    // name    : { type: "text", required: true },
     // isAdmin : { type: "boolean", defaultValue: false },
 }, {
     validations: {
@@ -541,40 +553,39 @@ var Model = db.define("user", {
 });
 </code></pre>
 
-<p>Here you will want to define what fields you want to be able to read/update in the collection. In the example above, this model only has access to "created" and "updated" fields. But it's almost certain that you will need to add more fields than this. There are a few commented out examples included to get you started.</p>
+<p>This is wehere you will define what fields you want to be able to access. In the example above, this model only has access to "created" and "updated" fields. But it's almost certain that you will need to add more fields than this. There are a few commented out examples included to get you started.</p>
 
-<p>Tesla uses <a href="https://github.com/dresende/node-orm2">Node-ORM</a> to provide add basic ORM functionality. For more info on definifing models &amp; validations,<a href="https://github.com/dresende/node-orm2/wiki">have a look at the ORM wiki</a>.</p>
+<p>Tesla uses <a href="https://github.com/dresende/node-orm2" target="_blank">Node-ORM</a> to provide basic ORM functionality &amp; databse abstraction. For more info on definifing models &amp; validations, <a href="https://github.com/dresende/node-orm2/wiki" target="_blank">have a look at the ORM wiki</a>.</p>
 
-<p>Once you have your schema setup, that should be about all you need to with the model do in most cases. But feel free to muck about further down in the file if you need to do some more customization.</p>
+<p>Once you have your schema setup, that should be about all you need to do with the model in most cases. But feel free to muck about further down in the file if you need to do some more customization.</p>
 
 <h4 id="controllers">Controllers</h4>
 
 <p>By default, Tesla will serve up your data via a RESTful JSON api. If this is the result you want, you shouldn't need to make any changes to the generated controller. You get the following URI scheme by default:</p>
 
-<pre class="code"><code>http://localhost:3000/user/all
-http://localhost:3000/user/create?data&amp;goes&amp;here
-http://localhost:3000/user/delete/:id
-http://localhost:3000/user/find?query&amp;terms&amp;here
-http://localhost:3000/user/update/:id
+<pre class="code"><code>http://localhost:3000/user/all                            // retrieve all records
+http://localhost:3000/user/create?data&amp;goes&amp;here          // create a new record
+http://localhost:3000/user/delete/:id                     // delete a record
+http://localhost:3000/user/find?query&amp;terms&amp;here          // search for matching records
+http://localhost:3000/user/update/:id                     // update a record
 </code></pre>
 
-<p>It's worth noting that delete &amp; update require to pass the databse ID, while create &amp; find accept arguments via GET parameters. Create maps each GET parameter to a field in the databse (POST/PUT support will come in the next iteration). For example, if you want add the following data to your collection/table:</p>
+<p>It's worth noting that <strong>delete</strong> &amp; <strong>update</strong> require you to pass the databse ID as a url segment, while <strong>create</strong> &amp; <strong>find</strong> accept arguments via GET parameters. <strong>Create</strong> maps each GET parameter to a field in the databse (POST &amp; PUT support will come in the next iteration). For example, if you want to add the following data to your collection/table:</p>
 
 <pre class="code"><code>name: Bob
 email: bob@marley.com
 </code></pre>
 
-<p>you would simple enter this into the browser:</p>
+<p>Assuming you've added the fields the the schema in your model, you would simple enter this into the browser:</p>
 
 <pre class="code"><code>http://localhost:3000/user/create?name=Bob&amp;email=bob@marley.com
 </code></pre>
 
-<p>Similarly, if you want to retrieve all the records of people names Bob, you would build a request like this:</p>
+<p>Similarly, if you want to retrieve all the records of people named Bob, you would build a request like this:</p>
 
-<pre class="code"><code>http://localhost:3000/user/find?name=Bob
-</code></pre>
+<pre class="code"><code>http://localhost:3000/user/find?name=Bob</code></pre>
 
-<p>and you will get back something like this:</p>
+<p>And you will get back a JSON view similar to this:</p>
 
 <pre class="code"><code>[
     {
@@ -588,13 +599,13 @@ email: bob@marley.com
 ]
 </code></pre>
 
-<p>Now, if you would rather serve up a proper HTML view, it's a simple change, just open up your <a href="">config file</a> and set "config.api.enabled" to "false". Now, it will map the request to the appropriate view. By default, you get 5 (all, create, delete, find, update) views. Continuing with our user example, you will get the following url > view mapping:</p>
+<p>This is the default behavior, but if you would rather serve up a standard html, it's a simple change. Simply open up your <a href="https://github.com/teslajs/tesla.js/blob/master/config/config.js" target="_blank">config file</a> and set "config.api.enabled" to "false". Now it will map the request to the appropriate view (assuming it exists). By default, you get 5 methods (all, create, delete, find, update). Continuing with our user example, you will get the following url > view mapping:</p>
 
-<pre class="code"><code>http://localhost:3000/user/all  &gt;  app/views/all
-http://localhost:3000/user/create?data&amp;goes&amp;here  &gt;  app/views/create
-http://localhost:3000/user/delete/:id  &gt;  app/views/delete
-http://localhost:3000/user/find?query&amp;terms&amp;here  &gt;  app/views/find
-http://localhost:3000/user/update/:id  &gt;  app/views/update
+<pre class="code"><code>http://localhost:3000/user/all  &gt;  app/views/user/all
+http://localhost:3000/user/create?data&amp;goes&amp;here  &gt;  app/views/user/create
+http://localhost:3000/user/delete/:id  &gt;  app/views/user/delete
+http://localhost:3000/user/find?query&amp;terms&amp;here  &gt;  app/views/user/find
+http://localhost:3000/user/update/:id  &gt;  app/views/user/update
 </code></pre>
 
 <p>These are all setup in the controller, however you will need to create the appropriate view files or you will get a 404 error. The data from each request (which was previously spit out as a JSON view) will be sent to the view as an object called "data".</p>
@@ -610,7 +621,10 @@ http://localhost:3000/user/update/:id  &gt;  app/views/update
 <h2 id="views">Views</h2>
 
 
-<p>Views can use EJS, Handlebars, Hogan, Jade (default) or Mustache templates. See the appropriate documentation for your chosen templating language for more info on how to use it.</p>
+<p>Views can use <a href="http://embeddedjs.com/" target="_blank">EJS</a>, <a href="http://handlebarsjs.com/" target="_blank">Handlebars</a>, <a href="http://twitter.github.io/hogan.js/" target="_blank">Hogan.js</a>, <a href="http://jade-lang.com/" target="_blank">Jade</a> (default) or <a href="http://mustache.github.io/" target="_blank">Mustache</a> templates. See the appropriate documentation for your chosen templating language for more info on how to use it.</p>
+
+
+
 
 </section>
 
@@ -622,39 +636,36 @@ http://localhost:3000/user/update/:id  &gt;  app/views/update
 <h2 id="troubleshooting">Troubleshooting</h2>
 
 
-<p>During install some of you may encounter some issues, most of this issues can be solved by one of the following tips.
-If you went through all this and still can't solve the issue, feel free to contact me(Amos), via the repository issue tracker or the links provided below.</p>
+<p>If you experience any issues during installation, here's a few tips that may help solve many common problems. If none of the below solve your problems, feel free to file a bug in the <a href="https://github.com/teslajs/tesla.js/issues" target="_blank">Github issue tracker</a>.</p>
 
 <h4 id="update-npm-bower-or-grunt">Update NPM, Bower or Grunt</h4>
 
 <p>Sometimes you may find there is a weird error during install like npm's <em>Error: ENOENT</em>, usually updating those tools to the latest version solves the issue.</p>
 
-<p>Updating NPM:</p>
+<h5>Updating NPM:</h5>
 
 <pre class="code"><code>$ npm update -g npm
 </code></pre>
 
-<p>Updating Grunt:</p>
+<h5>Updating Grunt:</h5>
 
 <pre class="code"><code>$ npm update -g grunt-cli
 </code></pre>
 
-<p>Updating Bower:</p>
+<h5>Updating Bower:</h5>
 
 <pre class="code"><code>$ npm update -g bower
 </code></pre>
 
 <h4 id="cleaning-npm-and-bower-cache">Cleaning NPM and Bower cache</h4>
 
-<p>NPM and Bower has a caching system for holding packages that you already installed.
-We found that often cleaning the cache solves some troubles this system creates.</p>
+<p>NPM and Bower have a caching system for holding packages that you already installed. Cleaeing the cache often solves created by caching.</p>
 
-<p>NPM Clean Cache:</p>
-
+<h5>NPM Clean Cache:</h5>
 <pre class="code"><code>$ npm cache clean
 </code></pre>
 
-<p>Bower Clean Cache:</p>
+<h5>Bower Clean Cache:</h5>
 
 <pre class="code"><code>$ bower cache clean
 </code></pre>
@@ -668,7 +679,7 @@ We found that often cleaning the cache solves some troubles this system creates.
 <h2 id="heroku-quick-deployment">Heroku Quick Deployment</h2>
 
 
-<p>Before you start make sure you have <a href="https://toolbelt.heroku.com/">heroku toolbelt</a> installed and an accessible mongo db instance - you can try <a href="http://www.mongohq.com/">mongohq</a> which have an easy setup )</p>
+<p>Before you start, make sure you have <a href="https://toolbelt.heroku.com/" target="_blank">Heroku toolbelt</a> installed and an accessible db instance if you have any models setup.</p>
 
 <pre class="code"><code class="bash">git init
 git add .
@@ -687,35 +698,17 @@ git push heroku master
 <h2 id="credits">Credits</h2>
 
 
-<strong>Developed by:</strong> <a href="http://github.com/jesseweed">Jesse Weed</a>
+<strong>Developed by:</strong> <a href="http://github.com/jesseweed" target="_blank">Jesse Weed</a>
 
 <br>
 
-<strong>Inspired by:</strong> <a href="https://github.com/visionmedia/express">Express</a>, <a href="http://sailsjs.org">Sails.js</a> and <a href="https://github.com/linnovate/meana">MEAN</a>.
+<strong>Inspired by:</strong> <a href="https://github.com/visionmedia/express" target="_blank">Express</a>, <a href="http://sailsjs.org" target="_blank">Sails.js</a> and <a href="https://github.com/linnovate/mean" target="_blank">MEAN</a>.
 
 <br><br>
 
-<p><a href="https://bitdeli.com/teslajs" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/teslajs/tesla.js/trend.png" alt="Bitdeli Badge" title="" /></a></p>
+<p><a href="https://bitdeli.com/teslajs" title="Bitdeli Badge" target="_blank"><img src="https://d2weczhvl823v0.cloudfront.net/teslajs/tesla.js/trend.png" alt="Bitdeli Badge" /></a></p>
 
 </section>
-
-
-
-<!-- <section class="features" id="features"></section> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </section>
