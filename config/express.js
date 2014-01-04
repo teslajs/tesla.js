@@ -88,7 +88,7 @@ module.exports = function(app, tesla) {
 
 
     // IF NOT USING STYLUS
-    } else {
+    } else if ( app.config.engines.css === false ) {
         app.use(require(app.config.engines.css).middleware(app.config.root + '/public/')); // Set CSS Processor
     }
 
