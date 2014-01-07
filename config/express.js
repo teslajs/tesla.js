@@ -86,7 +86,7 @@ module.exports = function(app, tesla) {
             compile: compile
         }));
 
-        // app.use(express.static(app.config.root + '/public/'));
+        app.use(express.static(app.config.root + '/public/'));
 
 
     // CUSTOM SETTINGS FOR SASS
@@ -103,8 +103,23 @@ module.exports = function(app, tesla) {
         app.use(express.static('./public'));
 
     // IF NOT USING STYLUS
-    } else if ( app.config.engines.css !== false ) {
-        app.use(require(app.config.engines.css).middleware(app.config.root + '/public/')); // Set CSS Processor
+    } else if ( app.config.engines.css === 'less' ) {
+
+        var less = require('less-middleware');
+
+        if ( app.config.prettify.css === true ) {
+            var compress = false;
+        } else {
+            var compress = true;
+        }
+
+        app.use(less({
+            src: app.config.root + '/public/',
+            dest: app.config.root + '/public/',
+            debug: true,
+            compress: compress
+        }));
+
         app.use(express.static('./public'));
     }
 
@@ -125,7 +140,7 @@ module.exports = function(app, tesla) {
         min_stylus = /donothinghere/;
     }
 
-    if ( app.config.prettify.css === false ) {
+    if ( app.config.prettify.js === false ) {
         min_js = /js/;
     } else {
         min_js = /donothinghere/;
