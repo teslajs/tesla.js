@@ -5,7 +5,6 @@ module.exports = function(app, tesla) {
 
 	var tesla = require('../lib/tesla')(app);
 
-
 	// POST
 	app.post("/*", function(req, res) {
 		res.send('post');
@@ -37,7 +36,6 @@ module.exports = function(app, tesla) {
 		tesla.log(' ');
 		tesla.log('INFO:'.blue + ' GET request received at ' + uri.full().yellow);
 		tesla.log('INFO:'.blue + ' Attempting to autoload the correct route' + ' (config/routes.js)');
-		tesla.log( 'INFO:'.blue + ' Attempting to load: ' + ctrlFile.yellow.italic );
 
 		// IF CONTROLLER EXIST IN URI, TRY TO LOAD
 		if ( ctrl !== '' ) {
@@ -59,11 +57,11 @@ module.exports = function(app, tesla) {
 				tesla.log( 'SUCCESS:'.green + ' ' + ctrlFileAction.replace('./', '').yellow + ' was loaded.');
 				ctrlFileLoaded = ctrlFileAction;
 			} else {
-				tesla.log(' ');
-				tesla.log( 'ERROR: Tesla tried and failed to load the following controllers:'.red );
-				tesla.log( 'NOT FOUND: '.red + ctrlFile.yellow.italic);
-				tesla.log( 'NOT FOUND: '.red + ctrlFileIndex.yellow.italic);
-				tesla.log( 'NOT FOUND: '.red + ctrlFileAction.yellow.italic);
+				// tesla.log(' ');
+				// tesla.log( 'ERROR: Tesla tried and failed to load the following controllers:'.red );
+				// tesla.log( 'NOT FOUND: '.red + ctrlFile.yellow.italic);
+				// tesla.log( 'NOT FOUND: '.red + ctrlFileIndex.yellow.italic);
+				// tesla.log( 'NOT FOUND: '.red + ctrlFileAction.yellow.italic);
 				notFound = true;
 			}
 
@@ -94,6 +92,12 @@ module.exports = function(app, tesla) {
 
 		// LOAD CONTROLLER IF IT EXISTS
 		if ( notFound === false ) {
+
+			if ( action.indexOf('.json') >= 0 ) {
+				useAction = action.replace('.json', '');
+			} else {
+				useAction = action;
+			}
 
 			// LOAD ACTION
 			if ( controller[action] ) {
@@ -153,16 +157,5 @@ function throw404(res, req, app) {
         site: app.site
     });
 }
-
-
-// var ctrl, controller, action,
-//     notFound = false,
-// 	uri = req.url.split('?');
-
-// uri = uri[0].split('/');
-// ctrl = uri[1],
-// model = ctrl,
-// action = uri[2],
-// id = uri[3];
 
 };
