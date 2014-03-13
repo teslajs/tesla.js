@@ -27,14 +27,17 @@ require('./config/express')(app, tesla); //express settings
 require('./config/routes')(app, tesla); // routes
 
 // START THE APP BY LISTEN ON <PORT>
-port = process.env.PORT || config.port;
-app.listen(port);
+port = process.env.PORT || app.config.port;
 
-tesla.log(' ');
-tesla.log('# # # # # # # # # # # # # # # # # # # # # # # # # #'.green);
-tesla.log('        IT\'S ALIVE!'.white + ' TESLA'.red + ' IS UP AND RUNNING.'.white);
-tesla.log('   POINT YOUR BROWSER TO: '.grey + app.site.url.white);
-tesla.log('# # # # # # # # # # # # # # # # # # # # # # # # # #'.green);
+app.listen(port, function(err) {
+
+	tesla.log(' ');
+	tesla.log('# # # # # # # # # # # # # # # # # # # # # # # # # # # #'.green);
+	tesla.log('        IT\'S ALIVE!'.white + ' TESLA'.red + ' IS UP AND RUNNING.'.white);
+	tesla.log('   POINT YOUR BROWSER TO: '.grey + app.site.url.white);
+	tesla.log('# # # # # # # # # # # # # # # # # # # # # # # # # # # #'.green);
+
+})
 
 // EXPOSE APP
 exports = module.exports = app;
