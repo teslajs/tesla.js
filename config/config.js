@@ -4,11 +4,17 @@ rootPath = path.normalize(__dirname + '/..');
 module.exports = function (app) {
 
     app.site = {
-        name : "tesla.js", // the name of your app
+        name : "testapp", // the name of your app
     }
 
     app.config = {
+
         port : 3000, // port to run the server on
+
+        liveReload : {
+            use: true,
+            port : 35729, // port to run the server on
+        },
 
         prettify : {
             html : true, // whether to pretify html
@@ -26,7 +32,7 @@ module.exports = function (app) {
 
         engines : {
             html: "jade", // options: (ejs|handlebars|hogan|jade|mustache)
-            css: "stylus", // options: (stylus|sass|less) - set false to just use vanilla css
+            css: false, // options: (stylus|sass|less) - set false to just use vanilla css
             cssLibrary: false, // options: (axis|bourbon|nib) - set to false for none
         },
 
