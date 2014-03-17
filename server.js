@@ -4,7 +4,6 @@ var express = require('express'),
     env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
     app = module.exports = express(),
     colors = require('colors'),
-    io = require('socket.io').listen(app),
     tesla, port;
 
 
