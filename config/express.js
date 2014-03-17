@@ -31,7 +31,11 @@ module.exports = function(app, tesla) {
         level: 9
     }));
 
-    tesla.log('INFO:'.blue.blue + ' using ' + app.config.engines.css + ' as css preprocessor');
+    if ( app.config.engines.css !== false ) {
+        tesla.log('INFO:'.blue.blue + ' using ' + app.config.engines.css + ' as css preprocessor');
+    } else {
+        tesla.log('INFO:'.blue.blue + ' serving raw css (no pre-processor)');
+    }
 
     // CUSTOM SETTINGS FOR STYLUS
     if ( app.config.engines.css === 'stylus' ) {
@@ -120,6 +124,10 @@ module.exports = function(app, tesla) {
             compress: compress
         }));
 
+        app.use(express.static('./public'));
+
+    // IF NO PREPROCESSORS
+    } else {
         app.use(express.static('./public'));
     }
 
