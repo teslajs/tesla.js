@@ -4,7 +4,7 @@ rootPath = path.normalize(__dirname + '/..');
 module.exports = function (app) {
 
     app.site = {
-        name : "testapp", // the name of your app
+        name : "tesla.js", // the name of your app
     }
 
     app.config = {
