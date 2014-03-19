@@ -15,21 +15,12 @@ module.exports = function(grunt) {
                     livereload: true,
                 },
             },
-            html: {
-                files: ['public/views/**'],
-                options: {
-                    livereload: true,
-                },
-            },
             css: {
                 files: ['public/css/**'],
                 options: {
                     livereload: true
                 }
             }
-        },
-        jshint: {
-            all: ['gruntfile.js', 'public/js/**/*.js', 'test/**/*.js', 'app/**/*.js']
         },
         nodemon: {
           dev: {
@@ -39,10 +30,6 @@ module.exports = function(grunt) {
             watchedExtensions: ['js', 'hbs', 'jade', 'html', 'mustache'],
             watchedFolders: ['app', 'config', 'tesla_modules'],
             debug: true,
-            delayTime: 1,
-            env: {
-                PORT: 3000
-            },
             cwd: __dirname
           }
         },
