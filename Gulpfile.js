@@ -1,10 +1,8 @@
 var app = {},
   cfg = require('./config/config')(app),gulp = require('gulp'),
-  jshint = require('gulp-jshint'),
   livereload = require('gulp-livereload'),
   nodemon = require('gulp-nodemon'),
   server = livereload(app.config.liveReload.port),
-  stylus = require('gulp-stylus'),
   paths = {
     app: 'server.js',
     css: './public/css/**/*',
