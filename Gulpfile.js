@@ -1,5 +1,5 @@
 var app = {},
-  cfg = require('./config/config')(app),gulp = require('gulp'),
+  cfg = require('./config/_settings')(app),gulp = require('gulp'),
   livereload = require('gulp-livereload'),
   nodemon = require('gulp-nodemon'),
   server = livereload(app.config.liveReload.port),
