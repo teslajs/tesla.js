@@ -103,7 +103,7 @@ module.exports = function(app, tesla) {
             debug: app.config.prettify.css
         }));
 
-        app.use(express.static('./public'));
+        app.use(express.static(app.config.root + '/public/'));
 
     // IF NOT USING STYLUS
     } else if ( app.config.engines.css === 'less' ) {
@@ -123,11 +123,11 @@ module.exports = function(app, tesla) {
             compress: compress
         }));
 
-        app.use(express.static('./public'));
+        app.use(express.static(app.config.root + '/public/'));
 
     // IF NO PREPROCESSORS
     } else {
-        app.use(express.static('./public'));
+        app.use(express.static(app.config.root + '/public/'));
     }
 
 
