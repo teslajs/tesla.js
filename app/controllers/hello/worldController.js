@@ -1,8 +1,7 @@
-
 // HELLO/WORLD
-exports.world = function(app) {
+module.exports = function(app, req, res) {
 
-	app.res.render('hello/world', {
+	res.render('hello/world', {
 		title : app.site.name + ' - Hello World',
 		site: app.site
     });

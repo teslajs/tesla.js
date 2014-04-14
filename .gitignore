@@ -2,5 +2,7 @@
 .nodemonignore
 .sass-cache/
 node_modules/
+public/lib
+*.log
 *.sublime-project
 *.sublime-workspace

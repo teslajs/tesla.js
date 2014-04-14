@@ -4,13 +4,12 @@ var express = require('express'),
     env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
     app = module.exports = express(),
     colors = require('colors'),
-    io = require('socket.io').listen(app),
     tesla, port;
 
 
 // REQUIRE CONFIG FILES
-require('./config/config')(app);
-require('./config/env-config')(app);
+require('./config/_settings')(app); // MAIN
+require('./config/environment')(app); // ENVIRONMENT SPECIFIC
 
 // LOAD TESLA LIB
 tesla = require('./lib/tesla')(app);
@@ -24,17 +23,20 @@ tesla.log(' ');
 
 // REQUIRE ADDITIONAL CONFIG FILES
 require('./config/express')(app, tesla); //express settings
-require('./config/routes')(app, tesla); // routes
+require('./app/routes/_setup')(app, tesla); // routes
 
 // START THE APP BY LISTEN ON <PORT>
-port = process.env.PORT || config.port;
-app.listen(port);
+port = process.env.PORT || app.config.port;
 
-tesla.log(' ');
-tesla.log('# # # # # # # # # # # # # # # # # # # # # # # # # #'.green);
-tesla.log('        IT\'S ALIVE!'.white + ' TESLA'.red + ' IS UP AND RUNNING.'.white);
-tesla.log('   POINT YOUR BROWSER TO: '.grey + app.site.url.white);
-tesla.log('# # # # # # # # # # # # # # # # # # # # # # # # # #'.green);
+app.listen(port, function(err) {
+
+	tesla.log(' ');
+	tesla.log('# # # # # # # # # # # # # # # # # # # # # # # # # # # #'.green);
+	tesla.log('        IT\'S ALIVE!'.white + ' TESLA'.red + ' IS UP AND RUNNING.'.white);
+	tesla.log('   POINT YOUR BROWSER TO: '.grey + app.site.url.white);
+	tesla.log('# # # # # # # # # # # # # # # # # # # # # # # # # # # #'.green);
+
+})
 
 // EXPOSE APP
 exports = module.exports = app;

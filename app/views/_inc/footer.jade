@@ -1,0 +1,8 @@
+//- Allows you to pass an array of page specific scripts to load
+if locals.js
+	each script in js
+		script(src='#{site.dir.js}#{script}')
+
+if ( locals.site.environment === 'development' )
+	//Livereload script rendered
+	script(src='http://localhost:35729/livereload.js')

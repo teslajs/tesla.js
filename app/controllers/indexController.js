@@ -1,6 +1,6 @@
 exports.index = function(app) {
 
-	app.res.render('default', {
+	app.res.render('index', {
 		title : app.site.name,
 		site: app.site
     });
