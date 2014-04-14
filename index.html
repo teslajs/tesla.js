@@ -70,7 +70,7 @@
     <h3><a href="#views">Views</a></h3>
 
     <h3><a href="#troubleshooting">Troubleshooting</a></h3>
-        <h4><a href="#updatenpm-bower-or-grunt">Update NPM, Bower or Grunt</a></h4>
+        <h4><a href="#updatenpm-bower-or-gulp">Update NPM, Bower or Gulp</a></h4>
         <h4><a href="#cleaning-npm-and-bower-cache">Cleaning NPM &amp; Bower cache</a></h4>
 
     <h3><a href="#heroku-quick-deployment">Heroku Deployment</a></h3>
@@ -84,11 +84,6 @@
 <h1 id="about">Tesla.js</h1>
 
 <p>Tesla is a modern MVC style framework built on to of <a href="http://nodejs.org/">Node.js</a> and <a href="http://expressjs.com/">Express</a>. It's build to be fast, simple &amp; easy to configure, with sane defaults and flexible boilerplates to get you up and running as quickly as possible.</p>
-
-<p>Tesla is still under heavy development, so I recommend checking for updates often by. I try to only push stable working builds, but errors do creep in, and bug reports are always apreciated!</p>
-
-<strong>To update Tesla: &nbsp; </strong>
-<code class="code-inline">$ npm update tesla-cli -g</code>
 
 </section>
 
@@ -121,7 +116,7 @@
 
     <section class="feature-box">
         <h4>Auto-watch &amp; LiveReload</h4>
-        <p>Tesla utilizes the Grunt task runner to watch for file changes, restarting the server when necessary. It also comes with LiveReload out of the box to auto refresh your browser when files change.</p>
+        <p>Tesla utilizes the Gulp task runner to watch for file changes, restarting the server when necessary. It also comes with LiveReload out of the box to auto refresh your browser when files change.</p>
     </section>
 
     <section class="feature-box">
@@ -142,12 +137,12 @@
 
 <h4 id="prerequisites">Prerequisites:</h4>
 
-<p><a href="http://nodejs.org/">Node.js</a> &amp; <a href="https://npmjs.org/">NPM</a> are the only absolute requirements, but it's highly recommended that you install <a href="http://gruntjs.com/">Grunt</a> as well:</p>
+<p><a href="http://nodejs.org/">Node.js</a> &amp; <a href="https://npmjs.org/">NPM</a> are the only absolute requirements, but it's highly recommended that you install <a href="http://gulpjs.com/">Gulp</a> as well:</p>
 
-<pre class="code"><code>$ npm install -g grunt-cli
+<pre class="code"><code>$ npm install gulp  -g
 </code></pre>
 
-<p>While it's not required, Tesla is configured to use Grunt for the majority of it's tasks. If you have any trouble installing it, refer to the <a href="http://gruntjs.com/getting-started#installing-the-cli">Grunt documentation</a> for help.</p>
+<p>While it's not required, Tesla is configured to use Gulp for the majority of it's tasks. If you have any trouble installing it, refer to the <a href="https://github.com/gulpjs/gulp/blob/master/README.md#gulp---">Gulp documentation</a> for help.</p>
 
 <h4 id="installing-tesla">Install Tesla</h4>
 
@@ -155,6 +150,10 @@
 
 <pre class="code"><code>$ npm install tesla-cli -g
 </code></pre>
+
+
+<h4 id="installing-tesla">Update Tesla</h4>
+<code class="code-inline">$ npm update tesla-cli -g</code>
 
 </section>
 
@@ -179,12 +178,12 @@
 
 <p>Start the server:</p>
 
-<pre class="code"><code>$ grunt
+<pre class="code"><code>$ gulp
 </code></pre>
 
 <p>Once the server has started, simply point your browser to: <a href="http://localhost:3000">http://localhost:3000</a></p>
 
-<p>If you choose not to use Grunt, you can start the server by running <code class="code-inline">node server.js</code>. But using Grunt gives you some extras such as livereload, and watching for changes your files &amp; restarting the server whenever necesary.</p>
+<p>If you choose not to use Gulp, you can start the server by running <code class="code-inline">node server.js</code>. But using Gulp gives you some extras such as livereload, and watching for changes your files &amp; restarting the server whenever necesary.</p>
 
 </section>
 
@@ -259,6 +258,9 @@
 <li><code class="code-inline">--nib</code> <a href="http://visionmedia.github.io/nib/">Nib</a> for Stylus - uses <a href="https://npmjs.org/package/nib">nib</a> npm package</li>
 </ul>
 
+
+<h5>NOTE: These helper libraries aren't fully tested yet, so please report any bugs you may find.</h5>
+
 <a class="top-link" href="#home">back to top</a>
 <h3 id="front-end-tools">Front-End Tools</h3>
 
@@ -287,7 +289,7 @@
 
 <ul>
 <li><code class="code-inline">--jquery</code> <a href="http://jquery.org/">jQuery</a></li>
-<li><code class="code-inline">--mootools</code> <a href="http://mootools.net/">MooTools</a></li>
+<li><code class="code-inline">--modernizr</code> <a href="http://modernizr.com/">Modernizr</a></li>
 <li><code class="code-inline">--zepto</code> <a href="http://zeptojs.com/">Zepto.js</a></li>
 </ul>
 
@@ -354,7 +356,7 @@ Options:
 
 // JS LIBRARIES
 --jquery             add support for jQuery
---mootools           add support for MooTools
+--modernizr           add support for Modernizr
 --zepto              add support for Zepto.js
 
 // CSS FRAMEWORKS
@@ -365,7 +367,7 @@ Options:
 
 // OTHER SETTINGS
 generate &lt;name&gt;      generate new model + controller with basic CRUD functionality
-start                start the web server (still a bit buggy, best just just run "grunt" for now)
+start                start the web server (still a bit buggy, best just just run "gulp" for now)
 </pre>
 </section>
 
@@ -376,15 +378,19 @@ start                start the web server (still a bit buggy, best just just run
 <h2 id="configuration">Configuration</h2>
 
 
-<p>All configuration for Tesla is specified in the <a href="config/">config</a> folder, particularly the <a href="config/config.js">config.js</a> file and the <a href="config/env/">env</a> files. This is where you will need to specify your application name, database connection, and any other settings you would like to customize.</p>
+<p>All configuration for Tesla is specified in the <a href="config/">config</a> folder, particularly the <a href="config/_settigs.js">config.js</a> file and the <a href="config/environment/">env</a> files. This is where you will need to specify your application name, database connection, and any other settings you would like to customize.</p>
 
 <a class="top-link" href="#home">back to top</a>
-<h5 id="efault-config-file">Default config file: <a href="config/config.js">config.js</a></h5>
+<h5 id="efault-config-file">Default config file: <a href="config/_settigs.js">config.js</a></h5>
 
 <p>Most default settings can be set &amp; updated here:</p>
 
 <pre class="code"><code>app.site = {
     name : "tesla.js", // the name of your app
+}
+
+app.config = app.site = {
+    name : "tesla-js", // the name of you app
 }
 
 app.config = {
@@ -399,60 +405,73 @@ app.config = {
     cache : false, // whether to use caching
 
     api : {
-        enabled : true, // set false to disable json output for scafolding
-        format : 'json', // format to output in api views
-        access : '*' // placeholder for future api security enhancement
+        enabled : true,
+        format : 'json',
+        access : '*'
     },
 
     engines : {
-        html: "jade", // options: (ejs|handlebars|hogan|jade|mustache)
-        css: "stylus", // options: (stylus|sass|less) - set false to just use vanilla css
-        cssLibrary: false, // options: (axis|bourbon|nib) - set to false for none
+        html: "hbs", // options: [jade|ejs|haml|hjs|jshtml]
+        css: "stylus", // options: [stylus|sass|less]
+        cssLibrary: false, // options: [nib|axis]
     },
+    root : rootPath,
 
-    root : rootPath, // path to the root of your server
-
-    // see https://github.com/dresende/node-orm2/wiki/Connecting-to-Database for more info on connection to your databse
     db : {
-        url : "driver://username:password@hostname/database", // url to database
-        driver: "mongodb" // which db driver to use
+        url : "mongodb://<user>:<pass>@mongohq.com:10074/dbname", // url to database
+        driver: "mongodb"
     },
 
     jsonp : true, // allow jsonp requests
-    secret : 'MYAPPSECRET', // placeholder for now, will be implemented later
-    protocol : 'http://', // options: (http|https)
+    secret : 'MYAPPSECRET',
+    protocol : 'http://',
     autoLoad : true, // whether to attempt autoload controllers
-    publicDir : './public', // public directory where images, javascript, css, etc is stored
+    publicDir : './public',
 
     logging : {
         console: true, // whether to allow tesla to log messages to the node console
         files: false // this doesn't do anything yet
     }
 }
+}
 </code></pre>
 
 <a class="top-link" href="#home">back to top</a>
 <h3 id="environmental-settings">Environmental Settings</h3>
 
-<p>To run with a different environment, just specify NODE_ENV as you call grunt:</p>
+<p>To run with a different environment, just specify NODE_ENV as you call gulp:</p>
 
-<pre class="code"><code>$ NODE_ENV=test grunt
+<pre class="code"><code>$ NODE_ENV=test gulp
 </code></pre>
 
-<p>If you are using node instead of grunt, it is very similar:</p>
+<p>If you are using node instead of gulp, it is very similar:</p>
 
 <pre class="code"><code>$ NODE_ENV=test node server
 </code></pre>
 
 <a class="top-link" href="#home">back to top</a>
-<h5 id="development-environment-example">Example config file for "development" environment: <a href="config/env/development.js">config/env/development.js</a></h5>
+<h5 id="development-environment-example">Example config file for "development" environment: <a href="config/environment/development.js">config/environment/development.js</a></h5>
 
-<pre class="code"><code>// global settings
-app.site.domain = "localhost"; // domain the site is running on
-app.site.environment = "Development"; // name of environment
+<pre class="code"><code>// GET IP / DOMAIN
+var interfaces = os.networkInterfaces();
+var addresses = [];
+for (k in interfaces) {
+    for (k2 in interfaces[k]) {
+        var address = interfaces[k][k2];
+        if (address.family == 'IPv4' && !address.internal) {
+            addresses.push(address.address)
+        }
+    }
+}
+
+var tesla = require('../../lib/tesla')(app);
+
+// global settings
+app.site.domain = addresses[0];
+app.site.environment = "development";
 app.site.url = app.config.protocol + app.site.domain + ':'  + app.config.port + '/'; // base url
 
-// directories location to use for dynamic file linking
+// directories
 app.site.dir = {
     css : app.site.url + "css/",
     img : app.site.url + "img/",
@@ -501,7 +520,51 @@ app.site.dir = {
 
 <p>If it's unable to find a matching controller or view, the router will throw a 404 error.</p>
 
-<p>If the default url scheme doesn't work for your site, you are of course free to create your own custom routes.</p>
+
+<h3>Custom Routes</h3>
+<p>If the default url scheme doesn't work for your site, you can easily create your own custom routes.</p>
+
+<p>Routes are configured in the <em>app/routes</em> directory. The default router as well as a few sample routes can be found in: <a href="app/routes/_setup.js">app/routes/_setup.js</a></p>
+
+<h4>HELLO WORLD</h4>
+
+<p>This is one of thie simplest routes. If you receive a request to domain.com/hello/world, it will load <a href="app/controllers/hello/worldController.js">app/controllers/hello/worldController</a>.</p>
+
+<pre class="code"><code>app.get("/hello/world", function(req, res) {
+    require(controllers + 'hello/worldController')(app, res, res);
+});
+</code></pre>
+
+
+<h4>FOO BAR</h4>
+
+<p>This example loads the controller directly, and lets it handle its own routing. Take a look at  <a href="app/controllers/fooController.js">app/controllers/fooController</a> if you're curious how it works.</p>
+
+<pre class="code"><code>require(controllers + 'fooController')(app);</code></pre>
+
+
+<h4>DYNAMIC ROUTING</h4>
+
+<p>This example shows how you can use dynamic routing to create RESTful CRUD style urls:</p>
+
+<pre class="code"><code>// EXAMPLE OF CRUD STYLE ROUTER & CONTROLLER
+app.get("/:controller/:action/:id?", function(req, res) {
+    require(controllers + req.params.controller + 'Controller')[req.params.action](app, req, res);
+});</code></pre>
+
+<p>If you have Tesla running, try hitting the following URL's in your browser:</p>
+
+<ul>
+    <li><a href="http://localhost:3000/crud/create">http://localhost:3000/crud/create</a></li>
+    <li><a href="http://localhost:3000/crud/read/12345">http://localhost:3000/crud/read/12345</a></li>
+    <li><a href="http://localhost:3000/crud/read/">http://localhost:3000/crud/read/</a></li>
+    <li><a href="http://localhost:3000/crud/update/12345">http://localhost:3000/crud/update/12345</a></li>
+    <li><a href="http://localhost:3000/delete/12345">http://localhost:3000/delete/12345</a></li>
+</ul>
+
+<p>Have a look at <a href="app/controllers/crudController.js">app/controllers/crudController</a> if you're curious how it works.</p>
+
+
 
 </section>
 
@@ -515,7 +578,7 @@ app.site.dir = {
 
 <p>Working with data &amp; creating models in Tesla is super easy. It takes only 2 steps:</p>
 
-<p><strong>1. Add your database:</strong><br> To work with data make sure you set the URL for your database (config.db.url) in the <a href="https://github.com/teslajs/tesla.js/blob/master/config/config.js">config file</a>.</p>
+<p><strong>1. Add your database:</strong><br> To work with data make sure you set the URL for your database (config.db.url) in the <a href="https://github.com/teslajs/tesla.js/blob/master/config/_settigs.js">config file</a>.</p>
 
 <p><strong>2. Generate a new model:</strong><br> let's say you have a collection called "user" you want to use with your app, all you need to do is run the following command:</p>
 
@@ -523,7 +586,7 @@ app.site.dir = {
 
 <p>This will create 2 new files for you:
 <ul>
-<li>app/models/user.js</li>
+<li>app/models/userModel.js</li>
 <li>app/controllers/userController.js</li>
 </ul>
 </p>
@@ -598,7 +661,7 @@ email: bob@marley.com
 ]
 </code></pre>
 
-<p>This is the default behavior, but if you would rather serve up a standard html, it's a simple change. Simply open up your <a href="https://github.com/teslajs/tesla.js/blob/master/config/config.js" target="_blank">config file</a> and set "config.api.enabled" to "false". Now it will map the request to the appropriate view (assuming it exists). By default, you get 5 methods (all, create, delete, find, update). Continuing with our user example, you will get the following url > view mapping:</p>
+<p>This is the default behavior, but if you would rather serve up a standard html, it's a simple change. Simply open up your <a href="https://github.com/teslajs/tesla.js/blob/master/config/_settigs.js" target="_blank">config file</a> and set "config.api.enabled" to "false". Now it will map the request to the appropriate view (assuming it exists). By default, you get 5 methods (all, create, delete, find, update). Continuing with our user example, you will get the following url > view mapping:</p>
 
 <pre class="code"><code>http://localhost:3000/user/all  &gt;  app/views/user/all
 http://localhost:3000/user/create?data&amp;goes&amp;here  &gt;  app/views/user/create
@@ -637,7 +700,7 @@ http://localhost:3000/user/update/:id  &gt;  app/views/user/update
 
 <p>If you experience any issues during installation, here's a few tips that may help solve many common problems. If none of the below solve your problems, feel free to file a bug in the <a href="https://github.com/teslajs/tesla.js/issues" target="_blank">Github issue tracker</a>.</p>
 
-<h4 id="update-npm-bower-or-grunt">Update NPM, Bower or Grunt</h4>
+<h4 id="update-npm-bower-or-gulp">Update NPM, Bower or Gulp</h4>
 
 <p>Sometimes you may find there is a weird error during install like npm's <em>Error: ENOENT</em>, usually updating those tools to the latest version solves the issue.</p>
 
@@ -646,9 +709,9 @@ http://localhost:3000/user/update/:id  &gt;  app/views/user/update
 <pre class="code"><code>$ npm update -g npm
 </code></pre>
 
-<h5>Updating Grunt:</h5>
+<h5>Updating Gulp:</h5>
 
-<pre class="code"><code>$ npm update -g grunt-cli
+<pre class="code"><code>$ npm update -g gulp
 </code></pre>
 
 <h5>Updating Bower:</h5>
