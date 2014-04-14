@@ -2,7 +2,14 @@
 [![NPM version](https://badge.fury.io/js/tesla.png)](http://badge.fury.io/js/tesla)
 [![Dependency Status](https://gemnasium.com/teslajs/tesla.js.png)](https://gemnasium.com/teslajs/tesla.js)
 
-Tesla is a modern MVC style framework built on to of [Node.js](http://nodejs.org/) and [Express](http://expressjs.com/). It's designed to be as flexible as possible, and includes sane default and boilerplates to get your site up an running as quickly as possible.
+
+###### NOTE: This is the Tesla.js source code. You probably want to install the [command line client](https://www.npmjs.org/package/tesla-cli).
+
+###### Full Docs: [teslajs.com](http://teslajs.com/)
+###### Updates: [twitter.com/teslajs](http://twitter.com/teslajs/)
+
+## About 
+Tesla is a modern MVC style framework built on to of [Node.js](http://nodejs.org/) and [Express](http://expressjs.com/). It's designed to be as flexible as possible, and includes sane default and easily configurable boilerplates to get you up an running as quickly as possible.
 
 It's still a work in progress, with more features being added, and while the current build seems stable, bug reports are always apreciated!
 
@@ -130,6 +137,8 @@ $ tesla myapp --css stylus
 + ```--bourbon``` [Bourbon](http://bourbon.io/) for Sass - uses [node-bourbon](https://npmjs.org/package/node-bourbon) npm package
 + ```--nib``` [Nib](http://visionmedia.github.io/nib/) for Stylus - uses [nib](https://npmjs.org/package/nib) npm package
 
+###### NOTE: These helper libraries aren't fully tested yet, so please report any bugs you may find.
+
 
 ### Front-End Tools
 Tesla utilizes Bower to let you quickly add many of your favorite front-end tools such as jQuery, Angular or Bootstrap. If you select any of these options, the package(s) will be added to your bower file, and any javascript or css dependencies will automatically added to the default views.
@@ -153,8 +162,8 @@ $ tesla myapp --backbone
 
 **Options:**
 
-+ ```--jquery``` [AngularJS](http://angularjs.org/)
-+ ```--mootools``` [MooTools](http://mootools.net/)
++ ```--jquery``` [jQuery](http://jquery.com/)
++ ```--modernizr``` [Modernizr](http://modernizr.com/)
 + ```--zepto``` [Zepto.js](http://zeptojs.com/)
 
 **Example:**
@@ -240,16 +249,22 @@ Options:
 ## Configuration
 All configuration for Tesla is specified in the [config](config/) folder, particularly the [config.js](config/config.js) file and the [env](config/env/) files. This is where you will need to specify your application name, database connection, and any other settings you would like to customize.
 
-##### Default config file: [config.js](config/config.js)
+##### Default config file: [config/_settings.js](config/_settings.js)
 Most default settings can be set & updated here:
 
 ```
 app.site = {
-    name : "tesla.js", // the name of you app
+    name : "tesla.js", // the name of your app
 }
 
 app.config = {
+
     port : 3000, // port to run the server on
+
+    liveReload : {
+        use: true,
+        port : 35729, // port to run the server on
+    },
 
     prettify : {
         html : true, // whether to pretify html
@@ -267,10 +282,10 @@ app.config = {
 
     engines : {
         html: "jade", // options: (ejs|handlebars|hogan|jade|mustache)
-        css: "stylus", // options: (stylus|sass|less) - set false to just use vanilla css
+        css: false, // options: (stylus|sass|less) - set false to just use vanilla css
         cssLibrary: false, // options: (axis|bourbon|nib) - set to false for none
     },
-    
+
     root : rootPath, // path to the root of your server
 
     // see https://github.com/dresende/node-orm2/wiki/Connecting-to-Database for more info on connection to your databse
@@ -283,13 +298,15 @@ app.config = {
     secret : 'MYAPPSECRET', // placeholder for now, will be implemented later
     protocol : 'http://', // options: (http|https)
     autoLoad : true, // whether to attempt autoload controllers
+    autoRouting : true, // whether to use auto routing
     publicDir : './public', // public directory where images, javascript, css, etc is stored
 
     logging : {
         console: true, // whether to allow tesla to log messages to the node console
-        files: false // this doesn't do anything yet
+        files: false // this doesn't do anything yet, eventually it will write .log files
     }
 }
+
 
 ```
 
@@ -312,12 +329,26 @@ $ NODE_ENV=test node server
 ##### Example config file for "development" environment: [config/env/development.js](config/env/development.js)
 
 ```
+// GET IP / DOMAIN
+var interfaces = os.networkInterfaces();
+var addresses = [];
+for (k in interfaces) {
+    for (k2 in interfaces[k]) {
+        var address = interfaces[k][k2];
+        if (address.family == 'IPv4' && !address.internal) {
+            addresses.push(address.address)
+        }
+    }
+}
+
+var tesla = require('../../lib/tesla')(app);
+
 // global settings
-app.site.domain = "localhost"; // domain the site is running on
-app.site.environment = "Development"; // name of environment
+app.site.domain = addresses[0];
+app.site.environment = "development";
 app.site.url = app.config.protocol + app.site.domain + ':'  + app.config.port + '/'; // base url
 
-// directories location to use for dynamic file linking
+// directories
 app.site.dir = {
     css : app.site.url + "css/",
     img : app.site.url + "img/",
