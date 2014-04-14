@@ -1,44 +1,33 @@
-var fs = require('fs'),
-	colors = require('colors');
+module.exports = function (app, tesla, next) {
 
-module.exports = function(app, tesla) {
-
-	var tesla = require('../lib/tesla')(app);
-
-	// POST
-	app.post("/*", function(req, res) {
-		res.send('post');
-	});
-
-	// PUT
-	app.put("/*", function(req, res) {
-		res.send('put');
-	});
+	var fs = require('fs'),
+			colors = require('colors');
 
 	// GET
-	app.get("/*", function(req, res) {
-
-		var uri = require('../lib/uri')(app, req); // require uri module
+	app.get("/*", function(req, res, next) {
 
 		// SET VARS
 		var notFound = false,
-			action = uri.action(),
-			ctrl = uri.controller(),
-			id = uri.id(),
-			loc = '../',
-			viewDir = './app/views/',
-			ctrlDir = './app/controllers/',
-			ctrlFile = ctrlDir + ctrl + 'Controller.js',
-			ctrlFileIndex = ctrlDir + ctrl + '/indexController.js',
-			ctrlFileAction = ctrlDir + ctrl + '/' + action + 'Controller.js',
-			ctrlFileLoaded;
+				uri = require('../../lib/uri')(app, req); // require uri module
+				action = uri.action(),
+				ctrl = uri.controller(),
+				id = uri.id(),
+				loc = '../../',
+				viewDir = './app/views/',
+				ctrlDir = './app/controllers/',
+				ctrlFile = ctrlDir + ctrl + 'Controller.js',
+				ctrlFileIndex = ctrlDir + ctrl + '/indexController.js',
+				ctrlFileAction = ctrlDir + ctrl + '/' + action + 'Controller.js',
+				ctrlFileLoaded = false;
 
 		tesla.log(' ');
 		tesla.log('INFO:'.blue + ' GET request received at ' + uri.full().yellow);
 		tesla.log('INFO:'.blue + ' Attempting to autoload the correct route' + ' (config/routes.js)');
 
-		// IF CONTROLLER EXIST IN URI, TRY TO LOAD
+		// IF CONTROLLER EXISTS IN URI, TRY TO LOAD IT
 		if ( ctrl !== '' ) {
+
+			var controller = 'no';
 
 			// IF CONTROLLER FILE EXISTS LOAD IT
 			if ( fs.existsSync( ctrlFile ) )  {
@@ -56,19 +45,16 @@ module.exports = function(app, tesla) {
 				tesla.log(' ');
 				tesla.log( 'SUCCESS:'.green + ' ' + ctrlFileAction.replace('./', '').yellow + ' was loaded.');
 				ctrlFileLoaded = ctrlFileAction;
+
+			// CONTROLLER NOT FOUND
 			} else {
-				// tesla.log(' ');
-				// tesla.log( 'ERROR: Tesla tried and failed to load the following controllers:'.red );
-				// tesla.log( 'NOT FOUND: '.red + ctrlFile.yellow.italic);
-				// tesla.log( 'NOT FOUND: '.red + ctrlFileIndex.yellow.italic);
-				// tesla.log( 'NOT FOUND: '.red + ctrlFileAction.yellow.italic);
 				notFound = true;
 			}
 
 		// LOAD INDEX IF NO CONTROLLER
 		} else {
 
-			// MAKE SURE INDEX FILE EXISTS
+			// SEE OF INDEX FILE EXISTS
 			if ( fs.existsSync( ctrlDir + 'indexController.js' ) )  {
 				controller = require( loc + ctrlDir + 'indexController.js' );
 				action = 'index';
@@ -82,13 +68,12 @@ module.exports = function(app, tesla) {
 		}
 
 
-		// SETUP APP VARIABLE TO SEND TO THE CONTROLLER
+		// SET APP VARIABLE TO SEND TO THE CONTROLLER
 		app.req = req;
 		app.res = res;
 		app.controller = ctrl;
 		app.action = action;
 		app.uri = uri;
-
 
 		// LOAD CONTROLLER IF IT EXISTS
 		if ( notFound === false ) {
@@ -111,14 +96,18 @@ module.exports = function(app, tesla) {
 			// IF NO INDEX, THROW 404
 			} else {
 				tesla.log(' ');
-				// tesla.log( 'ERROR:'.red + ' "exports.'.yellow + action.yellow  + '"'.yellow + ' not found in '.red + ctrlFileLoaded.yellow);
-				tesla.log( 'ERROR: Attempt to use'.red + ' "exports.index"'.yellow + ' also failed, throwing 404...'.red);
-				throw404(res, req, app);
+
+				tesla.log( 'ERROR: Attempt to use'.red + ' "exports.index"'.yellow + ' failed, throwing 404...'.red);
+
+				// THROW 404
+				next( tesla.throw(404) );
 			}
 
+
+		// IF CONTROLLER FILE WAS NOT FOUND
 		} else {
 
-
+			// ATTEMPT TO USE AUTO CONTROLLER IF ALLOWED
 			if ( app.config.autoLoad === true ) {
 
 				// TRY TO LOAD APP/VIEWS/CONTROLLER
@@ -133,29 +122,21 @@ module.exports = function(app, tesla) {
 				// TRY TO LOAD APP/VIEWS/CONTROLLER/ACTION/INDEX
 				} else if (  fs.existsSync( viewDir + '/' + ctrl + '/' + action + '/index.' + app.config.engines.html ) ) {
 					require('../app/controllers/autoController').render(app, ctrl + '/' + action + '/index');
+
 				// IF NO VIEW CAN BE FOUND, THROW A 404
 				} else {
-					throw404(res, req, app);
+
+					next( tesla.throw(404) );
+
 				}
 
-			// THROW A 404 IF WE CAN'T FIND THE CONTROLLER + AUTOLOAD FAILS
+			// THROW A 404 IF WE CAN'T FIND THE CONTROLLER & AUTOLOAD FAILS
 			} else {
-				throw404(res, req, app);
+				next( tesla.throw(404) );
 			}
+
 		}
 
-		tesla.log(' ');
-
 	});
-
-
-function throw404(res, req, app) {
-	res.status(404).render('404', {
-        title : 'Page Not Found',
-        url: req.originalUrl,
-        error:'Not found',
-        site: app.site
-    });
-}
 
 };
