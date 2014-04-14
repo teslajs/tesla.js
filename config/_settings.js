@@ -48,6 +48,7 @@ module.exports = function (app) {
         secret : 'MYAPPSECRET', // placeholder for now, will be implemented later
         protocol : 'http://', // options: (http|https)
         autoLoad : true, // whether to attempt autoload controllers
+        autoRouting : true, // whether to use auto routing
         publicDir : './public', // public directory where images, javascript, css, etc is stored
 
         logging : {
