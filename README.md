@@ -40,12 +40,12 @@ Almost all of the server settings (port number, database settings, etc.) can be 
 
 #### Prerequisites:
 
-[Node.js](http://nodejs.org/) & [NPM](https://npmjs.org/) are the only absolute requirements, but it's highly recommended that you install [Grunt](http://gruntjs.com/) as well:
+[Node.js](http://nodejs.org/) & [NPM](https://npmjs.org/) are the only absolute requirements, but it's highly recommended that you install [Gulp](http://gulpjs.com/) as well:
   
 ```
-$ npm install -g grunt-cli
+$ npm install gulp -g
 ```
-While it's not required, Tesla is configured to use Grunt for the majority of it's tasks. If you have any trouble installing it, refer to the [Grunt documentation](http://gruntjs.com/getting-started#installing-the-cli) for help.
+While it's not required, Tesla is configured to use Gulp for the majority of it's tasks. If you have any trouble installing it, refer to the [Grunt documentation](http://gruntjs.com/getting-started#installing-the-cli) for help.
  
 
 #### Install Tesla
@@ -73,7 +73,7 @@ $ cd mysite && npm install
 Start the server:
 
 ```
-$ grunt
+$ gulp
 ```
 
 Once the server has started, simply point your browser to: [http://localhost:3000](http://localhost:3000)
@@ -504,17 +504,17 @@ Sometimes you may find there is a weird error during install like npm's *Error: 
 
 Updating NPM:
 ```
-$ npm update -g npm
+$ npm update npm -g
 ```
 
 Updating Grunt:
 ```
-$ npm update -g grunt-cli
+$ npm update gulp -g
 ```
 
 Updating Bower:
 ```
-$ npm update -g bower
+$ npm update bower -g
 ```
 
 #### Cleaning NPM and Bower cache
