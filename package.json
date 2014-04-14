@@ -24,10 +24,6 @@
       "url": "https://github.com/teslajs/tesla.js/blob/master/LICENSE"
     }
   ],
-  "repository": "",
-  "homepage": "",
-  "bugs": "",
-  "licenses": "",
   "engines": {
     "node": ">=0.10.22",
     "npm": ">=1.3.17"
