@@ -2,6 +2,10 @@
  * Module dependencies.
  */
 var express = require('express'),
+    morgan = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    bodyParser = require('body-parser'),
+    methodOverride = require('method-override'),
     minify = require('express-minify'),
     helpers = require('view-helpers'),
     tesla = require('../lib/tesla'),
@@ -18,18 +22,13 @@ module.exports = function(app, tesla) {
         var htmlEngine = require(app.config.engines.html);
     }
 
-    app.set('showStackError', true);
+    // SHOW ERRORS IN DEV
+    if (process.env.NODE_ENV === 'development') {
+        app.set('showStackError', true);
+    }
 
-    //Prettify HTML
+    //PRETTIFY HTML
     app.locals.pretty = app.config.prettify.html;
-
-    //Should be placed before express.static
-    app.use(express.compress({
-        filter: function(req, res) {
-            return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
-        },
-        level: 9
-    }));
 
     if ( app.config.engines.css !== false ) {
         tesla.log('INFO:'.blue.blue + ' using ' + app.config.engines.css + ' as css preprocessor');
@@ -166,28 +165,28 @@ module.exports = function(app, tesla) {
         whitelist: null
     }));
 
-    //Setting the fav icon and static folder
-    app.use(express.favicon());
+    // FAVICON
+    // app.use(favicon());
 
-    //Don't use logger for test env
+    // LOGGER
     if (process.env.NODE_ENV !== 'test') {
-        app.use(express.logger('dev'));
+        app.use(morgan('dev'));
     }
 
-    //Set views directory
+    // SET VIEWS DIR
     app.set('views', app.config.root + '/app/views');
 
-    //Enable jsonp
+    // SET JSONP
     if ( app.config.jsonp === true ) {
         app.enable("jsonp callback");
     }
 
-    app.configure(function() {
+    // app.configure(function() {
 
-        //cookieParser should be above session
-        app.use(express.cookieParser());
+        // COOKIE PARSER (KEEP ABOVE SESSION)
+        app.use(cookieParser());
 
-        // set html view engine
+        // SET HTML VIEW ENGINE
         if ( app.config.engines.html === 'hbs' ) {
             app.set('view engine', 'hbs');
             app.engine('html', require('hbs').__express);
@@ -204,42 +203,16 @@ module.exports = function(app, tesla) {
 
         tesla.log('INFO:'.blue.blue + ' using ' + app.config.engines.html + ' as view engine');
 
-        // request body parsing middleware should be above methodOverride
-        app.use(express.urlencoded());
-        app.use(express.json());
-        app.use(express.methodOverride());
+        app.use(bodyParser()); // KEEP ABOVE METHOD OVERRIDE
+        app.use(methodOverride());
 
-        //dynamic helpers
+        // VIEW HELPERS
         app.use(helpers(app.name));
 
-        //routes should be at the last
-        app.use(app.router);
+        // app.use(app.router);
 
         //Assume "not found" if the error msg is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
-        app.use(function(err, req, res, next) {
-            //Treat as 404
-            if (~err.message.indexOf('not found')) return next();
 
-            //Log it
-            console.error(err.stack);
 
-            //Error page
-            res.status(500).render('500', {
-                error: err.stack,
-                title : app.site.name + ' - Error!',
-                site: app.site
-            });
-        });
-
-        //Assume 404 since no middleware responded
-        app.use(function(req, res, next) {
-            res.status(404).render('404', {
-                title : app.site.name + ' - Not Found',
-                url: req.originalUrl,
-                error: 'Not found',
-                site: app.site
-            });
-        });
-
-    });
+    // });
 };
