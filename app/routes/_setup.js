@@ -21,9 +21,9 @@ module.exports = function(app, tesla) {
   	// FOOBAR CONTROLLER - Example of controller that handles it's own routing
   	require(controllers + 'fooController')(app);
 
-    // EXAMPLE OF CRUD STYLE ROUTER & CONTROLLER
-  	app.get("/:controller/:action/:id?", function(req, res) {
-  		require(controllers + req.params.controller + 'Controller')[req.params.action](app, req, res);
+    // EXAMPLE OF DYNAMIC CRUD STYLE ROUTER & CONTROLLER
+  	app.get("/crud/:action/:id?", function(req, res) {
+  		require(controllers + 'crudController')[req.params.action](app, req, res);
   	});
 
 
@@ -36,6 +36,7 @@ module.exports = function(app, tesla) {
 
   	// AUTO ROUTER (THIS SHOULD COME AFTER ANY CUSTOME ROUTES)
   	if ( app.config.autoRouting === true ) {
+      tesla.log( 'INFO:'.blue + ' using auto router');
   		require(routes + 'auto')(app, tesla);
   	}
 

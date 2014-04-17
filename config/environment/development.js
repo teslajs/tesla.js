@@ -16,6 +16,8 @@ module.exports = function (app) {
 
     var tesla = require('../../lib/tesla')(app);
 
+    if ( typeof addresses[0] === 'undefined' ) addresses[0] = 'localhost'
+
     // global settings
     app.site.domain = addresses[0];
     app.site.environment = "development";

@@ -13,6 +13,15 @@ module.exports = function (app) {
 
     // SPECIAL VIEW FOR 404
     if ( err.status && err.status === 404 || err.code === 'MODULE_NOT_FOUND' ) {
+
+      if ( err.code === 'MODULE_NOT_FOUND' ) {
+        tesla.log( ' ');
+        tesla.log( 'ERROR:'.red + ' all attempts to be rational have failed...');
+        console.log(err);
+      } else {
+        tesla.log( 'ERROR:'.red + ' all attempts to be rational have failed. throwing 404.');
+      }
+
       require(controllers + 'errorController').throw404(app, req, res);
     } else if ( err.status ) {
       require(controllers + 'errorController').throw(app, req, res);
