@@ -26,7 +26,13 @@ module.exports = function (app, tesla, next) {
         ctrlFile = ctrlDir + ctrl + 'Controller.js',
         ctrlFileIndex = ctrlDir + ctrl + '/indexController.js',
         ctrlFileAction = ctrlDir + ctrl + '/' + action + 'Controller.js',
+        viewExt = app.config.engines.html,
         ctrlFileLoaded = false;
+
+    if ( viewExt === 'hogan' ) {
+    	viewExt = 'mustache';
+    }
+
 
     tesla.log(' ');
     tesla.log('INFO:'.blue + ' GET request received at ' + uri.full().yellow);
@@ -121,81 +127,83 @@ module.exports = function (app, tesla, next) {
 	      // ATTEMPT TO USE AUTO CONTROLLER IF ALLOWED
 	      if ( app.config.autoLoad === true ) {
 
-	        // LOAD: app/views/controller.js
-	        if ( fs.existsSync( viewDir + ctrl + '.' + app.config.engines.html ) )  {
-
-	          if ( fs.existsSync( ctrlDir + 'autoController.js') ) {
-		        	tesla.log( 'INFO: '.blue + 'using' + ctrlDir.yellow + 'autoController.js'.yellow + ' controller' );
-		        	tesla.log( 'INFO: '.blue + 'attempting to load ' + viewDir.yellow + ctrl.yellow + '.' + app.config.engines.html.yellow + ' view');
-							require( '../../app/controllers/autoController' ).render(app, ctrl);
-	          } else {
-	            tesla.log( 'ERROR: '.red + ' auto controller not found, throwing 404 [ a ]' ) ;
-	            next( tesla.throw(404) );
-	          }
-
-	        // LOAD: app/views/controllerAction.js
-	        } else if ( fs.existsSync( viewDir + ctrl + titleCase(action) + '.' + app.config.engines.html ) )  {
-
-	          if ( fs.existsSync( ctrlDir + 'autoController.js') ) {
-		        	tesla.log( 'INFO: '.blue + 'using ' + ctrlDir.yellow + 'autoController.js'.yellow + ' controller' );
-		        	tesla.log( 'INFO: '.blue + 'attempting to load ' + viewDir.yellow + ctrl.yellow + titleCase(action).yellow + '.' + app.config.engines.html.yellow + ' view');
-							require( '../../app/controllers/autoController' ).render(app, ctrl + titleCase(action));
-	          } else {
-	            tesla.log( 'ERROR: '.red + ' auto controller not found, throwing 404 [ a ]' ) ;
-	            next( tesla.throw(404) );
-	          }
-
-	        // LOAD: app/views/controller/index.js
-	        } else if ( fs.existsSync( viewDir + '/' + ctrl + '/index.' + app.config.engines.html ) ) {
-
-	          if ( fs.existsSync( ctrlDir + 'autoController.js') ) {
-							tesla.log( 'INFO: '.blue + 'using ' + ctrlDir.yellow + 'autoController.js'.yellow + ' controller' );
-		        	tesla.log( 'INFO: '.blue + 'attempting to load ' + viewDir.yellow + ctrl.yellow + '/index.'.yellow + app.config.engines.html.yellow + ' view');
-		        	require('../../app/controllers/autoController').render(app, ctrl + '/index');
-	          } else {
-	            tesla.log( 'ERROR: '.red + ' auto controller not found, throwing 404 [ b ]' ) ;
-	            next( tesla.throw(404) );
-	          }
-
-	        // LOAD: app/views/controller/action.js
-	        } else if (  fs.existsSync( viewDir + '/' + ctrl + '/' + action + '.' + app.config.engines.html ) ) {
-
-	        	if ( fs.existsSync( ctrlDir + 'autoController.js') ) {
-	          	tesla.log( 'INFO: '.blue + 'using ' + ctrlDir.yellow + 'autoController.js'.yellow + ' controller' );
-		        	tesla.log( 'INFO: '.blue + 'attempting to load ' + viewDir.yellow + ctrl.yellow + '/'.yellow + action.yellow + '.' + app.config.engines.html.yellow + ' view');
-							require('../../app/controllers/autoController').render(app, ctrl + '/' + action);
-	          } else {
-	            tesla.log( 'ERROR: '.red + ' auto controller not found, throwing 404 [ c ]' ) ;
-	            next( tesla.throw(404) );
-	          }
-
 	        // LOAD: app/views/controller/action/index.js
-	        } else if (  fs.existsSync( viewDir + '/' + ctrl + '/' + action + '/index.' + app.config.engines.html ) ) {
+					if (  fs.existsSync( viewDir + '/' + ctrl + '/' + action + '/index.' + viewExt ) ) {
 
-	        	if ( fs.existsSync( ctrlDir + 'autoController.js') ) {
-	        		tesla.log( 'INFO: '.blue + 'using ' + ctrlDir.yellow + 'autoController.js'.yellow + ' controller' );
-		        	tesla.log( 'INFO: '.blue + 'attempting to load ' + viewDir.yellow + ctrl.yellow + '/'.yellow + action.yellow + '/index.'.yellow + app.config.engines.html.yellow + ' view');
+					  if ( fs.existsSync( ctrlDir + 'autoController.js') ) {
+					    tesla.log( 'INFO: '.blue + 'using ' + ctrlDir.yellow + 'autoController.js'.yellow + ' controller' );
+					    tesla.log( 'INFO: '.blue + 'attempting to load ' + viewDir.yellow + ctrl.yellow + '/'.yellow + action.yellow + '/index.'.yellow + viewExt.yellow + ' view');
 
-							require('../../app/controllers/autoController').render(app, ctrl + '/' + action + '/index');
-	          } else {
-	            tesla.log( 'ERROR: '.red + ' auto controller not found, throwing 404 [ c ]' ) ;
-	            next( tesla.throw(404) );
-	          }
+					    require('../../app/controllers/autoController').render(app, ctrl + '/' + action + '/index');
+					  } else {
+					    tesla.log( 'ERROR: '.red + ' auto controller not found, throwing 404 [ f ]' ) ;
+					    next( tesla.throw(404) );
+					  }
 
-	        // IF NO VIEW CAN BE FOUND, THROW A 404
-	        } else {
 
-				    tesla.log( 'ERROR:'.red + ' all attempts to be rational have failed. throwing 404.');
+					// LOAD: app/views/controller/action.js
+					} else if (  fs.existsSync( viewDir + '/' + ctrl + '/' + action + '.' + viewExt ) ) {
 
-	          tesla.log( 'ERROR: '.red + 'view not found. Throwing 404 [ b ].' );
-	          next( tesla.throw(404) );
+					  if ( fs.existsSync( ctrlDir + 'autoController.js') ) {
+					    tesla.log( 'INFO: '.blue + 'using ' + ctrlDir.yellow + 'autoController.js'.yellow + ' controller' );
+					    tesla.log( 'INFO: '.blue + 'attempting to load ' + viewDir.yellow + ctrl.yellow + '/'.yellow + action.yellow + '.' + viewExt.yellow + ' view');
+					    require('../../app/controllers/autoController').render(app, ctrl + '/' + action);
+					  } else {
+					    tesla.log( 'ERROR: '.red + ' auto controller not found, throwing 404 [ e ]' ) ;
+					    next( tesla.throw(404) );
+					  }
 
-	        }
+
+					// LOAD: app/views/controller/index.js
+					} else if ( fs.existsSync( viewDir + '/' + ctrl + '/index.' + viewExt ) ) {
+
+					  if ( fs.existsSync( ctrlDir + 'autoController.js') ) {
+					    tesla.log( 'INFO: '.blue + 'using ' + ctrlDir.yellow + 'autoController.js'.yellow + ' controller' );
+					    tesla.log( 'INFO: '.blue + 'attempting to load ' + viewDir.yellow + ctrl.yellow + '/index.'.yellow + viewExt.yellow + ' view');
+					    require('../../app/controllers/autoController').render(app, ctrl + '/index');
+					  } else {
+					    tesla.log( 'ERROR: '.red + ' auto controller not found, throwing 404 [ d ]' ) ;
+					    next( tesla.throw(404) );
+					  }
+
+
+					// LOAD: app/views/controllerAction.js
+					} else if ( fs.existsSync( viewDir + ctrl + titleCase(action) + '.' + viewExt ) )  {
+
+					  if ( fs.existsSync( ctrlDir + 'autoController.js') ) {
+					    tesla.log( 'INFO: '.blue + 'using ' + ctrlDir.yellow + 'autoController.js'.yellow + ' controller' );
+					    tesla.log( 'INFO: '.blue + 'attempting to load ' + viewDir.yellow + ctrl.yellow + titleCase(action).yellow + '.' + viewExt.yellow + ' view');
+					    require( '../../app/controllers/autoController' ).render(app, ctrl + titleCase(action));
+					  } else {
+					    tesla.log( 'ERROR: '.red + ' auto controller not found, throwing 404 [ c ]' ) ;
+					    next( tesla.throw(404) );
+					  }
+
+
+					// LOAD: app/views/controller.js
+					} else if ( fs.existsSync( viewDir + ctrl + '.' + viewExt ) )  {
+
+					  if ( fs.existsSync( ctrlDir + 'autoController.js') ) {
+					    tesla.log( 'INFO: '.blue + 'using' + ctrlDir.yellow + 'autoController.js'.yellow + ' controller' );
+					    tesla.log( 'INFO: '.blue + 'attempting to load ' + viewDir.yellow + ctrl.yellow + '.' + viewExt.yellow + ' view');
+					    require( '../../app/controllers/autoController' ).render(app, ctrl);
+					  } else {
+					    tesla.log( 'ERROR: '.red + ' auto controller not found, throwing 404 [ b ]' ) ;
+					    next( tesla.throw(404) );
+					  }
+
+
+					// THROW A 404 IF WE CAN'T FIND THE CONTROLLER & AUTOLOAD FAILS
+					} else {
+
+					  tesla.log( 'INFO:'.red + ' controller not found, auto controller disabled, throwing 404 [ h ]');
+					  next( tesla.throw(404) );
+					}
 
 	      // THROW A 404 IF WE CAN'T FIND THE CONTROLLER & AUTOLOAD FAILS
 	      } else {
 
-	        tesla.log( 'INFO:'.red + ' controller not found, auto controller disabled, throwing 404 [ c ]');
+	        tesla.log( 'INFO:'.red + ' controller not found, auto controller disabled, throwing 404 [ h ]');
 	        next( tesla.throw(404) );
 	      }
 
