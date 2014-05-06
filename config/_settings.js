@@ -38,7 +38,7 @@ module.exports = function (app) {
 
         root : rootPath, // path to the root of your server
 
-        socket : true,
+        socket : false,
 
         // see https://github.com/dresende/node-orm2/wiki/Connecting-to-Database for more info on connection to your databse
         db : {
