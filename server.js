@@ -3,6 +3,8 @@ var express = require('express'),
     fs = require('fs'),
     env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
     app = module.exports = express(),
+    server = require('http').createServer(app),
+    io = require('socket.io').listen(server),
     colors = require('colors'),
     tesla, port;
 
@@ -28,7 +30,7 @@ require('./app/routes/_setup')(app, tesla); // routes
 // START THE APP BY LISTEN ON <PORT>
 port = process.env.PORT || app.config.port;
 
-app.listen(port, function(err) {
+server.listen(port, function(err) {
 
 	tesla.log(' ');
 	tesla.log('# # # # # # # # # # # # # # # # # # # # # # # # # # # #'.green);
@@ -37,6 +39,12 @@ app.listen(port, function(err) {
 	tesla.log('# # # # # # # # # # # # # # # # # # # # # # # # # # # #'.green);
 
 })
+
+// SOCKETS
+if ( app.config.socket === true ) {
+  require('./app/sockets/info.js')(io, app);
+}
+
 
 // EXPOSE APP
 exports = module.exports = app;
