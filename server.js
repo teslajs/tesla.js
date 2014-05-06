@@ -1,12 +1,12 @@
 // MODULE DEPENDENCIES
 var express = require('express'),
-    fs = require('fs'),
-    env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
-    app = module.exports = express(),
-    server = require('http').createServer(app),
-    io = require('socket.io').listen(server),
-    colors = require('colors'),
-    tesla, port;
+  fs = require('fs'),
+  env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
+  app = module.exports = express(),
+  server = require('http').createServer(app),
+  io = require('socket.io').listen(server),
+  colors = require('colors'),
+  tesla, port;
 
 
 // REQUIRE CONFIG FILES
@@ -32,11 +32,11 @@ port = process.env.PORT || app.config.port;
 
 server.listen(port, function(err) {
 
-	tesla.log(' ');
-	tesla.log('# # # # # # # # # # # # # # # # # # # # # # # # # # # #'.green);
-	tesla.log('        IT\'S ALIVE!'.white + ' TESLA'.red + ' IS UP AND RUNNING.'.white);
-	tesla.log('   POINT YOUR BROWSER TO: '.grey + app.site.url.white);
-	tesla.log('# # # # # # # # # # # # # # # # # # # # # # # # # # # #'.green);
+  tesla.log(' ');
+  tesla.log('# # # # # # # # # # # # # # # # # # # # # # # # # # # #'.green);
+  tesla.log('        IT\'S ALIVE!'.white + ' TESLA'.red + ' IS UP AND RUNNING.'.white);
+  tesla.log('   POINT YOUR BROWSER TO: '.grey + app.site.url.white);
+  tesla.log('# # # # # # # # # # # # # # # # # # # # # # # # # # # #'.green);
 
 })
 
