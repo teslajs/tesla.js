@@ -43,7 +43,7 @@ module.exports = function (app) {
     logging : {
       console : true, // whether to allow tesla to log messages to the node console
       files : false // this doesn't do anything yet, eventually it will write .log files
-    }
+    },
 
     port : 3000, // port to run the server on
 
