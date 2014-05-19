@@ -45,7 +45,7 @@ module.exports = function (app) {
       files : false // this doesn't do anything yet, eventually it will write .log files
     },
 
-    port : 3000, // port to run the server on
+    port : 1856, // port to run the server on
 
     prettify : {
       html : true, // whether to pretify html
