@@ -8,8 +8,8 @@
 ###### Full Docs: [teslajs.com](http://teslajs.com/)
 ###### Updates: [twitter.com/teslajs](http://twitter.com/teslajs/)
 
-## About 
-Tesla is a modern MVC style framework built on to of [Node.js](http://nodejs.org/) and [Express](http://expressjs.com/). It's designed to be as flexible as possible, and includes sane default and easily configurable boilerplates to get you up an running as quickly as possible.
+## About
+Tesla is a modern MVC style framework built on top of [Node.js](http://nodejs.org/) and [Express](http://expressjs.com/). It's built to be fast, simple and easy to configure, with sane defaults and flexible boilerplates to get you up and running as quickly as possible.
 
 It's still a work in progress, with more features being added, and while the current build seems stable, bug reports are always apreciated!
 
@@ -41,12 +41,12 @@ Almost all of the server settings (port number, database settings, etc.) can be 
 #### Prerequisites:
 
 [Node.js](http://nodejs.org/) & [NPM](https://npmjs.org/) are the only absolute requirements, but it's highly recommended that you install [Gulp](http://gulpjs.com/) as well:
-  
+
 ```
 $ npm install gulp -g
 ```
 While it's not required, Tesla is configured to use Gulp for the majority of it's tasks. If you have any trouble installing it, refer to the [Grunt documentation](http://gruntjs.com/getting-started#installing-the-cli) for help.
- 
+
 
 #### Install Tesla
 Once you have NPM up & running, getting Tesla installed is pretty painless:
@@ -97,7 +97,7 @@ This one command will give you basic CRUD functionality via a very simple JSON a
 
 
 ##### HTML templating engines
-By default, Tesla use Jade for HTML templates, but it supports 5 different templating languages: 
+By default, Tesla use Jade for HTML templates, but it supports 5 different templating languages:
 
 Options:
 
@@ -218,28 +218,28 @@ Options:
   -C, --css <engine>   add stylesheet support (less|sass|stylus) (defaults to vanilla css)
   -V, --version        output the version number
   -F, --force          force on non-empty directory
-  
+
   // PRE-PROCESSOR LIBRARIES
   --axis               add Axis support for Stylus
   --bourbon            add Bourbon support for Sass
   --nib                add Nib support for Stylus
-  
+
   // FE FRAMEWORKS
   --angular            add support for AngularJS
   --backbone           add support for BACKBONE.JS
   --ember              add support for Ember.js
-  
+
   // JS LIBRARIES
   --jquery             add support for jQuery
   --mootools           add support for MooTools
   --zepto              add support for Zepto.js
-  
+
   // CSS FRAMEWORKS
   --bootstrap          add support for Bootstrap
   --foundation         add support for Foundation
   --gumby              add support for Gumby
   --skeleton           add support for Skeleton  
-  
+
   // OTHER SETTINGS
   generate <name>      generate new model + controller with basic CRUD functionality
   start                start the web server (still a bit buggy, best just just run "grunt" for now)
@@ -376,7 +376,7 @@ The router will attempt to find a matching controller in this order:
 
 1. app/controllers/fooController.js
 2. app/controllers/foo/indexController.js
-3. app/controllers/foo/barController.js 
+3. app/controllers/foo/barController.js
 
 If it does not find a matching controller, the router will throw a 404 error.
 
@@ -548,4 +548,3 @@ Inspired by the [MEAN Stack](https://github.com/linnovate/mean) by [Amos Haviv](
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/teslajs/tesla.js/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
