@@ -23,7 +23,7 @@ tesla.log(' ');
 // REQUIRED SETTINGS & CONFIG FILES
 require('./config/environment/' + process.env.NODE_ENV)(app); // ENVIRONMENT SPECIFIC SETTINGS
 require('./config/express')(app, tesla); // EXPRESS SETTINGS
-require('./app/routes/_setup')(app, tesla); // DEFAULT ROUTES
+require('./app/routes/default')(app, tesla); // DEFAULT ROUTES
 
 
 // START THE APP BY LISTEN ON <PORT>

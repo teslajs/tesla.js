@@ -1,7 +1,7 @@
 module.exports = function (app) {
 
-  var controllers = '../../app/controllers/',
-      tesla = require('../../lib/tesla')(app);
+  var controllers = '../../../app/controllers/',
+      tesla = require('../../../lib/tesla')(app);
 
   app.get('*', function(req, res, next){
     next( tesla.throw(404) );

@@ -34,10 +34,10 @@ module.exports = function(app, tesla) {
   	// AUTO ROUTER (THIS SHOULD COME AFTER ANY CUSTOME ROUTES)
   	if ( app.config.autoRouting === true ) {
       tesla.log( 'INFO:'.blue + ' using auto router');
-  		require(routes + 'auto')(app, tesla);
+  		require(routes + 'system/auto')(app, tesla);
   	}
 
   	// ERROR HANDLER
-  	require(routes + 'errors')(app);
+  	require(routes + 'system/errors')(app);
 
 };
