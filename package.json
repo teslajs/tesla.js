@@ -66,6 +66,7 @@
     "grunt-contrib-jshint": ">=0.9.2",
     "grunt-contrib-watch": ">=0.6",
     "grunt-env": ">=0.4.1",
+    "gulp": "~3.6.2",
     "gulp-exit": "0.0.2",
     "grunt-nodemon": ">=0.2.1",
     "gulp-jade": "~0.5.0",
