@@ -39,7 +39,7 @@
     "compression": "~1.0.2",
     "cookie-parser": "~1.0.1",
     "crypto": ">=0.0.3",
-    "express": "~4.0",
+    "express": "~4.3.1",  
     "express-minify": ">=0.0.7",
     "forever": ">=0.10.10",
     "MD5": ">=1.2.0",
