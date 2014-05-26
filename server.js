@@ -1,8 +1,7 @@
 var tesla,
     express = require('express'), // GET EXPRESS
     app = module.exports = express(), // DEFINE THE APP
-    server = require('http').createServer(app), // CREATE THE SERVER
-    io = require('socket.io').listen(server); // IN CASE WE WANT SOCKET.IO
+    server = require('http').createServer(app); // CREATE THE SERVER
     require('colors'); // PRETTY CONSOLE LOGGING
     require('fs'); // FILE SYSTEM
     process.env.NODE_ENV = process.env.NODE_ENV || 'development'; // SET DEFAULT ENVIRONMENT
@@ -50,6 +49,7 @@ server.listen( process.env.PORT || app.config.port, function( err ) {
 
 // SOCKETS
 if ( app.config.socket === true ) {
+  var io = require('socket.io').listen(server); // IN CASE WE WANT SOCKET.IO
   require('./app/sockets/info.js')(io, app);
 }
 

@@ -4,8 +4,8 @@ rootPath = path.normalize(__dirname + '/..');
 module.exports = function (app) {
 
   app.site = {
-    name : "tesla.js", // the name of your app
-  }
+    name : 'tesla.js', // the name of your app
+  };
 
   app.config = {
 
@@ -19,19 +19,21 @@ module.exports = function (app) {
 
     autoRouting : true, // whether to use auto routing
 
-    cache : false, // whether to use caching
+    cache : true, // whether to use caching
 
     // see https://github.com/dresende/node-orm2/wiki/Connecting-to-Database for more info on connection to your databse
     db : {
-      url : "driver://username:password@hostname/database", // url to database
-      driver : "mongodb" // which db driver to use
+      url : 'driver://username:password@hostname/database', // url to database
+      driver : 'mongodb' // which db driver to use
     },
 
     engines : {
-      html : "jade", // options: (ejs|handlebars|hogan|jade|mustache)
+      html : 'jade', // options: (ejs|handlebars|hogan|jade|mustache)
       css : false, // options: (stylus|sass|less) - set false to just use vanilla css
       cssLibrary : false, // options: (axis|bourbon|nib) - set to false for none
     },
+
+    gzip : true, // whether to enable gzip compression
 
     jsonp : true, // allow jsonp requests
 
@@ -61,17 +63,17 @@ module.exports = function (app) {
 
     secret : 'MYAPPSECRET', // placeholder for now, will be implemented later
 
-    socket : false
+    socket : false // WHETHER TO USE SOCKET.IO
 
-  }
+  };
 
 
   // some default meta settings for <head>
   app.site.meta = {
     description : '',
-    encoding : "utf-8",
+    encoding : 'utf-8',
     keywords : '',
     viewport : 'width=device-width, user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0'
-  }
+  };
 
-}
+};

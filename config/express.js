@@ -1,25 +1,30 @@
-/**
- * Module dependencies.
- */
-var express = require('express'),
-    morgan = require('morgan'),
-    cookieParser = require('cookie-parser'),
-    bodyParser = require('body-parser'),
-    methodOverride = require('method-override'),
-    minify = require('express-minify'),
-    helpers = require('view-helpers'),
-    tesla = require('../lib/tesla'),
-    colors = require('colors'),
-    fs = require('fs');
-
 module.exports = function(app, tesla) {
 
+var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compress,
+    bodyParser = require('body-parser'),
+    compression = require('compression'),
+    cookieParser = require('cookie-parser'),
+    express = require('express'),
+    favicon = require('serve-favicon'),
+    helpers = require('view-helpers'),
+    methodOverride = require('method-override'),
+    minify = require('express-minify'),
+    morgan = require('morgan');
+    require('colors');
+
+
+  // ENABLE G-ZIP COMPRESSION
+  if ( app.config.gzip === true ) {
+    app.use( compression() );
+  }
+
+  // SET HTML ENGINE
   if ( app.config.engines.html === 'hogan' ) {
-    var htmlEngine = require('hogan-middleware');
+    htmlEngine = require('hogan-middleware');
   } else if ( app.config.engines.html === 'mustache' ) {
-    var htmlEngine = require('mustache-express');
+    htmlEngine = require('mustache-express');
   } else {
-    var htmlEngine = require(app.config.engines.html);
+    htmlEngine = require(app.config.engines.html);
   }
 
   // SHOW ERRORS IN DEV
@@ -30,6 +35,7 @@ module.exports = function(app, tesla) {
   //PRETTIFY HTML
   app.locals.pretty = app.config.prettify.html;
 
+  // LOG CSS ENGINE
   if ( app.config.engines.css !== false ) {
     tesla.log('INFO:'.blue.blue + ' using ' + app.config.engines.css + ' as css preprocessor');
   } else {
@@ -42,9 +48,9 @@ module.exports = function(app, tesla) {
     var stylus = require('stylus');
 
     if ( app.config.prettify.css === true ) {
-      var compress = false;
+      compress = false;
     } else {
-      var compress = true;
+      compress = true;
     }
 
     // USE NIB
@@ -53,14 +59,11 @@ module.exports = function(app, tesla) {
       var nib = require('nib');
 
       function compile(str, path) {
-
         return stylus(str)
         .set('filename', path)
         .set('compress', compress)
         .use(nib());
       }
-
-
 
     // USE AXIS
     } else if ( app.config.engines.cssLibrary === 'axis') {
@@ -68,7 +71,6 @@ module.exports = function(app, tesla) {
       var axis = require('axis-css');
 
       function compile(str, path) {
-
         return stylus(str)
         .set('filename', path)
         .set('compress', compress)
@@ -89,8 +91,6 @@ module.exports = function(app, tesla) {
       compile: compile
     }));
 
-    app.use(express.static(app.config.root + '/public/'));
-
 
   // CUSTOM SETTINGS FOR SASS
   } else if ( app.config.engines.css === 'sass' ) {
@@ -103,17 +103,15 @@ module.exports = function(app, tesla) {
       debug: app.config.prettify.css
     }));
 
-    app.use(express.static(app.config.root + '/public/'));
-
-  // IF NOT USING STYLUS
+  // IF NOT USING LESS
   } else if ( app.config.engines.css === 'less' ) {
 
     var less = require('less-middleware');
 
     if ( app.config.prettify.css === true ) {
-      var compress = false;
+      compress = false;
     } else {
-      var compress = true;
+      compress = true;
     }
 
     app.use(less({
@@ -123,16 +121,16 @@ module.exports = function(app, tesla) {
       compress: compress
     }));
 
-    app.use(express.static(app.config.root + '/public/'));
 
   // IF NO PREPROCESSORS
-  } else {
-    app.use(express.static(app.config.root + '/public/'));
   }
 
 
+  // SERVER STATIC FILES
+  app.use( express.static( app.config.root + '/public/') );
 
-  // MINIFY
+
+  // MINIFY CSS
   if ( app.config.prettify.css === false ) {
     min_css = /css/;
     min_less = /css/;
@@ -145,11 +143,20 @@ module.exports = function(app, tesla) {
     min_stylus = /donothinghere/;
   }
 
+  // MINIFY JS
   if ( app.config.prettify.js === false ) {
     min_js = /js/;
   } else {
     min_js = /donothinghere/;
   }
+
+  // CACHING
+  if ( app.config.cache === true ) {
+    cacheDir = app.config.root + '/public/.cache';
+  } else {
+    cacheDir = false;
+  }
+
 
   app.use(minify( {
     js_match: min_js,
@@ -158,13 +165,13 @@ module.exports = function(app, tesla) {
     less_match: min_less,
     stylus_match: min_stylus,
     coffee_match: /coffeescript/,
-    cache: app.config.cache,
+    cache: cacheDir,
     blacklist: [/\.min\.(css|js)$/],
     whitelist: null
   }));
 
   // FAVICON
-  // app.use(favicon());
+  app.use(favicon(app.config.root + '/public/favicon.ico'));
 
   // LOGGER
   if (process.env.NODE_ENV !== 'test') {
@@ -176,7 +183,7 @@ module.exports = function(app, tesla) {
 
   // SET JSONP
   if ( app.config.jsonp === true ) {
-    app.enable("jsonp callback");
+    app.enable('jsonp callback');
   }
 
   // app.configure(function() {
@@ -201,15 +208,17 @@ module.exports = function(app, tesla) {
 
     tesla.log('INFO:'.blue.blue + ' using ' + app.config.engines.html + ' as view engine');
 
-    app.use(bodyParser()); // KEEP ABOVE METHOD OVERRIDE
+    app.use(bodyParser()); // THIS SHOULD STAY ABOVE METHOD OVERRIDE!
     app.use(methodOverride());
 
     // VIEW HELPERS
     app.use(helpers(app.name));
 
-    // app.use(app.router);
-
-    //Assume "not found" if the error msg is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
+    // CUSTOM MIDDLEWARE
+    app.use(function(req,res,next){
+      res.header('X-Powered-By' , 'Tesla' );
+      next();
+    });
 
 
   // });

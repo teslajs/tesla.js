@@ -22,7 +22,7 @@ var exit = require('gulp-exit'),
 
   // CONDITIONAL REQUIREMENTS
 
-  // STYLES
+  // STYLUS
   if ( app.config.engines.css === 'stylus' ) {
     var stylus = require('gulp-stylus');
   }
@@ -47,8 +47,6 @@ var exit = require('gulp-exit'),
 
 // DEFAULT TASK
 gulp.task('default', ['nodemon', 'css', 'watch']);
-
-
 
 
 // HEROKU TASK
