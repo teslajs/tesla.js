@@ -13,7 +13,7 @@ exports.read = function(app, req, res) {
 	if (req.params.id) {
 		res.send('read: ' + req.params.id);
 	} else {
-		res.send('Error! ID is not specified. Required URL format: controller/action/id')
+		res.send('Error! ID is not specified. Required URL format: controller/action/id');
 	}
 
 };
@@ -26,7 +26,7 @@ exports.update = function(app, req, res) {
 	if (req.params.id) {
 		res.send('update: ' + req.params.id);
 	} else {
-		res.send('Error! ID is not specified. Required URL format: controller/action/id')
+		res.send('Error! ID is not specified. Required URL format: controller/action/id');
 	}
 
 };
@@ -39,7 +39,7 @@ exports.delete = function(app, req, res) {
 	if (req.params.id) {
 		res.send('delete: ' + req.params.id);
 	} else {
-		res.send('Error! ID is not specified. Required URL format: controller/action/id')
+		res.send('Error! ID is not specified. Required URL format: controller/action/id');
 	}
 
 };

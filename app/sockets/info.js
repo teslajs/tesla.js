@@ -4,4 +4,4 @@ module.exports = function (io, app) {
     socket.emit('info', { name: app.site.name });
   });
 
-}
+};

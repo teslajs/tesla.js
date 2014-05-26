@@ -1,11 +1,9 @@
 module.exports = function(app, tesla) {
 
 	var dir = '../../',
-      fs = require('fs'),
-      colors = require('colors');
-      tesla = require(dir + 'lib/tesla')(app),
 			controllers = dir + 'app/controllers/',
 			routes = dir + 'app/routes/';
+			require('colors');
 
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  //
@@ -14,7 +12,7 @@ module.exports = function(app, tesla) {
 
 
   	// HELLO WORLD ROUTER - example of loading controller if specific path is matched
-  	app.get("/hello/world", function(req, res) {
+  	app.get('/hello/world', function(req, res) {
   		require(controllers + 'hello/worldController')(app, res, res);
   	});
 
@@ -22,10 +20,9 @@ module.exports = function(app, tesla) {
   	require(controllers + 'fooController')(app);
 
     // EXAMPLE OF DYNAMIC CRUD STYLE ROUTER & CONTROLLER
-  	app.get("/crud/:action/:id?", function(req, res) {
+  	app.get('/crud/:action/:id?', function(req, res) {
   		require(controllers + 'crudController')[req.params.action](app, req, res);
   	});
-
 
 
 

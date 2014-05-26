@@ -2,7 +2,7 @@
 // HELLO/WORLD
 module.exports = function(app) {
 
-	tesla = require('../../lib/tesla.js')(app);
+	var tesla = require('../../lib/tesla.js')(app);
 
 	app.route('/foo/bar')
 
