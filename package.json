@@ -1,7 +1,7 @@
 {
   "name": "tesla",
   "description": "MVC Style Framework for Node.js",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "private": false,
   "contributors": [
     {
