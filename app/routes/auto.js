@@ -34,13 +34,12 @@ module.exports = function (app, tesla, next) {
     	viewExt = 'mustache';
     }
 
-
-    tesla.log(' ');
-    tesla.log('INFO:'.blue + ' GET request received at ' + uri.full().yellow);
-
     // IF CONTROLLER EXISTS IN URI, TRY TO LOAD IT
 
-    if ( uri.full().indexOf('favicon.ico') <= 0 ) {
+    if ( uri.full().indexOf('favicon.ico') <= 0 && uri.full().indexOf('socket.io/') <= 0 ) {
+
+			tesla.log(' ');
+			tesla.log('INFO:'.blue + ' GET request received at ' + uri.full().yellow);
 
 	    if ( ctrl !== '' ) {
 
