@@ -19,6 +19,8 @@ module.exports = function (app) {
 
     autoRouting : true, // whether to use auto routing
 
+    buildDir : './_build/', // destination directory for builds
+
     cache : true, // whether to use caching
 
     // see https://github.com/dresende/node-orm2/wiki/Connecting-to-Database for more info on connection to your databse
@@ -29,7 +31,7 @@ module.exports = function (app) {
 
     engines : {
       html : 'jade', // options: (ejs|hbs|hogan|jade|mustache)
-      css : false, // options: (stylus|sass|less) - set false to just use vanilla css
+      css : 'stylus', // options: (stylus|sass|less) - set false to just use vanilla css
       cssLibrary : false, // options: (axis|bourbon|nib) - set to false for none
     },
 
@@ -57,7 +59,7 @@ module.exports = function (app) {
 
     protocol : 'http://', // options: (http|https)
 
-    publicDir : './public', // public directory where images, javascript, css, etc is stored
+    publicDir : './public/', // public directory where images, javascript, css, etc is stored
 
     root : rootPath, // path to the root of your server
 
