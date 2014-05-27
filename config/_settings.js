@@ -28,7 +28,7 @@ module.exports = function (app) {
     },
 
     engines : {
-      html : 'jade', // options: (ejs|handlebars|hogan|jade|mustache)
+      html : 'jade', // options: (ejs|hbs|hogan|jade|mustache)
       css : false, // options: (stylus|sass|less) - set false to just use vanilla css
       cssLibrary : false, // options: (axis|bourbon|nib) - set to false for none
     },
