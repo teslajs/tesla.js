@@ -6,4 +6,3 @@ public/lib
 *.log
 *.sublime-project
 *.sublime-workspace
-.cache/
