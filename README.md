@@ -535,13 +535,22 @@ $ bower cache clean
 ## Heroku Quick Deployment
 Before you start make sure you have <a href="https://toolbelt.heroku.com/">heroku toolbelt</a> installed and an accessible mongo db instance - you can try <a href="http://www.mongohq.com/">mongohq</a> which have an easy setup )
 
-```bash
-git init
-git add .
-git commit -m "initial version"
-heroku apps:create
-git push heroku master
 ```
+// LOGIN
+heroku login
+
+// CREATE APP
+heroku apps:create {app_name}
+
+// SET ENVIRONMENT
+heroku config:add NODE_ENV=production --remote heroku --app {app_name}
+
+// PUSH TO HEROKU
+git push heroku master
+
+```
+
+
 
 ## Credits
 Inspired by the [MEAN Stack](https://github.com/linnovate/mean) by [Amos Haviv](https://twitter.com/amoshaviv) and [Express](https://github.com/visionmedia/express) by [TJ Holowaychuk](https://github.com/visionmedia)
