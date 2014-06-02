@@ -11,7 +11,7 @@
 ## About
 Tesla is a modern MVC style framework built on top of [Node.js](http://nodejs.org/) and [Express](http://expressjs.com/). It's built to be fast, simple and easy to configure, with sane defaults and flexible boilerplates to get you up and running as quickly as possible.
 
-It's still a work in progress, with more features being added, and while the current build seems stable, bug reports are always apreciated!
+It's still a work in progress, with more features being added, and while the current build seems stable, bug reports are always appreciated!
 
 ## Features
 
@@ -76,7 +76,7 @@ Start the server:
 $ gulp
 ```
 
-Once the server has started, simply point your browser to: [http://localhost:3000](http://localhost:3000)
+Once the server has started, simply point your browser to: [http://localhost:1856](http://localhost:1856)
 
 If you choose not to use Grunt, you can start the server by running ```node server.js```. But using Grunt gives you some extras such as livereload, and watching for changes your files & restarting the server whenever necesary.
 
@@ -87,7 +87,7 @@ As you've seen, firing up a basic barebones site is pretty easy, but it's also a
 
 
 ##### MVC Scaffolding
-Tesla includes a generator that will do the dirty work of creting & linking controllers, models & views for you. Let's say you have a databse of users that you want to interact with:
+Tesla includes a generator that will do the dirty work of creating & linking controllers, models & views for you. Let's say you have a database of users that you want to interact with:
 
 ```
 $ tesla generate user
@@ -141,7 +141,7 @@ $ tesla myapp --css stylus
 
 
 ### Front-End Tools
-Tesla utilizes Bower to let you quickly add many of your favorite front-end tools such as jQuery, Angular or Bootstrap. If you select any of these options, the package(s) will be added to your bower file, and any javascript or css dependencies will automatically added to the default views.
+Tesla utilizes Bower to let you quickly add many of your favorite front-end tools such as jQuery, Angular or Bootstrap. If you select any of these options, the package(s) will be added to your bower file, and any javascript or css dependencies will automatically be added to the default views.
 
 
 ##### JavaScript Application Frameworks
@@ -275,7 +275,7 @@ app.config = {
     cache : false, // whether to use caching
 
     api : {
-        enabled : true, // set false to disable json output for scafolding
+        enabled : true, // set false to disable json output for scaffolding
         format : 'json', // format to output in api views
         access : '*' // placeholder for future api security enhancement
     },
@@ -363,13 +363,13 @@ app.site.dir = {
 Tesla comes with an automatic routing system which should save you the trouble of manually creating routes for your site 99% of the time. The routing is based on the following URI structure:
 
 ```
-http://localhost:3000/controller/action/:id
+http://localhost:1856/controller/action/:id
 ```
 
 Let's say you called the following url:
 
 ```
-http://localhost:3000/foo/bar
+http://localhost:1856/foo/bar
 ```
 
 The router will attempt to find a matching controller in this order:
@@ -395,7 +395,7 @@ Creating models & working with data in Tesla is super simple. It takes only 2 st
 $ tesla generate user
 ```
 
-this will create 2 new files for you:
+This will create 2 new files for you:
 - app/models/user.js
 - app/controllers/userController.js
 
@@ -408,7 +408,7 @@ In this file, you will see a block that looks something like this:
 
 ```
 // DEFINE MODEL SCHEMA
-// Be sure to add some files to the schema below or you will not have success quering or adding to the database
+// Be sure to add some files to the schema below or you will not have success querying or adding to the database
 var Model = db.define("user", {
     created   : { type: "date", time: true },
     updated   : { type: "date", time: true }
@@ -418,7 +418,7 @@ var Model = db.define("user", {
 }, {
     validations: {
         // EXAMPLE VALIDATIONS
-        // password: orm.enforce.security.password('luns5', 'Passowrd does not meet min security requirements.'),
+        // password: orm.enforce.security.password('luns5', 'Password does not meet min security requirements.'),
         // email: orm.enforce.patterns.email('Please enter a valid email address.')
         // More Options : https://github.com/dresende/node-enforce
     }
@@ -436,11 +436,11 @@ Once you have your schema setup, that should be about all you need to with the m
 By default, Tesla will serve up your data via a RESTful JSON api. If this is the result you want, you shouldn't need to make any changes to the generated controller. You get the following URI scheme by default:
 
 ```
-http://localhost:3000/user/all
-http://localhost:3000/user/create?data&goes&here
-http://localhost:3000/user/delete/:id
-http://localhost:3000/user/find?query&terms&here
-http://localhost:3000/user/update/:id
+http://localhost:1856/user/all
+http://localhost:1856/user/create?data&goes&here
+http://localhost:1856/user/delete/:id
+http://localhost:1856/user/find?query&terms&here
+http://localhost:1856/user/update/:id
 ```
 
 It's worth noting that delete & update require to pass the databse ID, while create & find accept arguments via GET parameters. Create maps each GET parameter to a field in the databse (POST/PUT support will come in the next iteration). For example, if you want add the following data to your collection/table:
@@ -453,13 +453,13 @@ email: bob@marley.com
 you would simple enter this into the browser:
 
 ```
-http://localhost:3000/user/create?name=Bob&email=bob@marley.com
+http://localhost:1856/user/create?name=Bob&email=bob@marley.com
 ```
 
 Similarly, if you want to retrieve all the records of people names Bob, you would build a request like this:
 
 ```
-http://localhost:3000/user/find?name=Bob
+http://localhost:1856/user/find?name=Bob
 ```
 
 and you will get back something like this:
@@ -480,11 +480,11 @@ and you will get back something like this:
 Now, if you would rather serve up a proper HTML view, it's a simple change, just open up your [config file]() and set "config.api.enabled" to "false". Now, it will map the request to the appropriate view. By default, you get 5 (all, create, delete, find, update) views. Continuing with our user example, you will get the following url > view mapping:
 
 ```
-http://localhost:3000/user/all  >  app/views/all
-http://localhost:3000/user/create?data&goes&here  >  app/views/create
-http://localhost:3000/user/delete/:id  >  app/views/delete
-http://localhost:3000/user/find?query&terms&here  >  app/views/find
-http://localhost:3000/user/update/:id  >  app/views/update
+http://localhost:1856/user/all  >  app/views/all
+http://localhost:1856/user/create?data&goes&here  >  app/views/create
+http://localhost:1856/user/delete/:id  >  app/views/delete
+http://localhost:1856/user/find?query&terms&here  >  app/views/find
+http://localhost:1856/user/update/:id  >  app/views/update
 ```
 
 These are all setup in the controller, however you will need to create the appropriate view files or you will get a 404 error. The data from each request (which was previously spit out as a JSON view) will be sent to the view as an object called "data".
