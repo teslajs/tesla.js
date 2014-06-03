@@ -5,10 +5,9 @@ require('./config/environment/development')(app);
 
 var exit = require('gulp-exit'),
     gulp = require('gulp'),
-    livereload = require('gulp-livereload'),
     nodemon = require('gulp-nodemon'),
     uglify = require('gulp-uglify'),
-    server = livereload(app.config.liveReload.port),
+    mocha = require('gulp-mocha'),
     paths = {
       app: 'server.js',
       build : app.config.buildDir,
@@ -18,6 +17,13 @@ var exit = require('gulp-exit'),
       lib: app.config.publicDir + 'lib/**/*',
       js: [app.config.publicDir + 'js/**/*', 'app/**/*.js'],
     };
+
+
+    // ONLY REQUIRE LIVE-RELOAD IF IT'S REQUIRED
+    if ( app.config.liveReload.use === true ) {
+      var livereload = require('gulp-livereload'),
+          server = livereload(app.config.liveReload.port);
+    }
 
 
   // CONDITIONAL REQUIREMENTS
@@ -45,14 +51,21 @@ var exit = require('gulp-exit'),
 
 
 
-// DEFAULT TASK
+// TASK(S) TO START THE SERVER
 gulp.task('default', ['nodemon', 'css', 'watch']);
-
+gulp.task('start', ['nodemon', 'css', 'watch']);
 
 // HEROKU TASK
 gulp.task('heroku', ['nodemon', 'css']);
 
+// RUN TESTS
+gulp.task('test', function() {
 
+  gulp.src('test/server.js')
+      .pipe(mocha({reporter: 'nyan'}))
+      .pipe(exit());
+
+});
 
 
 // WATCH FILES FOR CHANGES
@@ -106,33 +119,35 @@ gulp.task('watch', function() {
 
 
 
-// Get and render all .styl files recursively
 gulp.task('css', function () {
 
     console.log('Running gulp task "CSS"');
 
     // SASS
     if ( app.config.engines.css === 'sass' ) {
-      console.log('Compiling Sass');
-      gulp.src('./public/css/*.scss')
-          .pipe(sass({errLogToConsole: true}))
-          .pipe(gulp.dest( app.config.publicDir + 'css'));
+
+        console.log('Compiling Sass');
+
+        gulp.src('./public/css/*.scss')
+            .pipe(sass({errLogToConsole: true}))
+            .pipe(gulp.dest( app.config.publicDir + 'css'));
+
     }
 
     // STYLUS
     if ( app.config.engines.css === 'stylus' ) {
-      console.log('Compiling Stylus');
-      gulp.src('./public/css/**/*.styl')
-          .pipe(stylus())
-          .pipe(gulp.dest( app.config.publicDir + 'css'));
+        console.log('Compiling Stylus');
+        gulp.src('./public/css/**/*.styl')
+            .pipe(stylus())
+            .pipe(gulp.dest( app.config.publicDir + 'css'));
     }
 
     // LESS
     if ( app.config.engines.css === 'less' ) {
-      console.log('Compiling Less');
-      gulp.src('./public/css/**/*.less')
-          .pipe(less())
-          .pipe(gulp.dest( app.config.publicDir + 'css'));
+        console.log('Compiling Less');
+        gulp.src('./public/css/**/*.less')
+            .pipe(less())
+            .pipe(gulp.dest( app.config.publicDir + 'css'));
     }
 
 
