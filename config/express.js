@@ -152,7 +152,7 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
 
   // CACHING
   if ( app.config.cache === true ) {
-    cacheDir = app.config.root + '/public/.cache';
+    cacheDir = app.config.root + '/public/_cache';
   } else {
     cacheDir = false;
   }
