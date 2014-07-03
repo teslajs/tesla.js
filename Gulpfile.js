@@ -35,7 +35,15 @@ var exit = require('gulp-exit'),
 
   // SASS
   if ( app.config.engines.css === 'sass' ) {
-    var sass = require('gulp-sass');
+
+    /*
+      setting gulp-ruby-sass as default for now
+      gulp-ruby-sass is slower than gulp-sass, but supports Sass 3.3.
+      gulp-sass is faster, but uses liblass which doesn't yet support Sass 3.2
+    */
+
+    var sass = require('gulp-ruby-sass');
+    // var sass = require('gulp-sass');
   }
 
   // LESS
@@ -51,12 +59,15 @@ var exit = require('gulp-exit'),
 
 
 
-// TASK(S) TO START THE SERVER
-gulp.task('default', ['nodemon', 'css', 'watch']);
-gulp.task('start', ['nodemon', 'css', 'watch']);
 
-// HEROKU TASK
+// DEFAULT TASK TO PROECESS CSS, START THE SERVER & WATCH FOR CHANGES
+gulp.task('default', ['nodemon', 'css', 'watch']);
+
+// DEFAULT TASK TO PROECESS CSS & START THE SERVER
 gulp.task('heroku', ['nodemon', 'css']);
+
+
+
 
 // RUN TESTS
 gulp.task('test', function() {
@@ -66,6 +77,62 @@ gulp.task('test', function() {
       .pipe(exit());
 
 });
+
+
+
+gulp.task('css', function () {
+
+    console.log('Running gulp task "CSS"');
+
+    // SASS
+    if ( app.config.engines.css === 'sass' ) {
+
+        console.log('Compiling Sass');
+
+        gulp.src('./public/css/*.scss')
+            .pipe(sass({errLogToConsole: true}))
+            .pipe(gulp.dest( app.config.publicDir + 'css'));
+
+    }
+
+    // STYLUS
+    if ( app.config.engines.css === 'stylus' ) {
+        console.log('Compiling Stylus');
+        gulp.src('./public/css/**/*.styl')
+            .pipe(stylus())
+            .pipe(gulp.dest( app.config.publicDir + 'css'));
+    }
+
+    // LESS
+    if ( app.config.engines.css === 'less' ) {
+        console.log('Compiling Less');
+        gulp.src('./public/css/**/*.less')
+            .pipe(less())
+            .pipe(gulp.dest( app.config.publicDir + 'css'));
+    }
+
+
+
+}); // END: CSS TASK
+
+
+
+// MONITOR SERVER FOR CHANGES & RESTART
+gulp.task('nodemon', function() {
+
+  console.log('Running gulp task "NODEMON"');
+
+  nodemon({
+    script: paths.app,
+    ext: 'js, ejs, hbs, jade, html, mustache, styl, less, scss',
+    ignore: ['README.md', 'node_modules/**', '.DS_Store']
+  })
+  .on('change', ['css'])
+  .on('restart', ['reload']);
+
+}); // END: NODEMON TASK
+
+
 
 
 // WATCH FILES FOR CHANGES
@@ -117,104 +184,6 @@ gulp.task('watch', function() {
 }); // END: WATCH
 
 
-
-
-gulp.task('css', function () {
-
-    console.log('Running gulp task "CSS"');
-
-    // SASS
-    if ( app.config.engines.css === 'sass' ) {
-
-        console.log('Compiling Sass');
-
-        gulp.src('./public/css/*.scss')
-            .pipe(sass({errLogToConsole: true}))
-            .pipe(gulp.dest( app.config.publicDir + 'css'));
-
-    }
-
-    // STYLUS
-    if ( app.config.engines.css === 'stylus' ) {
-        console.log('Compiling Stylus');
-        gulp.src('./public/css/**/*.styl')
-            .pipe(stylus())
-            .pipe(gulp.dest( app.config.publicDir + 'css'));
-    }
-
-    // LESS
-    if ( app.config.engines.css === 'less' ) {
-        console.log('Compiling Less');
-        gulp.src('./public/css/**/*.less')
-            .pipe(less())
-            .pipe(gulp.dest( app.config.publicDir + 'css'));
-    }
-
-
-
-}); // END: CSS TASK
-
-
-
-
-// BUILD TASK TO RENDER TEMPLATES TO HTML + COPY & MINIFY ASSETS
-// THIS BIT IS STILL IN BETA. USE AT YOUR OWN RISK!
-gulp.task('build', function () {
-
-  console.log('Running gulp task "HTML"');
-
-  var siteData = {
-    site : {
-      name : app.site.name,
-      dir : {
-        css : '../public/css/',
-        js : '../public/js/',
-        img : '../public/img/',
-        lib : '../public/lib/'
-      }
-    }
-  };
-
-  // PROCESS HTML TEMPLATES
-  if ( app.config.engines.html === 'jade' ) {
-
-    console.log( 'Building HTML from: ' + paths.views + '.jade');
-    gulp.src( paths.views + '.jade' )
-      .pipe(jade({
-        locals: siteData
-      }))
-      .pipe(gulp.dest( paths.build ));
-
-  }
-
-  // MINIFY JS
-  console.log( 'Minify JS from: ' +  paths.js[0] + '.js');
-  gulp.src( paths.js[0] + '.js' )
-    .pipe(gulp.dest( paths.build + 'public/js/' ));
-
-  // MINIFY CSS
-  console.log( 'Minify CSS from: ' +  paths.css + '.css');
-  gulp.src( paths.css )
-    .pipe(uglify({outSourceMap: true}))
-    .pipe(gulp.dest( paths.build + 'public/css/' ));
-
-  // COPY LIB FILES
-  console.log( 'Copy lib files from: ' +  paths.lib );
-  gulp.src( paths.lib )
-    .pipe(gulp.dest( paths.build + 'public/lib/' ))
-    .pipe( exit() );
-
-  // COPY IMAGES
-  console.log( 'Copy images from: ' +  paths.img );
-  gulp.src( paths.img )
-    .pipe(gulp.dest( paths.build + 'public/img/' ))
-    .pipe( exit() );
-
-}); // END: BUILD TASK
-
-
-
-
 // RELOAD BROWSER ON CHANGE
 gulp.task('reload', function () {
 
@@ -225,19 +194,7 @@ gulp.task('reload', function () {
 }); //END: RELOAD TASK
 
 
-
-
-// MONITOR SERVER FOR CHANGES & RESTART
-gulp.task('nodemon', function() {
-
-  console.log('Running gulp task "NODEMON"');
-
-  nodemon({
-    script: paths.app,
-    ext: 'js, ejs, hbs, jade, html, mustache, styl, less, scss',
-    ignore: ['README.md', 'node_modules/**', '.DS_Store']
-  })
-  .on('change', ['css'])
-  .on('restart', ['reload']);
-
-}); // END: NODEMON TASK
+// THIS IS JUST HERE FOR TO KEEP GULP FROM CRASHING WHEN SASS THROWS AN ERROR
+function handleError() {
+  // PLACEHOLDER FOR ACTUAL ERROR HANDLER
+}
