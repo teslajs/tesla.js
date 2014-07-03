@@ -33,6 +33,18 @@ server.listen( process.env.PORT || app.config.port, function( err ) {
 
 });
 
+// HANDLE UNCAUGHT ERRORS
+process.on('uncaughtException', function(err) {
+
+  if(err.errno === 'EADDRINUSE') {
+    tesla.inform(app, 'eaddr');
+  } else {
+    tesla.inform(app, 'error', err);
+  }
+
+  process.exit(1);
+
+});
 
 // EXPOSE APP
 exports = module.exports = app;
