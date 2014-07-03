@@ -19,7 +19,7 @@ var exit = require('gulp-exit'),
     };
 
 
-    // ONLY REQUIRE LIVE-RELOAD IF IT'S REQUIRED
+    // ONLY LOAD LIVE-RELOAD IF IT'S REQUIRED
     if ( app.config.liveReload.use === true ) {
       var livereload = require('gulp-livereload'),
           server = livereload(app.config.liveReload.port);
@@ -67,12 +67,10 @@ gulp.task('default', ['nodemon', 'css', 'watch']);
 gulp.task('heroku', ['nodemon', 'css']);
 
 
-
-
 // BUILD CSS
 gulp.task('css', function () {
 
-  // IF CSS IS NOT PROCESSED VIA MIDDLEWARE
+  // ONLY RUN IF CSS IS NOT PROCESSED VIA MIDDLEWARE
   if ( app.config.middleware.css === false ) {
 
     console.log('Running gulp task "CSS"');
@@ -159,7 +157,7 @@ gulp.task('test', function() {
 });
 
 
-// THIS IS JUST HERE FOR TO KEEP GULP FROM CRASHING WHEN SASS THROWS AN ERROR
+// FOR NOW, THIS IS JUST HERE TO KEEP GULP FROM CRASHING WHEN SASS THROWS AN ERROR
 function handleError() {
   // PLACEHOLDER FOR ACTUAL ERROR HANDLER
 }
