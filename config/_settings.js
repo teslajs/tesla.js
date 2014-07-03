@@ -49,6 +49,12 @@ module.exports = function (app) {
       files : false // this doesn't do anything yet, eventually it will write .log files
     },
 
+    // WHETHER TO HANDLE CSS & HTML TEMPLATE VIA MIDDLEWARE OR GULP
+    middleware: {
+      css: false, // set true if you want to process via middleware instead of Gulp
+      html: true, // jade, handlebars, etc still need to run through middleware for now
+    },
+
     port : 1856, // port to run the server on
 
     prettify : {

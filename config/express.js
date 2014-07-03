@@ -37,13 +37,19 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
 
   // LOG CSS ENGINE
   if ( app.config.engines.css !== false ) {
-    tesla.log('INFO:'.blue.blue + ' using ' + app.config.engines.css + ' as css preprocessor');
+
+    if ( app.config.middleware.css === true ) {
+      tesla.log('INFO:'.blue.blue + ' using ' + app.config.engines.css + ' as css preprocessor (via middleware)');
+    } else {
+      tesla.log('INFO:'.blue.blue + ' using ' + app.config.engines.css + ' as css preprocessor (via gulp)');
+    }
   } else {
     tesla.log('INFO:'.blue.blue + ' serving raw css (no pre-processor)');
   }
 
+
   // CUSTOM SETTINGS FOR STYLUS
-  if ( app.config.engines.css === 'stylus' ) {
+  if ( app.config.engines.css === 'stylus' && app.config.middleware.css === true ) {
 
     var stylus = require('stylus');
 
@@ -93,7 +99,7 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
 
 
   // CUSTOM SETTINGS FOR SASS
-  } else if ( app.config.engines.css === 'sass' ) {
+  } else if ( app.config.engines.css === 'sass' && app.config.middleware.css === true ) {
 
     var sass = require('node-sass');
 
@@ -104,7 +110,7 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
     }));
 
   // IF NOT USING LESS
-  } else if ( app.config.engines.css === 'less' ) {
+  } else if ( app.config.engines.css === 'less' && app.config.middleware.css === true ) {
 
     var less = require('less-middleware');
 

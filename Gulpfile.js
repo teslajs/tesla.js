@@ -69,49 +69,45 @@ gulp.task('heroku', ['nodemon', 'css']);
 
 
 
-// RUN TESTS
-gulp.task('test', function() {
-
-  gulp.src('test/server.js')
-      .pipe(mocha({reporter: 'nyan'}))
-      .pipe(exit());
-
-});
-
-
-
+// BUILD CSS
 gulp.task('css', function () {
+
+  // IF CSS IS NOT PROCESSED VIA MIDDLEWARE
+  if ( app.config.middleware.css === false ) {
 
     console.log('Running gulp task "CSS"');
 
     // SASS
     if ( app.config.engines.css === 'sass' ) {
 
-        console.log('Compiling Sass');
+      console.log('Compiling Sass');
 
-        gulp.src('./public/css/*.scss')
-            .pipe(sass({errLogToConsole: true}))
-            .pipe(gulp.dest( app.config.publicDir + 'css'));
+      gulp.src('./public/css/*.scss')
+          .pipe(sass({
+            sourcemap: true
+          }))
+          .on('error', handleError)
+          .pipe(gulp.dest( app.config.publicDir + 'css'));
 
     }
 
     // STYLUS
     if ( app.config.engines.css === 'stylus' ) {
-        console.log('Compiling Stylus');
-        gulp.src('./public/css/**/*.styl')
-            .pipe(stylus())
-            .pipe(gulp.dest( app.config.publicDir + 'css'));
+      console.log('Compiling Stylus');
+      gulp.src('./public/css/**/*.styl')
+          .pipe(stylus())
+          .pipe(gulp.dest( app.config.publicDir + 'css'));
     }
 
     // LESS
     if ( app.config.engines.css === 'less' ) {
-        console.log('Compiling Less');
-        gulp.src('./public/css/**/*.less')
-            .pipe(less())
-            .pipe(gulp.dest( app.config.publicDir + 'css'));
+      console.log('Compiling Less');
+      gulp.src('./public/css/**/*.less')
+          .pipe(less())
+          .pipe(gulp.dest( app.config.publicDir + 'css'));
     }
 
-
+  }
 
 }); // END: CSS TASK
 
@@ -127,11 +123,9 @@ gulp.task('nodemon', function() {
     ext: 'js, ejs, hbs, jade, html, mustache, styl, less, scss',
     ignore: ['README.md', 'node_modules/**', '.DS_Store']
   })
-  .on('change', ['css'])
-  .on('restart', ['reload']);
+  .on('change', ['css']);
 
 }); // END: NODEMON TASK
-
 
 
 
@@ -143,55 +137,26 @@ gulp.task('watch', function() {
   // LIVE RELOAD
   if ( app.config.liveReload.use === true ) {
 
-    // CSS
-    gulp.watch(paths.css).on('change', function(file) {
-      server.changed(file.path);
-    });
-
-    // IMG
-    gulp.watch(paths.img).on('change', function(file) {
-      server.changed(file.path);
-    });
-
-    // JS
-    gulp.watch(paths.js).on('change', function(file) {
-      server.changed(file.path);
-    });
-
-
-    // JADE
-    if ( app.config.engines.html === 'jade' ) {
-      gulp.watch(paths.views + '.jade').on('change', function(file) { server.changed(file.path); });
-    }
-
-    // EJS
-    if ( app.config.engines.html === 'ejs' ) {
-      gulp.watch(paths.views + '.ejs').on('change', function(file) { server.changed(file.path); });
-    }
-
-    // HANDLEBARS
-    if ( app.config.engines.html === 'hbs' ) {
-      gulp.watch(paths.views + '.hbs').on('change', function(file) { server.changed(file.path); });
-    }
-
-    // HOGAN
-    if ( app.config.engines.html === 'hogan' || app.config.engines.html === 'mustache' ) {
-      gulp.watch(paths.views + '.mustache').on('change', function(file) { server.changed(file.path); });
-    }
+      // CSS
+      gulp.watch(paths.css).on('change', function(file) {
+           server.changed(file.path)}); // CSS
+      gulp.watch(paths.img).on('change', function(file) {
+           server.changed(file.path)}); // IMG
 
   }
 
 }); // END: WATCH
 
 
-// RELOAD BROWSER ON CHANGE
-gulp.task('reload', function () {
 
-  if ( app.config.liveReload.use === true ) {
-    livereload();
-  }
+// RUN TESTS
+gulp.task('test', function() {
 
-}); //END: RELOAD TASK
+  gulp.src('test/server.js')
+      .pipe(mocha({reporter: 'nyan'}))
+      .pipe(exit());
+
+});
 
 
 // THIS IS JUST HERE FOR TO KEEP GULP FROM CRASHING WHEN SASS THROWS AN ERROR
