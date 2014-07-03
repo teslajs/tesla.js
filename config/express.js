@@ -12,7 +12,6 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
     morgan = require('morgan');
     require('colors');
 
-
   // ENABLE G-ZIP COMPRESSION
   if ( app.config.gzip === true ) {
     app.use( compression() );
@@ -109,7 +108,7 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
       debug: app.config.prettify.css
     }));
 
-  // IF NOT USING LESS
+  // CUSTOM SETTINGS FOR LESS
   } else if ( app.config.engines.css === 'less' && app.config.middleware.css === true ) {
 
     var less = require('less-middleware');
@@ -127,12 +126,10 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
       compress: compress
     }));
 
-
-  // IF NO PREPROCESSORS
   }
 
 
-  // SERVER STATIC FILES
+  // SERVE STATIC FILES
   app.use( express.static( app.config.root + '/public/') );
 
 
@@ -192,8 +189,6 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
     app.enable('jsonp callback');
   }
 
-  // app.configure(function() {
-
     // COOKIE PARSER (KEEP ABOVE SESSION)
     app.use(cookieParser());
 
@@ -226,6 +221,4 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
       next();
     });
 
-
-  // });
 };
