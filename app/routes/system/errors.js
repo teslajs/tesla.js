@@ -20,6 +20,7 @@ module.exports = function (app) {
         console.log(err);
       } else {
         tesla.log( 'ERROR:'.red + ' all attempts to be rational have failed. throwing 404.');
+        console.log(req.method);
       }
 
       require(controllers + 'errorController').throw404(app, req, res);

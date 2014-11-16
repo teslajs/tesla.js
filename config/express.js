@@ -12,8 +12,12 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
     morgan = require('morgan');
     require('colors');
 
+
+  // SERVE STATIC FILES
+  app.use( express.static( app.config.system.root + '/public/') );
+  
   // ENABLE G-ZIP COMPRESSION
-  if ( app.config.gzip === true ) {
+  if ( app.config.server.gzip === true ) {
     app.use( compression() );
   }
 
@@ -92,7 +96,7 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
     }
 
     app.use(stylus.middleware({
-      src: app.config.root + '/public/',
+      src: app.config.system.root + '/public/',
       compile: compile
     }));
 
@@ -103,8 +107,8 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
     var sass = require('node-sass');
 
     app.use(sass.middleware({
-      src: app.config.root + '/public/',
-      dest: app.config.root + '/public/',
+      src: app.config.system.root + '/public/',
+      dest: app.config.system.root + '/public/',
       debug: app.config.prettify.css
     }));
 
@@ -120,17 +124,13 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
     }
 
     app.use(less({
-      src: app.config.root + '/public/',
-      dest: app.config.root + '/public/',
+      src: app.config.system.root + '/public/',
+      dest: app.config.system.root + '/public/',
       debug: true,
       compress: compress
     }));
 
   }
-
-
-  // SERVE STATIC FILES
-  app.use( express.static( app.config.root + '/public/') );
 
 
   // MINIFY CSS
@@ -154,8 +154,8 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
   }
 
   // CACHING
-  if ( app.config.cache === true ) {
-    cacheDir = app.config.root + '/public/_cache';
+  if ( app.config.server.cache === true ) {
+    cacheDir = app.config.system.root + '/public/_cache';
   } else {
     cacheDir = false;
   }
@@ -173,8 +173,10 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
     whitelist: null
   }));
 
+
+  console.log(app.config.system.root + '/public/favicon.ico');
   // FAVICON
-  app.use(favicon(app.config.root + '/public/favicon.ico'));
+  app.use(favicon(app.config.system.root + '/public/favicon.ico'));
 
   // LOGGER
   if (process.env.NODE_ENV !== 'test') {
@@ -182,10 +184,10 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
   }
 
   // SET VIEWS DIR
-  app.set('views', app.config.root + '/app/views');
+  app.set('views', app.config.system.root + '/app/views');
 
   // SET JSONP
-  if ( app.config.jsonp === true ) {
+  if ( app.config.server.jsonp === true ) {
     app.enable('jsonp callback');
   }
 
@@ -196,7 +198,7 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
     if ( app.config.engines.html === 'hbs' ) {
       app.set('view engine', 'hbs');
       app.engine('html', require('hbs').__express);
-      htmlEngine.registerPartials(app.config.root + '/app/views/partials');
+      htmlEngine.registerPartials(app.config.system.root + '/app/views/partials');
     } else if ( app.config.engines.html === 'hogan' ) {
       app.engine('mustache', require('hogan-middleware').__express);
       app.set('view engine', 'mustache');

@@ -21,7 +21,7 @@ module.exports = function (app) {
   // global settings
   app.site.domain = addresses[0];
   app.site.environment = 'development';
-  app.site.url = app.config.protocol + app.site.domain + ':'  + app.config.port + '/'; // base url
+  app.site.url = app.config.server.protocol + app.site.domain + ':'  + app.config.server.port + '/'; // base url
 
   // directories
   app.site.dir = {

@@ -21,9 +21,9 @@ describe('The Server', function(){
 		// START THE SERVER AND MAKE SURE WE GET A 200 RESPONSE
 		it('should start.', function (done) {
 
-			server.listen( process.env.PORT || app.config.port);
+			server.listen( process.env.PORT || app.config.server.port);
 
-	      http.get('http://localhost:' + app.config.port, function (res) {
+	      http.get('http://localhost:' + app.config.server.port, function (res) {
 	        // assert.equal(200, res.statusCode);
 					res.statusCode.should.equal(200);
 	        done();
@@ -50,7 +50,7 @@ describe('Default Environment', function(){
 		if ( typeof process.env.PORT !== 'undefined' ) {
 			process.env.PORT.should.be.a('number');
 		} else {
-			app.config.port.should.be.a('number');
+			app.config.server.port.should.be.a('number');
 		}
 
 	});

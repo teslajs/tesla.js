@@ -1,8 +1,8 @@
-exports.index = function(app) {
+module.exports = function( app, res, res ) {
 
-	app.res.render('index', {
+	res.render('index', {
 		title : app.site.name,
 		site: app.site
-    });
+	});
 
 };

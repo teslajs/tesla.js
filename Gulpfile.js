@@ -3,161 +3,119 @@ var app = {};
 require('./config/_settings')(app);
 require('./config/environment/development')(app);
 
-var exit = require('gulp-exit'),
-    gulp = require('gulp'),
-    nodemon = require('gulp-nodemon'),
-    uglify = require('gulp-uglify'),
-    mocha = require('gulp-mocha'),
-    paths = {
-      app: 'server.js',
-      build : app.config.buildDir,
-      css: app.config.publicDir + 'css/**/*',
-      views: './app/views/**/*',
-      img: app.config.publicDir + 'img/**/*',
-      lib: app.config.publicDir + 'lib/**/*',
-      js: [app.config.publicDir + 'js/**/*', 'app/**/*.js'],
+var browserSync = require('browser-sync'),
+    exit        = require('gulp-exit'),
+    gulp        = require('gulp'),
+    gulpIgnore  = require('gulp-ignore'),
+    karma       = require('karma').server,
+    minifyCSS   = require('gulp-minify-css'),
+    nodemon     = require('gulp-nodemon'),
+    reload      = browserSync.reload,
+    uglify      = require('gulp-uglifyjs'),
+    paths       = {
+      app   : 'server.js',
+      build : app.config.system.build,
+      css   : app.config.system.public + 'css/**/*.css',
+      img   : app.config.system.public + 'img/**/*',
+      js    : [app.config.system.public + 'js/**/*', 'app/**/*.js'],
+      less  : app.config.system.public + 'css/**/*.less',
+      lib   : app.config.system.public + 'lib/**/*'
     };
 
 
-    // ONLY LOAD LIVE-RELOAD IF IT'S REQUIRED
-    if ( app.config.liveReload.use === true ) {
-      var livereload = require('gulp-livereload'),
-          server = livereload(app.config.liveReload.port);
-    }
+// DEFAULT TASK, HANDLES ALL BASIC SERVER STUFF
+gulp.task('default', ['bs'], function () {
 
+  // gulp.watch(paths.less, ['css'] );
+  gulp.watch(paths.js, [reload]);
+  // gulp.watch(paths.img);
 
-  // CONDITIONAL REQUIREMENTS
+});
 
-  // STYLUS
-  if ( app.config.engines.css === 'stylus' ) {
-    var stylus = require('gulp-stylus');
-  }
+// DEV TASK, SAME AS DEFAULT + UNIT TESTS
+gulp.task('dev', ['default', 'bs'], function (done) {
 
-  // SASS
-  if ( app.config.engines.css === 'sass' ) {
-
-    /*
-      setting gulp-ruby-sass as default for now
-      gulp-ruby-sass is slower than gulp-sass, but supports Sass 3.3.
-      gulp-sass is faster, but uses liblass which doesn't yet support Sass 3.2
-    */
-
-    var sass = require('gulp-ruby-sass');
-    // var sass = require('gulp-sass');
-  }
-
-  // LESS
-  if ( app.config.engines.css === 'less' ) {
-    var less = require('gulp-less');
-  }
-
-  // JADE
-  if ( app.config.engines.html === 'jade' ) {
-    var jade = require('gulp-jade');
-  }
-
-
-
-
-
-// DEFAULT TASK TO PROECESS CSS, START THE SERVER & WATCH FOR CHANGES
-gulp.task('default', ['nodemon', 'css', 'watch']);
-
-// DEFAULT TASK TO PROECESS CSS & START THE SERVER
-gulp.task('heroku', ['nodemon', 'css']);
-
-
-// BUILD CSS
-gulp.task('css', function () {
-
-  // ONLY RUN IF CSS IS NOT PROCESSED VIA MIDDLEWARE
-  if ( app.config.middleware.css === false ) {
-
-    console.log('Running gulp task "CSS"');
-
-    // SASS
-    if ( app.config.engines.css === 'sass' ) {
-
-      console.log('Compiling Sass');
-
-      gulp.src('./public/css/*.scss')
-          .pipe(sass({
-            sourcemap: true
-          }))
-          .on('error', handleError)
-          .pipe(gulp.dest( app.config.publicDir + 'css'));
-
-    }
-
-    // STYLUS
-    if ( app.config.engines.css === 'stylus' ) {
-      console.log('Compiling Stylus');
-      gulp.src('./public/css/**/*.styl')
-          .pipe(stylus())
-          .pipe(gulp.dest( app.config.publicDir + 'css'));
-    }
-
-    // LESS
-    if ( app.config.engines.css === 'less' ) {
-      console.log('Compiling Less');
-      gulp.src('./public/css/**/*.less')
-          .pipe(less())
-          .pipe(gulp.dest( app.config.publicDir + 'css'));
-    }
-
-  }
-
-}); // END: CSS TASK
-
-
-
-// MONITOR SERVER FOR CHANGES & RESTART
-gulp.task('nodemon', function() {
-
-  console.log('Running gulp task "NODEMON"');
-
-  nodemon({
-    script: paths.app,
-    ext: 'js, ejs, hbs, jade, html, mustache, styl, less, scss',
-    ignore: ['README.md', 'node_modules/**', '.DS_Store']
-  })
-  .on('change', ['css']);
-
-}); // END: NODEMON TASK
-
-
-
-// WATCH FILES FOR CHANGES
-gulp.task('watch', function() {
-
-  console.log('Running gulp task "WATCH"');
-
-  // LIVE RELOAD
-  if ( app.config.liveReload.use === true ) {
-
-      // CSS
-      gulp.watch(paths.css).on('change', function(file) {
-           server.changed(file.path)}); // CSS
-      gulp.watch(paths.img).on('change', function(file) {
-           server.changed(file.path)}); // IMG
-
-  }
-
-}); // END: WATCH
-
-
-
-// RUN TESTS
-gulp.task('test', function() {
-
-  gulp.src('test/server.js')
-      .pipe(mocha({reporter: 'nyan'}))
-      .pipe(exit());
+  // RUN UNIT TESTS ANY TIME JS FILES CHANGE - karma.conf.js
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: false
+  }, done);
 
 });
 
 
-// FOR NOW, THIS IS JUST HERE TO KEEP GULP FROM CRASHING WHEN SASS THROWS AN ERROR
-function handleError() {
-  // PLACEHOLDER FOR ACTUAL ERROR HANDLER
-}
+
+// BROWSER SYNC
+gulp.task('bs', ['nodemon'], function() {
+
+  if ( app.config.browserSync ) {
+    console.log('Running gulp task "BS"');
+
+    browserSync.init(null, {
+      proxy: 'http://localhost:' + app.config.server.port,
+      files: app.config.browserSync.files,
+      open: app.config.browserSync.open,
+      port: app.config.browserSync.port,
+      notify: app.config.browserSync.notify
+    });
+  }
+
+});
+
+
+
+// BUILD TASK TO MINIFY & CONCAT PRODUCTIONS FILES
+gulp.task('build', function () {
+
+  console.log('Running gulp task "BUILD"');
+
+  // CONCAT + MINIFY JS
+  gulp.src([app.config.system.public + 'js/**/*.js', '!' + app.config.system.public + 'js/style-guide.js'])
+    .pipe(uglify('zebra.min.js'))
+    .pipe(gulp.dest(app.config.system.public + '_dist/'));
+
+  // MINIFY CSS
+  gulp.src(app.config.system.public + 'css/zebra.css')
+    .pipe(minifyCSS({keepBreaks:true}))
+    .pipe(gulp.dest(app.config.system.public + '_dist/'))
+    .pipe(exit());
+
+
+}); // END: BUILD TASK
+
+
+
+
+// RUN ALL UNIT TESTS ONCE & EXIT
+gulp.task('test', function(done) {
+
+  process.env.CHROME_BIN = '/Applications/Internet/Google Chrome.app/Contents/MacOS/Google Chrome';
+
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done);
+
+});
+
+
+
+// NODEMON
+gulp.task('nodemon', function (cb) {
+  var called = false;
+	return nodemon({
+	  script: paths.app,
+    ext: 'js, hbs, less',
+    ignore: ['README.md', 'node_modules/**', '.DS_Store']
+	}).on('start', function () {
+    if (!called) {
+      called = true;
+      cb();
+    }
+  })
+  .on('restart', function () {
+    setTimeout(function () {
+      reload({ stream: false });
+    }, 1000);
+  });
+});

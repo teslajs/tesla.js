@@ -1,5 +1,5 @@
 var path = require('path'),
-rootPath = path.normalize(__dirname + '/..');
+rootPath = path.dirname(require.main.filename);
 
 module.exports = function (app) {
 
@@ -15,13 +15,14 @@ module.exports = function (app) {
       access : '*' // placeholder for future api security enhancement
     },
 
-    autoLoad : true, // whether to attempt autoload controllers
-
-    autoRouting : true, // whether to use auto routing
-
-    buildDir : './_build/', // destination directory for builds
-
-    cache : true, // whether to use caching
+    // BROWSER SYNC - http://www.browsersync.io/docs/gulp/
+    browserSync: {
+      enable: true,
+      files: ['public/**/*.*'],
+      notify: false,
+      open: false,
+      port: 3000
+    },
 
     // see https://github.com/dresende/node-orm2/wiki/Connecting-to-Database for more info on connection to your databse
     db : {
@@ -35,18 +36,9 @@ module.exports = function (app) {
       cssLibrary : false, // options: (axis|bourbon|nib) - set to false for none
     },
 
-    gzip : true, // whether to enable gzip compression
-
-    jsonp : true, // allow jsonp requests
-
-    liveReload : {
-      use : true,
-      port : 35729, // port to run the server on
-    },
-
     logging : {
       console : true, // whether to allow tesla to log messages to the node console
-      files : false // this doesn't do anything yet, eventually it will write .log files
+      file : false // this doesn't do anything yet, eventually it will write .log files
     },
 
     // WHETHER TO HANDLE CSS & HTML TEMPLATE VIA MIDDLEWARE OR GULP
@@ -55,7 +47,14 @@ module.exports = function (app) {
       html: true, // jade, handlebars, etc still need to run through middleware for now
     },
 
-    port : 1856, // port to run the server on
+    server : {
+      cache : true, // whether to use caching
+      gzip : true, // whether to enable gzip compression
+      jsonp : true, // allow jsonp requests
+      port : 1856, // port to run the server on
+      protocol : 'http://', // options: (http|https)
+      socket : false // WHETHER TO USE SOCKET.IO
+    },
 
     prettify : {
       html : true, // whether to pretify html
@@ -63,25 +62,24 @@ module.exports = function (app) {
       js : true // whether to pretify js
     },
 
-    protocol : 'http://', // options: (http|https)
+    routes : {
+      autoLoad : true, // whether to attempt autoload controllers
+      auto : true, // whether to use auto routing
+    },
 
-    publicDir : './public/', // public directory where images, javascript, css, etc is stored
+    // DIRECTORIES USED BY THE APP
+    system : {
+      build : rootPath + '_build/',
+      config: rootPath + '/config/',
+      controllers: rootPath + '/app/controllers/',
+      models: rootPath + '/app/models/',
+      public: rootPath + '/public/',
+      root : rootPath, // path to the root of your server
+      routes: rootPath + '/app/routes/',
+      tests: rootPath + '/tests/',
+      views: rootPath + '/app/views/'
+    }
 
-    root : rootPath, // path to the root of your server
-
-    secret : 'MYAPPSECRET', // placeholder for now, will be implemented later
-
-    socket : false // WHETHER TO USE SOCKET.IO
-
-  };
-
-
-  // some default meta settings for <head>
-  app.site.meta = {
-    description : '',
-    encoding : 'utf-8',
-    keywords : '',
-    viewport : 'width=device-width, user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0'
   };
 
 };

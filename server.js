@@ -1,5 +1,6 @@
 var tesla,
     express = require('express'), // GET EXPRESS
+    router = express.Router(),
     app = module.exports = express(), // DEFINE THE APP
     server = require('http').createServer(app); // CREATE THE SERVER
     require('colors'); // PRETTY CONSOLE LOGGING
@@ -14,16 +15,16 @@ tesla.inform(app, 'start'); // WELCOME MESSAGE
 // REQUIRED SETTINGS & CONFIG FILES
 require('./config/environment/' + process.env.NODE_ENV)(app); // ENVIRONMENT SPECIFIC SETTINGS
 require('./config/express')(app, tesla); // EXPRESS SETTINGS
-require('./app/routes/default')(app, tesla); // DEFAULT ROUTES
+require('./app/routes/default')(app); // DEFAULT ROUTES
 
 
 // ADD SOCKET.IO
-if ( app.config.socket === true ) {
+if ( app.config.server.sockets === true ) {
   app.io = require('socket.io').listen(server);
 }
 
 // START THE APP BY LISTEN ON <PORT>
-server.listen( process.env.PORT || app.config.port, function( err ) {
+server.listen( process.env.PORT || app.config.server.port, function( err ) {
 
   if ( !err ) { // IF THERE'S NO ERRORS
     tesla.inform(app, 'done');
