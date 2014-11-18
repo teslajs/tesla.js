@@ -13,7 +13,7 @@ module.exports = function(app, tesla) {
 
   	// HELLO WORLD ROUTER - example of loading controller if specific path is matched
   	app.get('/hello/world', function(req, res) {
-  		require(controllers + 'hello/worldController')(app, res, res);
+  		require(controllers + 'hello/worldController')(app, req, res);
   	});
 
   	// FOOBAR CONTROLLER - Example of controller that handles it's own routing
