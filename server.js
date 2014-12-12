@@ -15,7 +15,8 @@ tesla.inform(app, 'start'); // WELCOME MESSAGE
 // REQUIRED SETTINGS & CONFIG FILES
 require('./config/environment/' + process.env.NODE_ENV)(app); // ENVIRONMENT SPECIFIC SETTINGS
 require('./config/express')(app, tesla); // EXPRESS SETTINGS
-require('./app/routes/default')(app); // DEFAULT ROUTES
+require('./app/routes')(app); // DEFAULT ROUTES
+require('tesla-router')(app); // DEFAULT ROUTES
 
 
 // ADD SOCKET.IO
