@@ -6,3 +6,5 @@ public/lib
 *.log
 *.sublime-project
 *.sublime-workspace
+req.json
+Procfile
