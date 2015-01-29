@@ -15,7 +15,7 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
 
   // SERVE STATIC FILES
   app.use( express.static( app.config.system.root + '/public/') );
-  
+
   // ENABLE G-ZIP COMPRESSION
   if ( app.config.server.gzip === true ) {
     app.use( compression() );
@@ -54,7 +54,8 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
   // CUSTOM SETTINGS FOR STYLUS
   if ( app.config.engines.css === 'stylus' && app.config.middleware.css === true ) {
 
-    var stylus = require('stylus');
+    var compile,
+        stylus = require('stylus');
 
     if ( app.config.prettify.css === true ) {
       compress = false;
@@ -67,32 +68,32 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
 
       var nib = require('nib');
 
-      function compile(str, path) {
+      compile = function(str, path) {
         return stylus(str)
         .set('filename', path)
         .set('compress', compress)
         .use(nib());
-      }
+      };
 
     // USE AXIS
     } else if ( app.config.engines.cssLibrary === 'axis') {
 
       var axis = require('axis-css');
 
-      function compile(str, path) {
+      compile = function(str, path) {
         return stylus(str)
         .set('filename', path)
         .set('compress', compress)
         .use(axis());
-      }
+      };
 
 
     } else {
-      function compile(str, path) {
+      compile = function(str, path) {
         return stylus(str)
         .set('filename', path)
         .set('compress', compress);
-      }
+      };
     }
 
     app.use(stylus.middleware({
@@ -104,9 +105,9 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
   // CUSTOM SETTINGS FOR SASS
   } else if ( app.config.engines.css === 'sass' && app.config.middleware.css === true ) {
 
-    var sass = require('node-sass');
+    var sass = require('node-sass-middleware');
 
-    app.use(sass.middleware({
+    app.use(sass({
       src: app.config.system.root + '/public/',
       dest: app.config.system.root + '/public/',
       debug: app.config.prettify.css
@@ -173,8 +174,6 @@ var min_css, min_less, min_sass, min_stylus, min_js, cacheDir, htmlEngine, compr
     whitelist: null
   }));
 
-
-  console.log(app.config.system.root + '/public/favicon.ico');
   // FAVICON
   app.use(favicon(app.config.system.root + '/public/favicon.ico'));
 
