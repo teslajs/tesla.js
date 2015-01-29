@@ -12,13 +12,14 @@
   "keywords": [
     "express",
     "framework",
-    "sinatra",
     "web",
     "rest",
     "restful",
     "router",
     "app",
-    "api"
+    "api",
+    "node",
+    "tesla"
   ],
   "bugs": {
     "url": "https://github.com/teslajs/tesla.js/issues"
