@@ -15,12 +15,13 @@ tesla.inform(app, 'start'); // WELCOME MESSAGE
 // REQUIRED SETTINGS & CONFIG FILES
 require('./config/environment/' + process.env.NODE_ENV)(app); // ENVIRONMENT SPECIFIC SETTINGS
 require('./config/express')(app, tesla); // EXPRESS SETTINGS
-require('./app/routes')(app); // DEFAULT ROUTES
+require('./app/routes')(app, server); // DEFAULT ROUTES
 require('tesla-router')(app); // DEFAULT ROUTES
 
 
 // ADD SOCKET.IO
-if ( app.config.server.sockets === true ) {
+if ( app.config.server.socket === true ) {
+  console.log('INFO: '.blue + 'using socket.io');
   app.io = require('socket.io').listen(server);
 }
 
