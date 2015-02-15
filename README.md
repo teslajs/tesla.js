@@ -1,4 +1,6 @@
 # Tesla.js
+
+[![Join the chat at https://gitter.im/teslajs/tesla.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/teslajs/tesla.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![NPM version](https://badge.fury.io/js/tesla.png)](http://badge.fury.io/js/tesla)
 [![Dependency Status](https://gemnasium.com/teslajs/tesla.js.png)](https://gemnasium.com/teslajs/tesla.js)
 
